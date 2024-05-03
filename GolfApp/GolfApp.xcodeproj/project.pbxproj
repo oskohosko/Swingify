@@ -30,6 +30,8 @@
 		75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F0C2BE49EF500C3B659 /* MulticastDelegate.swift */; };
 		75F42F0F2BE49F5900C3B659 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F0E2BE49F5900C3B659 /* User.swift */; };
 		75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F102BE4A10300C3B659 /* FirebaseController.swift */; };
+		75F42F132BE4AF7D00C3B659 /* NewCourseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */; };
+		75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		75F42F0C2BE49EF500C3B659 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		75F42F0E2BE49F5900C3B659 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		75F42F102BE4A10300C3B659 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
+		75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCourseDelegate.swift; sourceTree = "<group>"; };
+		75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 				75F42F072BE3475900C3B659 /* MapViewController.swift */,
 				75F42F0E2BE49F5900C3B659 /* User.swift */,
 				75F42F102BE4A10300C3B659 /* FirebaseController.swift */,
+				75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */,
+				75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
 				75F42EA52BD92A3E00C3B659 /* ViewController.swift in Sources */,
+				75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42F002BE345D900C3B659 /* AddClubViewController.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
@@ -215,6 +222,7 @@
 				75F42F0F2BE49F5900C3B659 /* User.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,
 				75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */,
+				75F42F132BE4AF7D00C3B659 /* NewCourseDelegate.swift in Sources */,
 				75F42F042BE3471400C3B659 /* AddCourseViewController.swift in Sources */,
 				75F42F062BE3472E00C3B659 /* CourseDetailsViewController.swift in Sources */,
 				75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */,
