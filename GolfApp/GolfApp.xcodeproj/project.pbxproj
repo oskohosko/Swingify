@@ -32,6 +32,7 @@
 		75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F102BE4A10300C3B659 /* FirebaseController.swift */; };
 		75F42F132BE4AF7D00C3B659 /* NewCourseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */; };
 		75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */; };
+		75F42F512BE877EC00C3B659 /* CourseSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		75F42F102BE4A10300C3B659 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCourseDelegate.swift; sourceTree = "<group>"; };
 		75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				75F42F102BE4A10300C3B659 /* FirebaseController.swift */,
 				75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */,
 				75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */,
+				75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
 				75F42EA52BD92A3E00C3B659 /* ViewController.swift in Sources */,
+				75F42F512BE877EC00C3B659 /* CourseSelectionDelegate.swift in Sources */,
 				75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42F002BE345D900C3B659 /* AddClubViewController.swift in Sources */,
