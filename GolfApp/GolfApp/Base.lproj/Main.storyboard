@@ -128,9 +128,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCP-9l-b3e">
                                 <rect key="frame" x="20" y="230" width="353" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="gray" title="View Map"/>
+                                <buttonConfiguration key="configuration" style="gray" title="View Courses"/>
                                 <connections>
-                                    <segue destination="5zH-uv-gbz" kind="show" id="kCU-1v-LZS"/>
+                                    <segue destination="GVM-2o-HSp" kind="show" id="VXo-Cz-RBf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temporary Buttons" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5e-rp-HQS">
@@ -204,20 +204,14 @@
                             <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="J4f-Am-e1a" secondAttribute="trailing" constant="75" id="yc7-9n-qN0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ron-Dq-tuS">
-                        <barButtonItem key="rightBarButtonItem" title="Courses" id="JeS-Ix-wHL">
-                            <connections>
-                                <segue destination="GVM-2o-HSp" kind="show" id="qjh-7S-fgn"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Ron-Dq-tuS"/>
                     <connections>
                         <outlet property="mapView" destination="vvk-aF-F6I" id="hSb-bf-Rif"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rm3-tt-CCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3670.9923664122134" y="7.746478873239437"/>
+            <point key="canvasLocation" x="3714" y="736"/>
         </scene>
         <!--Course Details View Controller-->
         <scene sceneID="Eig-ZP-Hgw">
@@ -280,10 +274,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="5zH-uv-gbz" kind="show" identifier="showCourseSegue" id="Flg-Dx-txs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OV4-LO-btg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4596" y="8"/>
+            <point key="canvasLocation" x="3714" y="8"/>
         </scene>
         <!--Add Course-->
         <scene sceneID="3dg-mW-bBf">
@@ -397,7 +394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ayh-vu-aS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5503.0534351145034" y="7.746478873239437"/>
+            <point key="canvasLocation" x="4647" y="8"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="XBy-tA-fpZ">

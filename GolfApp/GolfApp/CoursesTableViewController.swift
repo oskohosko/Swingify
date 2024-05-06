@@ -9,7 +9,7 @@ import UIKit
 
 class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     
-    
+    weak var delegate: CourseSelectionDelegate?
     
     // Constant storing the cell identifier
     let CELL_COURSE = "courseCell"
@@ -21,6 +21,10 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     
     // Keeps track of whether first appearance has been shown.
     var isFirstAppearance = true
+    
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,30 +101,29 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        mapViewController?.focusOn(annotation: courseList[indexPath.row])
-        splitViewController?.show(.secondary)
+        // When a user selects a row in the table view, they are taken to the map view controller
+        let selectedCourse = courseList[indexPath.row]
+        self.performSegue(withIdentifier: "showCourseSegue", sender: indexPath)
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if isFirstAppearance {
-            mapViewController?.mapView.addAnnotations(courseList)
-            isFirstAppearance = false
-        }
-    }
 
     // MARK: - Navigation
 
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         
          if segue.identifier == "addLocationSegue" {
              let destinationVC = segue.destination as! AddCourseViewController
              
              destinationVC.locationDelegate = self
              }
+         
+         else if segue.identifier == "showCourseSegue" {
+             let destinationVC = segue.destination as! MapViewController
+             if let indexPath = sender as? IndexPath {
+                 let selectedCourse = courseList[indexPath.row]
+                 destinationVC.courseLocation = selectedCourse
+             }
          }
-
+    }
  }
