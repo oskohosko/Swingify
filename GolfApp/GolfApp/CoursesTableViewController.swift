@@ -6,18 +6,25 @@
 //
 
 import UIKit
+import MapKit
 
 class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     
-    weak var delegate: CourseSelectionDelegate?
+    weak var courseDelegate: CourseSelectionDelegate?
+    
+    weak var holeDelegate: HoleSelectionDelegate?
     
     // Constant storing the cell identifier
     let CELL_COURSE = "courseCell"
+    let TEE_INDEX = 0
+    let GREEN_INDEX = 1
     
     // Reference to map view controller
     // Allows us to control the view controller as we are the master
     weak var mapViewController: MapViewController?
     var courseList = [LocationAnnotation]()
+    
+    var holeList = [[CLLocationCoordinate2D]]()
     
     // Keeps track of whether first appearance has been shown.
     var isFirstAppearance = true
@@ -45,6 +52,17 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
         let boxHillGC = LocationAnnotation(title: "Box Hill Golf Club", subtitle: "Box Hill Golf Club", lat: -37.8394797020779, long: 145.12239406941345)
         
         courseList.append(boxHillGC)
+        
+        
+        // Testing with a hole location
+//        let rosebudNorthHoleOne = [LocationAnnotation(title: "Rosebud North Hole 1 Tee", subtitle: "The first hole at Rosebud CC North Course", lat: -38.3793503, long: 144.8962955), LocationAnnotation(title: "Rosebud North Hole 1 Green", subtitle: "The first hole's green at Rosebud CC North Course", lat: -38.3794813, long: 144.8948077)]
+//        
+        // This is hole 1
+        let rosebudNorthHoleOne = [CLLocationCoordinate2D(latitude: -38.3793503, longitude: 144.8962955),
+                                   CLLocationCoordinate2D(latitude: -38.3794813, longitude: 144.8948077)]
+        
+        
+        holeList.append(rosebudNorthHoleOne)
     }
     
     func annotationAdded(annotation: LocationAnnotation) {
@@ -64,18 +82,29 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courseList.count
+//        return courseList.count
+        return holeList.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_COURSE, for: indexPath)
         
-        let annotation = courseList[indexPath.row]
         
-        // Configure the cell...
-        cell.textLabel?.text = annotation.title
+        // COURSE STUFF
+//        let annotation = courseList[indexPath.row]
+//        
+//        // Configure the cell...
+//        cell.textLabel?.text = annotation.title
+//        
+//        cell.detailTextLabel?.text = "Latitude: \(annotation.coordinate.latitude) Longitude: \(annotation.coordinate.longitude)"
         
-        cell.detailTextLabel?.text = "Latitude: \(annotation.coordinate.latitude) Longitude: \(annotation.coordinate.longitude)"
+        // HOLE STUFF
+        
+        let tee = holeList[indexPath.row][TEE_INDEX]
+        let green = holeList[indexPath.row][GREEN_INDEX]
+        
+        cell.textLabel?.text = "Tee: (\(tee.latitude), \(tee.longitude))"
+        cell.detailTextLabel?.text = "Green: (\(green.latitude), \(green.longitude))"
 
         return cell
     }
@@ -92,7 +121,10 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            /*
+             UNCOMMENT FOR COURSE
             mapViewController?.mapView.removeAnnotation(courseList[indexPath.row])
+             */
             courseList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -102,7 +134,7 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // When a user selects a row in the table view, they are taken to the map view controller
-        let selectedCourse = courseList[indexPath.row]
+//        let selectedCourse = courseList[indexPath.row]
         self.performSegue(withIdentifier: "showCourseSegue", sender: indexPath)
         
     }
@@ -123,6 +155,10 @@ class CoursesTableViewController: UITableViewController, NewCourseDelegate {
              if let indexPath = sender as? IndexPath {
                  let selectedCourse = courseList[indexPath.row]
                  destinationVC.courseLocation = selectedCourse
+                 
+                 // HOLE STUFF
+                 destinationVC.selectedTee = holeList[indexPath.row][TEE_INDEX]
+                 destinationVC.selectedGreen = holeList[indexPath.row][GREEN_INDEX]
              }
          }
     }
