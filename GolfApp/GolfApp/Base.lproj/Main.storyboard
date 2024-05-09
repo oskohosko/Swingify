@@ -211,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rm3-tt-CCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3714" y="736"/>
+            <point key="canvasLocation" x="3714" y="724"/>
         </scene>
         <!--Course Details View Controller-->
         <scene sceneID="Eig-ZP-Hgw">
@@ -435,7 +435,13 @@
                             <outlet property="delegate" destination="kde-pE-z5R" id="7Ts-hQ-lrh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Clubs" id="STT-bn-ehJ"/>
+                    <navigationItem key="navigationItem" title="Your Clubs" id="STT-bn-ehJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="p25-gO-bxh">
+                            <connections>
+                                <segue destination="MnJ-MF-fCK" kind="show" identifier="addClubSegue" id="bYm-vx-iw6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XLy-W4-UFV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -451,6 +457,7 @@
                         <viewLayoutGuide key="safeArea" id="oSa-9l-dyQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="3I5-Oj-9Dh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzd-yA-Glq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
