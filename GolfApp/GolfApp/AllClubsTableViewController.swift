@@ -6,8 +6,50 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class AllClubsTableViewController: UITableViewController {
+    
+    var CELL_CLUB = "clubCell"
+    
+    var clubs: [Club] = []
+    
+    var clubsRef: CollectionReference?
+    var databaseListener: ListenerRegistration?
+    
+    // Function that adds a club to Firebase and to the TableView
+    @IBAction func addClubAction(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Add Club", message: "Add Your Club Below", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Name"
+        }
+        alertController.addTextField { textField in
+            textField.placeholder = "Distance"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let addAction = UIAlertAction(title: "Add", style: .default) {_ in
+            let clubName = alertController.textFields![0]
+            let clubDistance = alertController.textFields![1]
+            var doesExist = false
+            
+            for club in self.clubs {
+                if club.name.lowercased() == clubName.text!.lowercased() {
+                    doesExist = true
+                }
+            }
+            
+            let newClub = Club(name: clubName.text!, distance: clubDistance.text!)
+            
+            if !doesExist {
+                self.clubsRef?.addDocument(data: ["name": newClub.name,
+                                                  "distance": newClub.distance])
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(addAction)
+        self.present(alertController, animated: false, completion: nil)
+        }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,29 +59,56 @@ class AllClubsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let database = Firestore.firestore()
+        clubsRef = database.collection("clubs")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        databaseListener = clubsRef?.addSnapshotListener() {
+            (querySnapshot, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.clubs.removeAll()
+            querySnapshot?.documents.forEach() {
+                snapshot in
+//                let id = snapshot.documentID
+                let name = snapshot["name"] as! String
+                let distance = snapshot["distance"] as! String
+                let newClub = Club(name: name, distance: distance)
+                
+                self.clubs.append(newClub)
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseListener?.remove()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return clubs.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_CLUB, for: indexPath)
 
         // Configure the cell...
+        let club = clubs[indexPath.row]
+        cell.textLabel?.text = club.name
+        cell.detailTextLabel?.text = club.distance
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

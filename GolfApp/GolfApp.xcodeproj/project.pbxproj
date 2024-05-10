@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
-		75F42EA52BD92A3E00C3B659 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA42BD92A3E00C3B659 /* ViewController.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
 		75F42EAA2BD92A3F00C3B659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA92BD92A3F00C3B659 /* Assets.xcassets */; };
 		75F42EAD2BD92A3F00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EAC2BD92A3F00C3B659 /* Base */; };
@@ -21,7 +20,6 @@
 		75F42EFA2BE3418F00C3B659 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */; };
 		75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */; };
 		75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */; };
-		75F42F002BE345D900C3B659 /* AddClubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFF2BE345D900C3B659 /* AddClubViewController.swift */; };
 		75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */; };
 		75F42F042BE3471400C3B659 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F032BE3471400C3B659 /* AddCourseViewController.swift */; };
 		75F42F062BE3472E00C3B659 /* CourseDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F052BE3472E00C3B659 /* CourseDetailsViewController.swift */; };
@@ -36,13 +34,13 @@
 		75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F882BECA3CE00C3B659 /* CourseData.swift */; };
 		75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8A2BECA3F600C3B659 /* HoleData.swift */; };
 		75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */; };
+		75F42F912BEDD13700C3B659 /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F902BEDD13700C3B659 /* Club.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		75F42E9D2BD92A3E00C3B659 /* GolfApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		75F42EA42BD92A3E00C3B659 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		75F42EA72BD92A3E00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		75F42EA92BD92A3F00C3B659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75F42EAC2BD92A3F00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,7 +50,6 @@
 		75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllClubsTableViewController.swift; sourceTree = "<group>"; };
-		75F42EFF2BE345D900C3B659 /* AddClubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClubViewController.swift; sourceTree = "<group>"; };
 		75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
 		75F42F032BE3471400C3B659 /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		75F42F052BE3472E00C3B659 /* CourseDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailsViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +64,7 @@
 		75F42F882BECA3CE00C3B659 /* CourseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseData.swift; sourceTree = "<group>"; };
 		75F42F8A2BECA3F600C3B659 /* HoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleData.swift; sourceTree = "<group>"; };
 		75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTableViewController.swift; sourceTree = "<group>"; };
+		75F42F902BEDD13700C3B659 /* Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +103,6 @@
 				75F42F092BE49EB800C3B659 /* Database */,
 				75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */,
 				75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */,
-				75F42EA42BD92A3E00C3B659 /* ViewController.swift */,
 				75F42EA62BD92A3E00C3B659 /* Main.storyboard */,
 				75F42EA92BD92A3F00C3B659 /* Assets.xcassets */,
 				75F42EAB2BD92A3F00C3B659 /* LaunchScreen.storyboard */,
@@ -115,7 +112,6 @@
 				75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */,
 				75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */,
 				75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */,
-				75F42EFF2BE345D900C3B659 /* AddClubViewController.swift */,
 				75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */,
 				75F42F032BE3471400C3B659 /* AddCourseViewController.swift */,
 				75F42F052BE3472E00C3B659 /* CourseDetailsViewController.swift */,
@@ -128,6 +124,7 @@
 				75F42F882BECA3CE00C3B659 /* CourseData.swift */,
 				75F42F8A2BECA3F600C3B659 /* HoleData.swift */,
 				75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */,
+				75F42F902BEDD13700C3B659 /* Club.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -222,14 +219,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
+				75F42F912BEDD13700C3B659 /* Club.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
 				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
-				75F42EA52BD92A3E00C3B659 /* ViewController.swift in Sources */,
 				75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
-				75F42F002BE345D900C3B659 /* AddClubViewController.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */,
 				75F42F0F2BE49F5900C3B659 /* User.swift in Sources */,

@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 
 class FirebaseController: NSObject {
     
-    let DEFAULT_COURSE = "Rosebud CC"
     var userList: [User]
     var listeners = MulticastDelegate<DatabaseListener>()
     
