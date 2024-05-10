@@ -7,7 +7,18 @@
 
 import UIKit
 
-class HolesTableViewController: UITableViewController {
+enum HoleListError: Error {
+    case invalidCourseURL
+    case invalidServerResponse
+}
+
+class HolesTableViewController: UITableViewController, UISearchBarDelegate {
+    
+    let CELL_HOLE = "holeCell"
+    
+    weak var selectedCourse: Course?
+    
+    var courseHoles: [HoleData] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,29 +28,67 @@ class HolesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        navigationItem.title = "Loading Holes..."
+        
+        // API CALL
+        guard let selectedCourse else {
+            print("No Course Selected.")
+            return
+        }
+        // ID to make the API call with
+        let request_id = selectedCourse.course_id
+        guard let requestURL = URL(string: "https://swingify.s3.ap-southeast-2.amazonaws.com/course_\(request_id).json") else {
+            print("URL not valid")
+            return
+        }
+        Task {
+            do {
+                let (data, response) = try await URLSession.shared.data(from: requestURL)
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    throw HoleListError.invalidServerResponse
+                }
+                
+                let decoder = JSONDecoder()
+                let courseData = try decoder.decode(CourseData.self, from: data)
+                
+                navigationItem.title = courseData.name
+                
+                courseHoles = courseData.holes!
+                tableView.reloadData()
+            }
+            catch {
+                print(error)
+            }
+        }
+        
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return courseHoles.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_HOLE, for: indexPath)
 
         // Configure the cell...
+        let hole = courseHoles[indexPath.row]
+        cell.textLabel?.text = "Hole \(hole.number)"
+        cell.detailTextLabel?.text = "Par \(hole.par), \(hole.yards) yards"
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "goToHoleSegue", sender: indexPath)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -57,7 +106,7 @@ class HolesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -76,14 +125,20 @@ class HolesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        // Get destination, convert selected hole into a location annotation
+        if segue.identifier == "goToHoleSegue" {
+            let destinationVC = segue.destination as! MapViewController
+            if let indexPath = sender as? IndexPath {
+                let selectedHole = courseHoles[indexPath.row]
+                destinationVC.selectedHole = selectedHole
+            }
+        }
     }
-    */
 
 }
