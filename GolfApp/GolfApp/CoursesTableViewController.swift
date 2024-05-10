@@ -12,13 +12,37 @@ enum CourseListError: Error {
     case invalidServerResponse
 }
 
-class CoursesTableViewController: UITableViewController {
+class CoursesTableViewController: UITableViewController, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            filteredCourses = []
+            tableView.reloadData()
+            return
+        }
+        filteredCourses = allCourses.filter { course in
+            return course.name.lowercased().contains(searchText.lowercased())
+        }
+        tableView.reloadData()
+    }
+    
     
     // Constant storing the cell identifier
     let CELL_COURSE = "courseCell"
     
     // Going to be our courses list
     var allCourses: [Course] = []
+    
+    // For searching for courses.
+    var filteredCourses: [Course] = []
+    var searchController: UISearchController!
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+
+    var searchBarIsEmpty: Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
     
     // URL we request when loading the screen to get the courses
     let REQUEST_URL = "https://swingify.s3.ap-southeast-2.amazonaws.com/courses.json"
@@ -33,6 +57,14 @@ class CoursesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        // Search controller setup
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Courses"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
         navigationItem.title = "Loading Courses..."
         
         // Making our API call
@@ -40,9 +72,12 @@ class CoursesTableViewController: UITableViewController {
             print("URL not valid.")
             return
         }
+        // Previous data was cached, this fixes that
+        var request = URLRequest(url: requestURL)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         Task {
             do {
-                let (data, response) = try await URLSession.shared.data(from: requestURL)
+                let (data, response) = try await URLSession.shared.data(for: request)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw CourseListError.invalidServerResponse
@@ -75,7 +110,7 @@ class CoursesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCourses.count
+        return isFiltering ? filteredCourses.count : allCourses.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,9 +118,9 @@ class CoursesTableViewController: UITableViewController {
         
         
         // COURSE STUFF
-        let course = allCourses[indexPath.row]
+        let course = isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
         cell.textLabel?.text = course.name
-        cell.detailTextLabel?.text = "(\(course.latitude), \(course.longitude))"
+        cell.detailTextLabel?.text = "(\(course.lat), \(course.lng))"
         
         return cell
     }
@@ -106,7 +141,7 @@ class CoursesTableViewController: UITableViewController {
          if segue.identifier == "viewHolesSegue" {
              let destinationVC = segue.destination as! HolesTableViewController
              if let indexPath = sender as? IndexPath {
-                 let selectedCourse = allCourses[indexPath.row]
+                 let selectedCourse = isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
                  destinationVC.selectedCourse = selectedCourse
              }
          }

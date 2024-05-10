@@ -9,12 +9,11 @@ import UIKit
 
 class HoleData: NSObject, Decodable {
     
-    var number: Int
+    var num: Int
     var par: Int
-    var yards: Int
-    var tee_latitude: Double
-    var tee_longitude: Double
-    var green_latitude: Double
-    var green_longitude: Double
+    var tee_lat: Double
+    var tee_lng: Double
+    var green_lat: Double
+    var green_lng: Double
     
 }
