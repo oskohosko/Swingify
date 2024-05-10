@@ -10,8 +10,8 @@ import UIKit
 class CourseData: NSObject, Decodable {
     
     var name: String
-    var latitude: Double
-    var longitude: Double
+    var lat: Double
+    var lng: Double
     var holes: [HoleData]?
     
 }

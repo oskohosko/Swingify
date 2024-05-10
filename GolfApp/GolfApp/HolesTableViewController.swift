@@ -37,14 +37,17 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
             return
         }
         // ID to make the API call with
-        let request_id = selectedCourse.course_id
+        let request_id = selectedCourse.id
         guard let requestURL = URL(string: "https://swingify.s3.ap-southeast-2.amazonaws.com/course_\(request_id).json") else {
             print("URL not valid")
             return
         }
+        // Previous data was cached, this fixes that
+        var request = URLRequest(url: requestURL)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
         Task {
             do {
-                let (data, response) = try await URLSession.shared.data(from: requestURL)
+                let (data, response) = try await URLSession.shared.data(for: request)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw HoleListError.invalidServerResponse
@@ -80,8 +83,8 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
 
         // Configure the cell...
         let hole = courseHoles[indexPath.row]
-        cell.textLabel?.text = "Hole \(hole.number)"
-        cell.detailTextLabel?.text = "Par \(hole.par), \(hole.yards) yards"
+        cell.textLabel?.text = "Hole \(hole.num)"
+        cell.detailTextLabel?.text = "Par \(hole.par)"
 
         return cell
     }

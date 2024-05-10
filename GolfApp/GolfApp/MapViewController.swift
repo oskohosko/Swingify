@@ -31,12 +31,12 @@ class MapViewController: UIViewController {
     // Drop down menu
     @IBAction func selectClubAction(_ sender: UIButton) {
         let actionClosure = { (action: UIAction) in
-            print(action.title)
+//            print(action.title)
             // Inside the closure, we are updating our selected club based on the drop down.
             let club = self.clubs.first {$0.name == action.title }
             if let hole = self.selectedHole {
-                let tee = CLLocationCoordinate2D(latitude: hole.tee_latitude, longitude: hole.tee_longitude)
-                let green = CLLocationCoordinate2D(latitude: hole.green_latitude, longitude: hole.green_longitude)
+                let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+                let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
                 let distCoord = self.distToCoord(club: club!, location: tee, green: green)
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = distCoord
@@ -97,9 +97,11 @@ class MapViewController: UIViewController {
         // Turn the hole into a location annotation and present on map.
         if let hole = selectedHole {
             
-            let tee = CLLocationCoordinate2D(latitude: hole.tee_latitude, longitude: hole.tee_longitude)
+            navigationItem.title = "Hole \(hole.num) - Par \(hole.par)"
             
-            let green = CLLocationCoordinate2D(latitude: hole.green_latitude, longitude: hole.green_longitude)
+            let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+            
+            let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
             
             self.setupMapView(mapView: mapView, teeBox: tee, centerGreen: green)
         }

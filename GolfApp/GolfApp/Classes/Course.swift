@@ -9,8 +9,8 @@ import UIKit
 
 class Course: NSObject, Decodable {
     
-    var course_id: Int
+    var id: Int
     var name: String
-    var latitude: Double
-    var longitude: Double
+    var lat: Double
+    var lng: Double
 }
