@@ -32,8 +32,10 @@
 		75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F102BE4A10300C3B659 /* FirebaseController.swift */; };
 		75F42F132BE4AF7D00C3B659 /* NewCourseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */; };
 		75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */; };
-		75F42F512BE877EC00C3B659 /* CourseSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */; };
-		75F42F532BEA00BA00C3B659 /* HoleSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F522BEA00BA00C3B659 /* HoleSelectionDelegate.swift */; };
+		75F42F872BECA3BC00C3B659 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F862BECA3BC00C3B659 /* Course.swift */; };
+		75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F882BECA3CE00C3B659 /* CourseData.swift */; };
+		75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8A2BECA3F600C3B659 /* HoleData.swift */; };
+		75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +63,10 @@
 		75F42F102BE4A10300C3B659 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCourseDelegate.swift; sourceTree = "<group>"; };
 		75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
-		75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionDelegate.swift; sourceTree = "<group>"; };
-		75F42F522BEA00BA00C3B659 /* HoleSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleSelectionDelegate.swift; sourceTree = "<group>"; };
+		75F42F862BECA3BC00C3B659 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		75F42F882BECA3CE00C3B659 /* CourseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseData.swift; sourceTree = "<group>"; };
+		75F42F8A2BECA3F600C3B659 /* HoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleData.swift; sourceTree = "<group>"; };
+		75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +124,10 @@
 				75F42F102BE4A10300C3B659 /* FirebaseController.swift */,
 				75F42F122BE4AF7D00C3B659 /* NewCourseDelegate.swift */,
 				75F42F142BE4AFA000C3B659 /* LocationAnnotation.swift */,
-				75F42F502BE877EC00C3B659 /* CourseSelectionDelegate.swift */,
-				75F42F522BEA00BA00C3B659 /* HoleSelectionDelegate.swift */,
+				75F42F862BECA3BC00C3B659 /* Course.swift */,
+				75F42F882BECA3CE00C3B659 /* CourseData.swift */,
+				75F42F8A2BECA3F600C3B659 /* HoleData.swift */,
+				75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -215,22 +221,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
 				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
 				75F42EA52BD92A3E00C3B659 /* ViewController.swift in Sources */,
-				75F42F512BE877EC00C3B659 /* CourseSelectionDelegate.swift in Sources */,
 				75F42F152BE4AFA000C3B659 /* LocationAnnotation.swift in Sources */,
-				75F42F532BEA00BA00C3B659 /* HoleSelectionDelegate.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42F002BE345D900C3B659 /* AddClubViewController.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */,
 				75F42F0F2BE49F5900C3B659 /* User.swift in Sources */,
+				75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,
 				75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */,
+				75F42F872BECA3BC00C3B659 /* Course.swift in Sources */,
 				75F42F132BE4AF7D00C3B659 /* NewCourseDelegate.swift in Sources */,
+				75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */,
 				75F42F042BE3471400C3B659 /* AddCourseViewController.swift in Sources */,
 				75F42F062BE3472E00C3B659 /* CourseDetailsViewController.swift in Sources */,
 				75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */,

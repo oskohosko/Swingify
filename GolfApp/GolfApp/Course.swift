@@ -5,4 +5,12 @@
 //  Created by Oskar Hosken on 9/5/2024.
 //
 
-import Foundation
+import UIKit
+
+class Course: NSObject, Decodable {
+    
+    var course_id: Int
+    var name: String
+    var latitude: Double
+    var longitude: Double
+}
