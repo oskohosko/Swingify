@@ -7,15 +7,52 @@
 
 import UIKit
 import MapKit
+import FirebaseFirestore
 
 class MapViewController: UIViewController {
     
     var selectedHole: HoleData?
     
+    // List of clubs for drop down button
+    var clubs: [Club] = []
+    
+    // The selected club from the drop down.
+    var selectedClub: Club?
+    
+    // Firebase stuff
+    var clubsRef: CollectionReference?
+    var databaseListener: ListenerRegistration?
+    
     @IBOutlet weak var mapView: MKMapView!
+    
+    
+    @IBAction func selectClubAction(_ sender: UIButton) {
+        let actionClosure = { (action: UIAction) in
+            print(action.title)
+            // Inside the closure, we are updating our selected club based on the drop down.
+            self.selectedClub = self.clubs.first {$0.name == action.title }
+        }
+        var menuChildren: [UIMenuElement] = []
+        for club in clubs {
+            menuChildren.append(UIAction(title: club.name, handler: actionClosure))
+        }
+        
+        sender.menu = UIMenu(options: .displayInline, children: menuChildren)
+        
+        sender.showsMenuAsPrimaryAction = true
+        sender.changesSelectionAsPrimaryAction = true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialising firebase stuff
+        let database = Firestore.firestore()
+        clubsRef = database.collection("clubs")
+        
+        // Preferred is imagery.
+        mapView.preferredConfiguration = MKImageryMapConfiguration()
         
         // Turn the hole into a location annotation and present on map.
         if let hole = selectedHole {
@@ -26,6 +63,33 @@ class MapViewController: UIViewController {
             
             self.setupMapView(mapView: mapView, teeBox: tee, centerGreen: green)
         }
+    }
+    
+    // Populating our clubs array
+    override func viewWillAppear(_ animated: Bool) {
+        databaseListener = clubsRef?.addSnapshotListener() {
+            (querySnapshot, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            self.clubs.removeAll()
+            querySnapshot?.documents.forEach() {
+                snapshot in
+//                let id = snapshot.documentID
+                let name = snapshot["name"] as! String
+                let distance = snapshot["distance"] as! String
+                let newClub = Club(name: name, distance: distance)
+                
+                self.clubs.append(newClub)
+                self.clubs.sort { $0.distance > $1.distance }
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseListener?.remove()
     }
     
     // Function to compute distance between two CLLocationCoordinate2D points
@@ -83,22 +147,6 @@ class MapViewController: UIViewController {
             let bearing = atan2(y, x)
             
             return radiansToDegrees(bearing)
-        }
-    }
-    
-    @IBAction func mapSegmentedControlAction(_ segmentedControl: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            let configuration = MKStandardMapConfiguration()
-            configuration.showsTraffic = true
-            mapView.preferredConfiguration = configuration
-            
-        case 1:
-            mapView.preferredConfiguration = MKImageryMapConfiguration()
-        case 2:
-            mapView.preferredConfiguration = MKHybridMapConfiguration()
-        default:
-            mapView.preferredConfiguration = MKStandardMapConfiguration()
         }
     }
     

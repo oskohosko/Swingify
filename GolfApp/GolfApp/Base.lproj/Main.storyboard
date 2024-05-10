@@ -180,28 +180,25 @@
                                 <rect key="frame" x="16" y="142" width="361" height="676"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="J4f-Am-e1a">
-                                <rect key="frame" x="75" y="103" width="243" height="32"/>
-                                <segments>
-                                    <segment title="Standard"/>
-                                    <segment title="Imagery"/>
-                                    <segment title="Hybrid"/>
-                                </segments>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oke-js-kBW">
+                                <rect key="frame" x="20" y="103" width="353" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Select Club"/>
                                 <connections>
-                                    <action selector="mapSegmentedControlAction:" destination="5zH-uv-gbz" eventType="valueChanged" id="Nae-pO-xDb"/>
+                                    <action selector="selectClubAction:" destination="5zH-uv-gbz" eventType="touchUpInside" id="uvn-dF-IFT"/>
                                 </connections>
-                            </segmentedControl>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ghw-cv-F0O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="J4f-Am-e1a" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" id="092-R3-8sx"/>
-                            <constraint firstItem="vvk-aF-F6I" firstAttribute="top" secondItem="J4f-Am-e1a" secondAttribute="bottom" constant="8" id="JRl-2h-1H3"/>
                             <constraint firstAttribute="bottomMargin" secondItem="vvk-aF-F6I" secondAttribute="bottom" id="b7T-Ma-aDg"/>
+                            <constraint firstItem="Oke-js-kBW" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" id="gLY-je-Y63"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vvk-aF-F6I" secondAttribute="trailing" id="hZk-5R-nHU"/>
+                            <constraint firstItem="Oke-js-kBW" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="20" id="l30-Y3-1LU"/>
                             <constraint firstItem="vvk-aF-F6I" firstAttribute="leading" secondItem="VWF-GR-A1m" secondAttribute="leadingMargin" id="svv-QX-aeD"/>
-                            <constraint firstItem="J4f-Am-e1a" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="75" id="tok-GD-uIU"/>
-                            <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="J4f-Am-e1a" secondAttribute="trailing" constant="75" id="yc7-9n-qN0"/>
+                            <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="Oke-js-kBW" secondAttribute="trailing" constant="20" id="t2P-Ez-fRg"/>
+                            <constraint firstItem="vvk-aF-F6I" firstAttribute="top" secondItem="Oke-js-kBW" secondAttribute="bottom" constant="4" id="zVh-UU-QTz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ron-Dq-tuS"/>

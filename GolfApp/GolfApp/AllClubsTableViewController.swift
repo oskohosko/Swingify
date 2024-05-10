@@ -79,6 +79,7 @@ class AllClubsTableViewController: UITableViewController {
                 let newClub = Club(name: name, distance: distance)
                 
                 self.clubs.append(newClub)
+                self.clubs.sort { $0.distance > $1.distance }
             }
             self.tableView.reloadData()
         }
