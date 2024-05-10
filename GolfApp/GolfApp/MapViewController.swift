@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class MapViewController: UIViewController {
     
+    // The hole that we are displaying
     var selectedHole: HoleData?
     
     // List of clubs for drop down button
@@ -23,14 +24,26 @@ class MapViewController: UIViewController {
     var clubsRef: CollectionReference?
     var databaseListener: ListenerRegistration?
     
+//    var annotation: MKPointAnnotation?
+    
     @IBOutlet weak var mapView: MKMapView!
     
-    
+    // Drop down menu
     @IBAction func selectClubAction(_ sender: UIButton) {
         let actionClosure = { (action: UIAction) in
             print(action.title)
             // Inside the closure, we are updating our selected club based on the drop down.
-            self.selectedClub = self.clubs.first {$0.name == action.title }
+            let club = self.clubs.first {$0.name == action.title }
+            if let hole = self.selectedHole {
+                let tee = CLLocationCoordinate2D(latitude: hole.tee_latitude, longitude: hole.tee_longitude)
+                let green = CLLocationCoordinate2D(latitude: hole.green_latitude, longitude: hole.green_longitude)
+                let distCoord = self.distToCoord(club: club!, location: tee, green: green)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = distCoord
+                annotation.title = club!.distance
+                self.mapView.addAnnotation(annotation)
+            }
+            
         }
         var menuChildren: [UIMenuElement] = []
         for club in clubs {
@@ -41,6 +54,33 @@ class MapViewController: UIViewController {
         
         sender.showsMenuAsPrimaryAction = true
         sender.changesSelectionAsPrimaryAction = true
+    }
+    
+    func distToCoord(club: Club, location: CLLocationCoordinate2D, green: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+        // This function takes a club as input, and returns a coordinate that is club.distance away.
+        let distance = Double(club.distance)!
+        
+        // Coordinates we are projecting from
+        var currentLatitude = location.latitude
+        var currentLongitude = location.longitude
+        
+        var bearing = bearingBetweenPoints(startPoint: location, endPoint: green)
+        
+        bearing = degreesToRadians(bearing)
+        
+        currentLatitude = degreesToRadians(currentLatitude)
+        currentLongitude = degreesToRadians(currentLongitude)
+        
+        let radius = 6371e3
+        
+        var newLatitude = asin(sin(currentLatitude) * cos(distance / radius) +
+                               cos(currentLatitude) * sin(distance / radius) * cos(bearing))
+        var newLongitude = currentLongitude + atan2(sin(bearing) * sin(distance / radius) * cos(currentLatitude), cos(distance / radius) - sin(currentLatitude) * sin(newLatitude))
+        
+        newLatitude = radiansToDegrees(newLatitude)
+        newLongitude = radiansToDegrees(newLongitude)
+        
+        return CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
     }
     
     
@@ -91,14 +131,10 @@ class MapViewController: UIViewController {
         super.viewWillDisappear(animated)
         databaseListener?.remove()
     }
-    
-    // Function to compute distance between two CLLocationCoordinate2D points
-    func distanceBetweenPoints(first: CLLocationCoordinate2D, second: CLLocationCoordinate2D) -> CLLocationDistance {
-        let location1 = CLLocation(latitude: first.latitude, longitude: first.longitude)
-        let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
-        return location1.distance(from: location2)
-    }
 
+    
+    // MARK: MapView Setup - Regions & Rotations
+    
     func setupMapView(mapView: MKMapView, teeBox: CLLocationCoordinate2D, centerGreen: CLLocationCoordinate2D) {
         let center = CLLocationCoordinate2D(
             latitude: (teeBox.latitude + centerGreen.latitude) / 2,
@@ -124,30 +160,37 @@ class MapViewController: UIViewController {
         
         let camera = MKMapCamera(lookingAtCenter: center, fromDistance: min(1000, holeDistance * 2.3), pitch: 0, heading: bearing)
         mapView.setCamera(camera, animated: true)
+    }
+    
+    // Helper functions
+    func degreesToRadians(_ degrees: Double) -> Double {
+        return degrees * .pi / 180.0
+    }
+    
+    func radiansToDegrees(_ radians: Double) -> Double {
+        return radians * 180.0 / .pi
+    }
+    
+    // Calculate bearing between two coordinates
+    func bearingBetweenPoints(startPoint: CLLocationCoordinate2D, endPoint: CLLocationCoordinate2D) -> Double {
+        let lat1 = degreesToRadians(startPoint.latitude)
+        let lon1 = degreesToRadians(startPoint.longitude)
+        let lat2 = degreesToRadians(endPoint.latitude)
+        let lon2 = degreesToRadians(endPoint.longitude)
         
-        // Helper functions
-        func degreesToRadians(_ degrees: Double) -> Double {
-            return degrees * .pi / 180.0
-        }
+        let dLon = lon2 - lon1
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let bearing = atan2(y, x)
         
-        func radiansToDegrees(_ radians: Double) -> Double {
-            return radians * 180.0 / .pi
-        }
-        
-        // Calculate bearing between two coordinates
-        func bearingBetweenPoints(startPoint: CLLocationCoordinate2D, endPoint: CLLocationCoordinate2D) -> Double {
-            let lat1 = degreesToRadians(startPoint.latitude)
-            let lon1 = degreesToRadians(startPoint.longitude)
-            let lat2 = degreesToRadians(endPoint.latitude)
-            let lon2 = degreesToRadians(endPoint.longitude)
-            
-            let dLon = lon2 - lon1
-            let y = sin(dLon) * cos(lat2)
-            let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-            let bearing = atan2(y, x)
-            
-            return radiansToDegrees(bearing)
-        }
+        return radiansToDegrees(bearing)
+    }
+    
+    // Function to compute distance between two CLLocationCoordinate2D points
+    func distanceBetweenPoints(first: CLLocationCoordinate2D, second: CLLocationCoordinate2D) -> CLLocationDistance {
+        let location1 = CLLocation(latitude: first.latitude, longitude: first.longitude)
+        let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
+        return location1.distance(from: location2)
     }
     
     
