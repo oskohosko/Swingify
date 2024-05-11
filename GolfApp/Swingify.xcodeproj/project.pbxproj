@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7587CF5A2BEF0C8300F4F767 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */; };
+		7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
@@ -34,7 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		75F42E9D2BD92A3E00C3B659 /* GolfApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = GolfApp/CircleAnnotationView.swift; sourceTree = SOURCE_ROOT; };
+		7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		75F42EA72BD92A3E00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,7 +88,7 @@
 		75F42E9E2BD92A3E00C3B659 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				75F42E9D2BD92A3E00C3B659 /* GolfApp.app */,
+				75F42E9D2BD92A3E00C3B659 /* Swingify.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +113,8 @@
 				75F42F072BE3475900C3B659 /* MapViewController.swift */,
 				75F42F102BE4A10300C3B659 /* FirebaseController.swift */,
 				75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */,
+				7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */,
+				7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -137,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		75F42E9C2BD92A3E00C3B659 /* GolfApp */ = {
+		75F42E9C2BD92A3E00C3B659 /* Swingify */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 75F42EB12BD92A3F00C3B659 /* Build configuration list for PBXNativeTarget "GolfApp" */;
+			buildConfigurationList = 75F42EB12BD92A3F00C3B659 /* Build configuration list for PBXNativeTarget "Swingify" */;
 			buildPhases = (
 				75F42E992BD92A3E00C3B659 /* Sources */,
 				75F42E9A2BD92A3E00C3B659 /* Frameworks */,
@@ -149,14 +155,14 @@
 			);
 			dependencies = (
 			);
-			name = GolfApp;
+			name = Swingify;
 			packageProductDependencies = (
 				75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */,
 				75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */,
 				75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */,
 			);
 			productName = GolfApp;
-			productReference = 75F42E9D2BD92A3E00C3B659 /* GolfApp.app */;
+			productReference = 75F42E9D2BD92A3E00C3B659 /* Swingify.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -174,7 +180,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 75F42E982BD92A3E00C3B659 /* Build configuration list for PBXProject "GolfApp" */;
+			buildConfigurationList = 75F42E982BD92A3E00C3B659 /* Build configuration list for PBXProject "Swingify" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -190,7 +196,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				75F42E9C2BD92A3E00C3B659 /* GolfApp */,
+				75F42E9C2BD92A3E00C3B659 /* Swingify */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +223,7 @@
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
 				75F42F912BEDD13700C3B659 /* Club.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
+				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
 				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
@@ -225,6 +232,7 @@
 				75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */,
 				75F42F0F2BE49F5900C3B659 /* User.swift in Sources */,
 				75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */,
+				7587CF5A2BEF0C8300F4F767 /* CircleAnnotationView.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,
 				75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */,
 				75F42F872BECA3BC00C3B659 /* Course.swift in Sources */,
@@ -434,7 +442,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		75F42E982BD92A3E00C3B659 /* Build configuration list for PBXProject "GolfApp" */ = {
+		75F42E982BD92A3E00C3B659 /* Build configuration list for PBXProject "Swingify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75F42EAF2BD92A3F00C3B659 /* Debug */,
@@ -443,7 +451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		75F42EB12BD92A3F00C3B659 /* Build configuration list for PBXNativeTarget "GolfApp" */ = {
+		75F42EB12BD92A3F00C3B659 /* Build configuration list for PBXNativeTarget "Swingify" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				75F42EB22BD92A3F00C3B659 /* Debug */,
