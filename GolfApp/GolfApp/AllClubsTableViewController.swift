@@ -38,7 +38,7 @@ class AllClubsTableViewController: UITableViewController {
                 }
             }
             
-            let newClub = Club(name: clubName.text!, distance: clubDistance.text!)
+            let newClub = Club(name: clubName.text!, distance: Int(clubDistance.text!)!)
             
             if !doesExist {
                 self.clubsRef?.addDocument(data: ["name": newClub.name,
@@ -75,7 +75,7 @@ class AllClubsTableViewController: UITableViewController {
                 snapshot in
 //                let id = snapshot.documentID
                 let name = snapshot["name"] as! String
-                let distance = snapshot["distance"] as! String
+                let distance = snapshot["distance"] as! Int
                 let newClub = Club(name: name, distance: distance)
                 
                 self.clubs.append(newClub)
@@ -106,7 +106,7 @@ class AllClubsTableViewController: UITableViewController {
         // Configure the cell...
         let club = clubs[indexPath.row]
         cell.textLabel?.text = club.name
-        cell.detailTextLabel?.text = club.distance
+        cell.detailTextLabel?.text = String(club.distance)
 
         return cell
     }

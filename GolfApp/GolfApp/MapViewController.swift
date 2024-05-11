@@ -24,6 +24,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var clubsRef: CollectionReference?
     var databaseListener: ListenerRegistration?
     
+    // Function that gets the hole's distance (tee to green)
+    func calcHoleDistance(hole: HoleData) -> Int {
+        // Getting tee and green locations
+        let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+        let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
+        
+        // Using our distance function to get the distance
+        let distance = distanceBetweenPoints(first: tee, second: green)
+        
+        return Int(distance)
+    }
     
     
     override func viewDidLoad() {
@@ -40,7 +51,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Turn the hole into a location annotation and present on map.
         if let hole = selectedHole {
             
-            navigationItem.title = "Hole \(hole.num) - Par \(hole.par)"
+            let holeDist = calcHoleDistance(hole: hole)
+            
+            navigationItem.title = "Hole \(hole.num) - Par \(hole.par) - \(holeDist) Metres"
             
             let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
             
@@ -63,7 +76,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 snapshot in
 //                let id = snapshot.documentID
                 let name = snapshot["name"] as! String
-                let distance = snapshot["distance"] as! String
+                let distance = snapshot["distance"] as! Int
                 let newClub = Club(name: name, distance: distance)
                 
                 self.clubs.append(newClub)
@@ -77,7 +90,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         databaseListener?.remove()
     }
     
-//    var annotation: MKPointAnnotation?
+    // MARK: - Annotations and Overlays
+    
+    func clearMapOverlaysAndAnnotations() {
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -88,31 +106,37 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             // Removing all annotations before adding a new one
             self.clearMapOverlaysAndAnnotations()
             
-            // Inside the closure, we are updating our selected club based on the drop down.
-            let club = self.clubs.first {$0.name == action.title }
-            
-            // Annotation stuff
-            if let club = club, let hole = self.selectedHole {
-                // Getting variables for annotation calculations
-                let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
-                let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
-                let distCoord = self.distToCoord(club: club, location: tee, green: green)
+            if action.title == "None" {
+                self.clearMapOverlaysAndAnnotations()
+            } else {
+                // Inside the closure, we are updating our selected club based on the drop down.
+                let club = self.clubs.first {$0.name == action.title }
                 
-                // Point where the club would go
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = distCoord
-                annotation.title = club.distance
-                self.mapView.addAnnotation(annotation)
-                
-                // Draw a line from the tee to the calculated distance point
-                let points: [CLLocationCoordinate2D] = [tee, distCoord]
-                let polyline = MKPolyline(coordinates: points, count: points.count)
-                self.mapView.addOverlay(polyline)
+                // Annotation stuff
+                if let club = club, let hole = self.selectedHole {
+                    // Getting variables for annotation calculations
+                    let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+                    let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
+                    let distCoord = self.distToCoord(club: club, location: tee, green: green)
+                    
+                    // Point where the club would go
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = distCoord
+                    annotation.title = String(club.distance)
+                    self.mapView.addAnnotation(annotation)
+                    
+                    // Draw a line from the tee to the calculated distance point
+                    let points: [CLLocationCoordinate2D] = [tee, distCoord]
+                    let polyline = MKPolyline(coordinates: points, count: points.count)
+                    self.mapView.addOverlay(polyline)
+                }
             }
+            
             
         }
         mapView.delegate = self
         var menuChildren: [UIMenuElement] = []
+        menuChildren.append(UIAction(title: "None", handler: actionClosure))
         for club in clubs {
             menuChildren.append(UIAction(title: club.name, handler: actionClosure))
         }
@@ -135,7 +159,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func distToCoord(club: Club, location: CLLocationCoordinate2D, green: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
         // This function takes a club as input, and returns a coordinate that is club.distance away.
-        let distance = Double(club.distance)!
+        let distance = Double(club.distance)
         
         // Coordinates we are projecting from
         var currentLatitude = location.latitude
@@ -222,13 +246,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let location1 = CLLocation(latitude: first.latitude, longitude: first.longitude)
         let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
         return location1.distance(from: location2)
-    }
-    
-    // MARK: - Annotations and Overlays
-    
-    func clearMapOverlaysAndAnnotations() {
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
     }
     
     
