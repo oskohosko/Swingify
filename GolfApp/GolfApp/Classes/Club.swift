@@ -11,9 +11,9 @@ import FirebaseFirestoreSwift
 class Club: NSObject {
     @DocumentID var id: String?
     var name: String
-    var distance: String
+    var distance: Int
     
-    init(id: String? = nil, name: String, distance: String) {
+    init(id: String? = nil, name: String, distance: Int) {
         self.id = id
         self.name = name
         self.distance = distance
