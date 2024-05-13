@@ -6,16 +6,16 @@
 //
 
 import UIKit
-import FirebaseFirestore
+import CoreData
 
-class AllClubsTableViewController: UITableViewController {
+class AllClubsTableViewController: UITableViewController, DatabaseListener {
     
     var CELL_CLUB = "clubCell"
     
     var clubs: [Club] = []
     
-    var clubsRef: CollectionReference?
-    var databaseListener: ListenerRegistration?
+    var listenerType = ListenerType.clubs
+    weak var databaseController: DatabaseProtocol?
     
     // Function that adds a club to Firebase and to the TableView
     @IBAction func addClubAction(_ sender: UIBarButtonItem) {
@@ -38,11 +38,8 @@ class AllClubsTableViewController: UITableViewController {
                 }
             }
             
-            let newClub = Club(name: clubName.text!, distance: Int(clubDistance.text!)!)
-            
             if !doesExist {
-                self.clubsRef?.addDocument(data: ["name": newClub.name,
-                                                  "distance": newClub.distance])
+                let _ = self.databaseController?.addClub(name: clubName.text!, distance: Int32(clubDistance.text!)!)
             }
         }
         alertController.addAction(cancelAction)
@@ -59,35 +56,24 @@ class AllClubsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        let database = Firestore.firestore()
-        clubsRef = database.collection("clubs")
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        databaseListener = clubsRef?.addSnapshotListener() {
-            (querySnapshot, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            self.clubs.removeAll()
-            querySnapshot?.documents.forEach() {
-                snapshot in
-//                let id = snapshot.documentID
-                let name = snapshot["name"] as! String
-                let distance = snapshot["distance"] as! Int
-                let newClub = Club(name: name, distance: distance)
-                
-                self.clubs.append(newClub)
-                self.clubs.sort { $0.distance > $1.distance }
-            }
-            self.tableView.reloadData()
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
         }
-    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        databaseListener?.remove()
+        databaseController?.removeListener(listener: self)
+    }
+    
+    func onClubChange(change: DatabaseChange, clubs: [Club]) {
+        self.clubs = clubs
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -111,25 +97,22 @@ class AllClubsTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let club = clubs[indexPath.row]
+            databaseController?.deleteClub(club: club)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.

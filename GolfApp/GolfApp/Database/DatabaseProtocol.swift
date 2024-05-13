@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 
 enum DatabaseChange {
@@ -15,7 +16,6 @@ enum DatabaseChange {
 }
 
 enum ListenerType {
-    case users
     case clubs
     case all
 }
@@ -25,7 +25,7 @@ protocol DatabaseListener: AnyObject {
     // Must specify the listener's type
     var listenerType: ListenerType {get set}
    
-    func onUserChange(change: DatabaseChange, users: [User])
+    func onClubChange(change: DatabaseChange, clubs: [Club])
 }
 
 // Defines all behavuour the database must have.
@@ -34,10 +34,11 @@ protocol DatabaseProtocol: AnyObject {
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
 
-    // User stuff
-    // Just adding a user for now.
-    func createUser(email: String, password: String) -> User
-    func logInUser() async throws
+    func addClub(name: String, distance: Int32) -> Club
+    func deleteClub(club: Club)
+    
+    func fetchClubs() -> [Club]
+    
     
     func cleanup()
 }
