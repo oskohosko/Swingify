@@ -12,7 +12,7 @@
         <!--Login-->
         <scene sceneID="6uB-Aa-B5U">
             <objects>
-                <viewController id="k5n-gc-AkI" customClass="LoginViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="k5n-gc-AkI" customClass="LoginViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qcr-eO-JyH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,7 +120,7 @@
         <!--Dashboard-->
         <scene sceneID="JgA-oF-u6i">
             <objects>
-                <viewController id="yMh-Yf-rEb" customClass="DashboardViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yMh-Yf-rEb" customClass="DashboardViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xbp-ca-aQh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,7 +171,7 @@
         <!--Map View Controller-->
         <scene sceneID="WfH-Zn-rCK">
             <objects>
-                <viewController id="5zH-uv-gbz" customClass="MapViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5zH-uv-gbz" customClass="MapViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VWF-GR-A1m">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -201,7 +201,13 @@
                             <constraint firstItem="vvk-aF-F6I" firstAttribute="top" secondItem="Oke-js-kBW" secondAttribute="bottom" constant="4" id="zVh-UU-QTz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ron-Dq-tuS"/>
+                    <navigationItem key="navigationItem" id="Ron-Dq-tuS">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="location.circle" catalog="system" id="Srj-e5-IaK">
+                            <connections>
+                                <action selector="toggleLocationAction:" destination="5zH-uv-gbz" id="f0e-a0-5jC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="vvk-aF-F6I" id="hSb-bf-Rif"/>
                     </connections>
@@ -213,7 +219,7 @@
         <!--Courses-->
         <scene sceneID="bA1-SU-JJ8">
             <objects>
-                <tableViewController id="GVM-2o-HSp" customClass="CoursesTableViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GVM-2o-HSp" customClass="CoursesTableViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="S5S-1K-20A">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,7 +267,7 @@
         <!--Holes Table View Controller-->
         <scene sceneID="HW5-0A-B7g">
             <objects>
-                <tableViewController id="b0z-xf-Bvg" customClass="HolesTableViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="b0z-xf-Bvg" customClass="HolesTableViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="doJ-jg-QXD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,7 +315,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="XBy-tA-fpZ">
             <objects>
-                <viewController id="P5X-s0-SVr" customClass="SignUpViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P5X-s0-SVr" customClass="SignUpViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sQB-4h-VBE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,7 +331,7 @@
         <!--Your Clubs-->
         <scene sceneID="k1I-Fz-pJ5">
             <objects>
-                <tableViewController id="kde-pE-z5R" customClass="AllClubsTableViewController" customModule="GolfApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="kde-pE-z5R" customClass="AllClubsTableViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="YJV-5d-hcP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -393,6 +399,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="location.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

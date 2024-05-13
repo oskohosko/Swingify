@@ -9,10 +9,26 @@ import UIKit
 import MapKit
 import FirebaseFirestore
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    
+    let locationManager = CLLocationManager()
+    
+    // This will be where we project annotations from and get distances from.
+    var userLocation: CLLocationCoordinate2D?
+    
+    // Will utilise geo-fencing to detect when the user is near the teebox and to then use their location
+    var geoLocation: CLCircularRegion?
+    
+    @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
+        // Check if user location within the set region.
+        
+//        mapView.showsUserLocation = !mapView.showsUserLocation
+    }
     
     // The hole that we are displaying
     var selectedHole: HoleData?
+    
+    let TEE_IDENTIFIER = "teeBox"
     
     // List of clubs for drop down button
     var clubs: [Club] = []
@@ -24,21 +40,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var clubsRef: CollectionReference?
     var databaseListener: ListenerRegistration?
     
-    // Function that gets the hole's distance (tee to green)
-    func calcHoleDistance(hole: HoleData) -> Int {
-        // Getting tee and green locations
-        let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
-        let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
-        
-        // Using our distance function to get the distance
-        let distance = distanceBetweenPoints(first: tee, second: green)
-        
-        return Int(distance)
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Location Manager stuff
+        locationManager.delegate = self
+        
+        // Got to ensure we get permission to use location
+        let status = locationManager.authorizationStatus
+        if status == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+        }
         
         // Initialising firebase stuff
         let database = Firestore.firestore()
@@ -50,14 +62,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         // Turn the hole into a location annotation and present on map.
         if let hole = selectedHole {
-            
             let holeDist = calcHoleDistance(hole: hole)
             
             navigationItem.title = "Hole \(hole.num) - Par \(hole.par) - \(holeDist) Metres"
             
             let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
-            
             let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
+            
+            // Setting the geoLocation to the teebox
+            geoLocation = CLCircularRegion(center: tee, radius: 30, identifier: TEE_IDENTIFIER)
+            geoLocation?.notifyOnEntry = true
+            
+            locationManager.startMonitoring(for: geoLocation!)
             
             self.setupMapView(mapView: mapView, teeBox: tee, centerGreen: green)
         }
@@ -88,6 +104,39 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseListener?.remove()
+    }
+    
+    // MARK: - User Location Stuff
+    // This function contains the logic associated with checking if the user's location is within the region
+    // If the user is, we will display their location and project the annotations from that location
+    func isWithinRegion(in mapView: MKMapView, userLocation: CLLocation) -> Bool {
+        let region = mapView.region
+        let locationCoordinate = userLocation.coordinate
+        
+        // We are going to get the top right and bottom left corners of the map.
+        let topRight = CLLocationCoordinate2D(
+            latitude: region.center.latitude + (region.span.latitudeDelta) / 2.0,
+            longitude: region.center.longitude + (region.span.longitudeDelta) / 2.0
+        )
+        
+        let bottomLeft = CLLocationCoordinate2D(
+            latitude: region.center.latitude - (region.span.latitudeDelta) / 2.0,
+            longitude: region.center.longitude - (region.span.longitudeDelta) / 2.0
+        )
+        
+        // Now we need to check if the user is within these bounds.
+        return locationCoordinate.latitude <= topRight.latitude &&
+        locationCoordinate.latitude >= bottomLeft.latitude &&
+        locationCoordinate.longitude <= topRight.longitude &&
+        locationCoordinate.latitude >= bottomLeft.longitude
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        let alert = UIAlertController(title: "Tee box entered!",
+                                      message: "You have entered the tee.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        mapView.showsUserLocation = true
     }
     
     // MARK: - Annotations and Overlays
@@ -129,6 +178,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     let points: [CLLocationCoordinate2D] = [tee, distCoord]
                     let polyline = MKPolyline(coordinates: points, count: points.count)
                     self.mapView.addOverlay(polyline)
+                    
+                    // Circle annotation stuff
+//                    let annotation = CustomAnnotation(coordinate: distCoord, title: String(club.distance))
+//                    self.mapView.addAnnotation(annotation)
+                    
+                    
                 }
             }
             
@@ -155,6 +210,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             return renderer
         }
         return MKOverlayRenderer()
+    }
+    /*
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? CustomAnnotation {
+            let identifier = "circleAnnotation"
+            var view: CircleAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                view = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            }
+            return view
+        }
+        return nil
+    }
+     */
+    
+    // Function that gets the hole's distance (tee to green)
+    func calcHoleDistance(hole: HoleData) -> Int {
+        // Getting tee and green locations
+        let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+        let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
+        
+        // Using our distance function to get the distance
+        let distance = distanceBetweenPoints(first: tee, second: green)
+        
+        return Int(distance)
     }
     
     func distToCoord(club: Club, location: CLLocationCoordinate2D, green: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
