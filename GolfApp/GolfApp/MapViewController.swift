@@ -11,6 +11,8 @@ import FirebaseFirestore
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet weak var mapView: MKMapView!
+    
     let locationManager = CLLocationManager()
     
     // This will be where we project annotations from and get distances from.
@@ -20,8 +22,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var geoLocation: CLCircularRegion?
     
     @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
-        // Check if user location within the set region.
+        // Taken from workshop 7 code.
+        // Displays the user's location and allows us to project annotations from it.
         mapView.showsUserLocation = !mapView.showsUserLocation
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
         let iconName = (mapView.showsUserLocation) ? "location.circle.fill" : "location.circle"
         sender.image = UIImage(systemName: iconName)
     }
@@ -52,6 +57,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if status == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
+        
+        // Setting up a gesture recogniser for our long press
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        mapView.addGestureRecognizer(longPressRecognizer)
         
         // Initialising firebase stuff
         let database = Firestore.firestore()
@@ -147,7 +156,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.removeAnnotations(mapView.annotations)
     }
     
-    @IBOutlet weak var mapView: MKMapView!
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state != .began {
+            // This means we don't to it more than once.
+            return
+        }
+        // Getting the location of the gesture
+        let point = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+        
+        // Uncomment the below line to allow for only one annotation on the map per time
+//        mapView.removeAnnotations(mapView.annotations)
+        
+        // Creating our point annotation
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        if mapView.showsUserLocation {
+            let distance = Int(distanceBetweenPoints(first: mapView.userLocation.coordinate, second: coordinate))
+            annotation.title = "\(distance)"
+        } else {
+            if let hole = selectedHole {
+                let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+                let distance = Int(distanceBetweenPoints(first: tee, second: coordinate))
+                annotation.title = "\(distance)"
+            }
+        }
+        mapView.addAnnotation(annotation)
+        gestureRecognizer.state = .ended
+    }
     
     // Drop down menu
     @IBAction func selectClubAction(_ sender: UIButton) {
@@ -158,9 +194,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if action.title == "None" {
                 self.clearMapOverlaysAndAnnotations()
+//                self.mapView.isScrollEnabled = true
+//                self.mapView.isRotateEnabled = true
             } else {
                 // Inside the closure, we are updating our selected club based on the drop down.
                 let club = self.clubs.first {$0.name == action.title }
+                
+                // We are also limitting mapView interaction when in this mode.
+//                self.mapView.isScrollEnabled = false
+//                self.mapView.isRotateEnabled = false
                 
                 // Annotation stuff
                 if let club = club, let hole = self.selectedHole {
@@ -192,14 +234,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.mapView.addOverlay(polyline)
                     
                     // Circle annotation stuff
-//                    let annotation = CustomAnnotation(coordinate: distCoord, title: String(club.distance))
-//                    self.mapView.addAnnotation(annotation)
-                    
-                    
+                    //                    let annotation = CustomAnnotation(coordinate: distCoord, title: String(club.distance))
+                    //                    self.mapView.addAnnotation(annotation)
                 }
             }
-            
-            
         }
         mapView.delegate = self
         var menuChildren: [UIMenuElement] = []
@@ -207,9 +245,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for club in clubs {
             menuChildren.append(UIAction(title: club.name, handler: actionClosure))
         }
-        
         sender.menu = UIMenu(options: .displayInline, children: menuChildren)
-        
         sender.showsMenuAsPrimaryAction = true
         sender.changesSelectionAsPrimaryAction = true
     }
