@@ -166,7 +166,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     // Getting variables for annotation calculations
                     let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
                     let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
-                    let distCoord = self.distToCoord(club: club, location: tee, green: green)
+                    var distCoord = self.distToCoord(club: club, location: tee, green: green)
+                    
+                    var points: [CLLocationCoordinate2D] = [tee, distCoord]
+                    
+                    // If user is at the hole, we will use their location rather than the teebox.
+                    if self.mapView.showsUserLocation {
+                        let userLat = self.mapView.userLocation.coordinate.latitude
+                        let userLong = self.mapView.userLocation.coordinate.longitude
+                        let userLoc = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
+                        distCoord = self.distToCoord(club: club, location: userLoc, green: green)
+                        points = [userLoc, distCoord]
+                    }
                     
                     // Point where the club would go
                     let annotation = MKPointAnnotation()
@@ -175,7 +186,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.mapView.addAnnotation(annotation)
                     
                     // Draw a line from the tee to the calculated distance point
-                    let points: [CLLocationCoordinate2D] = [tee, distCoord]
+                    
                     let polyline = MKPolyline(coordinates: points, count: points.count)
                     self.mapView.addOverlay(polyline)
                     
