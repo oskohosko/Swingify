@@ -21,8 +21,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
         // Check if user location within the set region.
-        
-//        mapView.showsUserLocation = !mapView.showsUserLocation
+        mapView.showsUserLocation = !mapView.showsUserLocation
+        let iconName = (mapView.showsUserLocation) ? "location.circle.fill" : "location.circle"
+        sender.image = UIImage(systemName: iconName)
     }
     
     // The hole that we are displaying
