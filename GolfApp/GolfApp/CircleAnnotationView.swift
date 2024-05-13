@@ -17,5 +17,36 @@ class CircleAnnotationView: MKAnnotationView {
         // Drawing code
     }
     */
+    
+    override var annotation: MKAnnotation? {
+        willSet {
+            guard let customAnnotation = newValue as? CustomAnnotation else {
+                return
+            }
+            canShowCallout = true
+            calloutOffset = CGPoint(x: -5, y: 5)
+            
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: bounds.midX, y: bounds.midY), 
+                                          radius: CGFloat(20),
+                                          startAngle: CGFloat(0),
+                                          endAngle: CGFloat(Double.pi * 2),
+                                          clockwise: true)
+            let circleLayer = CAShapeLayer()
+            circleLayer.path = circlePath.cgPath
+            circleLayer.fillColor = UIColor.clear.cgColor
+            circleLayer.strokeColor = UIColor.white.cgColor
+            circleLayer.lineWidth = 2
+
+            frame = circlePath.bounds
+            layer.addSublayer(circleLayer)
+
+            let label = UILabel()
+            label.frame = bounds
+            label.text = customAnnotation.title
+            label.textColor = UIColor.white
+            label.textAlignment = .center
+            addSubview(label)
+        }
+    }
 
 }
