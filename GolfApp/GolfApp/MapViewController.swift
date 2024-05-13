@@ -7,10 +7,10 @@
 
 import UIKit
 import MapKit
-import FirebaseFirestore
+import CoreData
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
+
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
@@ -20,6 +20,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // Will utilise geo-fencing to detect when the user is near the teebox and to then use their location
     var geoLocation: CLCircularRegion?
+    
+    weak var databaseController: DatabaseProtocol?
+    var clubsFetchedResultsController: NSFetchedResultsController<Club>?
     
     @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
         // Taken from workshop 7 code.
@@ -42,12 +45,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // The selected club from the drop down.
     var selectedClub: Club?
     
-    // Firebase stuff
-    var clubsRef: CollectionReference?
-    var databaseListener: ListenerRegistration?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
         
         // Location Manager stuff
         locationManager.delegate = self
@@ -61,10 +63,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Setting up a gesture recogniser for our long press
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(longPressRecognizer)
-        
-        // Initialising firebase stuff
-        let database = Firestore.firestore()
-        clubsRef = database.collection("clubs")
         
         // Preferred is imagery.
         mapView.preferredConfiguration = MKImageryMapConfiguration()
@@ -89,31 +87,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    
     // Populating our clubs array
     override func viewWillAppear(_ animated: Bool) {
-        databaseListener = clubsRef?.addSnapshotListener() {
-            (querySnapshot, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            self.clubs.removeAll()
-            querySnapshot?.documents.forEach() {
-                snapshot in
-//                let id = snapshot.documentID
-                let name = snapshot["name"] as! String
-                let distance = snapshot["distance"] as! Int
-                let newClub = Club(name: name, distance: distance)
-                
-                self.clubs.append(newClub)
-                self.clubs.sort { $0.distance > $1.distance }
-            }
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        databaseListener?.remove()
+        self.clubs = (databaseController?.fetchClubs())!
     }
     
     // MARK: - User Location Stuff

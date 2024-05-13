@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
+		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
 		7587CF5A2BEF0C8300F4F767 /* CircleAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */; };
 		7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */; };
+		75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */; };
+		75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
 		75F42EAA2BD92A3F00C3B659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA92BD92A3F00C3B659 /* Assets.xcassets */; };
 		75F42EAD2BD92A3F00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EAC2BD92A3F00C3B659 /* Base */; };
-		75F42EEF2BE0CAA200C3B659 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EEE2BE0CAA200C3B659 /* GoogleService-Info.plist */; };
 		75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */; };
 		75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */; };
 		75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */; };
@@ -26,18 +29,19 @@
 		75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F072BE3475900C3B659 /* MapViewController.swift */; };
 		75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F0A2BE49EDD00C3B659 /* DatabaseProtocol.swift */; };
 		75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F0C2BE49EF500C3B659 /* MulticastDelegate.swift */; };
-		75F42F0F2BE49F5900C3B659 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F0E2BE49F5900C3B659 /* User.swift */; };
-		75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F102BE4A10300C3B659 /* FirebaseController.swift */; };
 		75F42F872BECA3BC00C3B659 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F862BECA3BC00C3B659 /* Course.swift */; };
 		75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F882BECA3CE00C3B659 /* CourseData.swift */; };
 		75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8A2BECA3F600C3B659 /* HoleData.swift */; };
 		75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */; };
-		75F42F912BEDD13700C3B659 /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F902BEDD13700C3B659 /* Club.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swingify-DataModel.xcdatamodel"; sourceTree = "<group>"; };
+		754C99062BF22DE4000E9759 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CircleAnnotationView.swift; path = GolfApp/CircleAnnotationView.swift; sourceTree = SOURCE_ROOT; };
 		7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataClass.swift"; path = "GolfApp/Club+CoreDataClass.swift"; sourceTree = "<group>"; };
+		75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataProperties.swift"; path = "GolfApp/Club+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +49,6 @@
 		75F42EA92BD92A3F00C3B659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75F42EAC2BD92A3F00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75F42EAE2BD92A3F00C3B659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75F42EEE2BE0CAA200C3B659 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		75F42EF72BE340E500C3B659 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -54,13 +57,10 @@
 		75F42F072BE3475900C3B659 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		75F42F0A2BE49EDD00C3B659 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		75F42F0C2BE49EF500C3B659 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
-		75F42F0E2BE49F5900C3B659 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		75F42F102BE4A10300C3B659 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		75F42F862BECA3BC00C3B659 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		75F42F882BECA3CE00C3B659 /* CourseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseData.swift; sourceTree = "<group>"; };
 		75F42F8A2BECA3F600C3B659 /* HoleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleData.swift; sourceTree = "<group>"; };
 		75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTableViewController.swift; sourceTree = "<group>"; };
-		75F42F902BEDD13700C3B659 /* Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +80,8 @@
 		75F42E942BD92A3E00C3B659 = {
 			isa = PBXGroup;
 			children = (
+				75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */,
+				75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */,
 				75F42E9F2BD92A3E00C3B659 /* GolfApp */,
 				75F42E9E2BD92A3E00C3B659 /* Products */,
 			);
@@ -104,17 +106,17 @@
 				75F42EA92BD92A3F00C3B659 /* Assets.xcassets */,
 				75F42EAB2BD92A3F00C3B659 /* LaunchScreen.storyboard */,
 				75F42EAE2BD92A3F00C3B659 /* Info.plist */,
-				75F42EEE2BE0CAA200C3B659 /* GoogleService-Info.plist */,
 				75F42EF72BE340E500C3B659 /* LoginViewController.swift */,
 				75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */,
 				75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */,
 				75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */,
 				75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */,
 				75F42F072BE3475900C3B659 /* MapViewController.swift */,
-				75F42F102BE4A10300C3B659 /* FirebaseController.swift */,
 				75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */,
 				7587CF592BEF0C8300F4F767 /* CircleAnnotationView.swift */,
 				7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */,
+				754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */,
+				754C99062BF22DE4000E9759 /* CoreDataController.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -131,8 +133,6 @@
 		75F42F942BEDE81300C3B659 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				75F42F0E2BE49F5900C3B659 /* User.swift */,
-				75F42F902BEDD13700C3B659 /* Club.swift */,
 				75F42F862BECA3BC00C3B659 /* Course.swift */,
 				75F42F882BECA3CE00C3B659 /* CourseData.swift */,
 				75F42F8A2BECA3F600C3B659 /* HoleData.swift */,
@@ -207,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F42EAA2BD92A3F00C3B659 /* Assets.xcassets in Resources */,
-				75F42EEF2BE0CAA200C3B659 /* GoogleService-Info.plist in Resources */,
 				75F42EAD2BD92A3F00C3B659 /* Base in Resources */,
 				75F42EA82BD92A3E00C3B659 /* Base in Resources */,
 			);
@@ -221,16 +220,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
-				75F42F912BEDD13700C3B659 /* Club.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
+				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
+				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
 				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
 				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
-				75F42F112BE4A10300C3B659 /* FirebaseController.swift in Sources */,
-				75F42F0F2BE49F5900C3B659 /* User.swift in Sources */,
+				754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */,
+				754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */,
 				75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */,
 				7587CF5A2BEF0C8300F4F767 /* CircleAnnotationView.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,
@@ -490,6 +490,20 @@
 			productName = FirebaseFirestoreSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */,
+			);
+			currentVersion = 754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */;
+			name = "Swingify-DataModel.xcdatamodeld";
+			path = "/Users/oskar/University/FIT3178/golfApp/GolfApp/GolfApp/Swingify-DataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 75F42E952BD92A3E00C3B659 /* Project object */;
 }
