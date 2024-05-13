@@ -28,24 +28,37 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let addAction = UIAlertAction(title: "Add", style: .default) {_ in
-            let clubName = alertController.textFields![0]
-            let clubDistance = alertController.textFields![1]
+            // Error checking
+            guard let clubName = alertController.textFields?[0].text, !clubName.isEmpty,
+                  let clubDistance = alertController.textFields?[1].text, !clubDistance.isEmpty,
+                  let distance = Int32(clubDistance) else {
+                self.displayMessage(title: "Error", message: "Please Enter All Fields.")
+                return
+            }
+            
             var doesExist = false
             
             for club in self.clubs {
-                if club.name.lowercased() == clubName.text!.lowercased() {
+                if club.name.lowercased() == clubName.lowercased() {
                     doesExist = true
                 }
             }
             
             if !doesExist {
-                let _ = self.databaseController?.addClub(name: clubName.text!, distance: Int32(clubDistance.text!)!)
+                let _ = self.databaseController?.addClub(name: clubName, distance: distance)
             }
         }
         alertController.addAction(cancelAction)
         alertController.addAction(addAction)
         self.present(alertController, animated: false, completion: nil)
         }
+    
+    // Display message function from week 1
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
     
 
     override func viewDidLoad() {
