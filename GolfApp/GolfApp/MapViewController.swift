@@ -150,21 +150,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         annotation.coordinate = coordinate
         if mapView.showsUserLocation {
             let distance = Int(distanceBetweenPoints(first: mapView.userLocation.coordinate, second: coordinate))
-            annotation.title = "\(distance)"
+            annotation.title = "\(distance)m"
         } else {
             if let hole = selectedHole {
                 let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
                 let distance = Int(distanceBetweenPoints(first: tee, second: coordinate))
-                annotation.title = "\(distance)"
+                annotation.title = "\(distance)m"
             }
         }
         mapView.addAnnotation(annotation)
+        // This line allows for better UX as you had to touch the map for the app to recognise the gesture ended.
         gestureRecognizer.state = .ended
     }
     
     // Drop down menu
     @IBAction func selectClubAction(_ sender: UIButton) {
         let actionClosure = { (action: UIAction) in
+            
+            var startLocation: CLLocationCoordinate2D
             
             // Removing all annotations before adding a new one
             self.clearMapOverlaysAndAnnotations()
@@ -183,36 +186,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 // Annotation stuff
                 if let club = club, let hole = self.selectedHole {
+                    self.selectedClub = club
                     // Getting variables for annotation calculations
                     let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
                     let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
                     var distCoord = self.distToCoord(club: club, location: tee, green: green)
                     
+                    // These are the points for the line annotation (tee to distCoord)
                     var points: [CLLocationCoordinate2D] = [tee, distCoord]
                     
+                    // Using startLocation for the annotations
+                    startLocation = tee
                     // If user is at the hole, we will use their location rather than the teebox.
                     if self.mapView.showsUserLocation {
                         let userLat = self.mapView.userLocation.coordinate.latitude
                         let userLong = self.mapView.userLocation.coordinate.longitude
                         let userLoc = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
+                        startLocation = userLoc
                         distCoord = self.distToCoord(club: club, location: userLoc, green: green)
                         points = [userLoc, distCoord]
                     }
                     
                     // Point where the club would go
+                    /*
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = distCoord
                     annotation.title = String(club.distance)
                     self.mapView.addAnnotation(annotation)
+                     */
                     
-                    // Draw a line from the tee to the calculated distance point
-                    
+                    // Drawing a line from the tee to the calculated distance point
                     let polyline = MKPolyline(coordinates: points, count: points.count)
                     self.mapView.addOverlay(polyline)
                     
-                    // Circle annotation stuff
-                    //                    let annotation = CustomAnnotation(coordinate: distCoord, title: String(club.distance))
-                    //                    self.mapView.addAnnotation(annotation)
+                    // Going to attempt the ellipse here.
+                    // Firstly, we need to design a circle annotation that bounds the ellipse.
+                    // This is because MKMapView doesn't support ellipses directly.
+                    // Using a value of 5% for dispersion here (Tour-Player level)
+                    let horizontalDist = Double(club.distance) * 0.05
+                    let verticalDist = Double(club.distance) * 0.025
+                    
+                    // Now creating the circle to bound the ellipse
+                    // Horizontal distance is always going to be bigger in this case, so set that as radius
+                    let circle = MKCircle(center: distCoord, radius: horizontalDist)
+                    self.mapView.addOverlay(circle)
+                    
                 }
             }
         }
@@ -228,13 +246,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if let circle = overlay as? MKCircle, let club = selectedClub {
+            print("Circle")
+            // Firstly need to get horiz and vert
+//            let horizontalMetres = Double(club.distance) * 0.05
+//            let verticalMetres = Double(club.distance) * 0.025
+//            return EllipseOverlayRenderer(circle: circle, horizontalMetres: 20, verticalMetres: 10)
+            let renderer = MKCircleRenderer(circle: circle)
+            renderer.fillColor = UIColor.clear
+            renderer.strokeColor = UIColor.white // Blue border
+            renderer.lineWidth = 2
+            return renderer
+            
+        }
+        
         if let polyline = overlay as? MKPolyline {
+            print("Polyline")
             let renderer = MKPolylineRenderer(polyline: polyline)
             renderer.strokeColor = .white
             renderer.lineWidth = 3
             return renderer
         }
-        return MKOverlayRenderer()
+       
+        return MKOverlayRenderer(overlay: overlay)
     }
     /*
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
