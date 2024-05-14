@@ -38,8 +38,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     
     func addClub(name: String, distance: Int32) -> Club {
         
-        let club = NSEntityDescription.insertNewObject(forEntityName:
-                                                        "Club", into: persistentContainer.viewContext) as! Club
+        let club = NSEntityDescription.insertNewObject(forEntityName: "Club", into: persistentContainer.viewContext) as! Club
         club.name = name
         club.distance = distance
         return club
