@@ -303,7 +303,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         var menuChildren: [UIMenuElement] = []
         menuChildren.append(UIAction(title: "None", handler: actionClosure))
         for club in clubs {
-            menuChildren.append(UIAction(title: club.name, handler: actionClosure))
+            menuChildren.append(UIAction(title: club.name, subtitle: String(club.distance), handler: actionClosure))
         }
         sender.menu = UIMenu(options: .displayInline, children: menuChildren)
         sender.showsMenuAsPrimaryAction = true
