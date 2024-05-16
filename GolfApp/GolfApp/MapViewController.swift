@@ -59,16 +59,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if status == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
-
-        // Setting up a double tap gesture recogniser to shift overlay
-        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
-        doubleTapRecognizer.numberOfTapsRequired = 2
-        mapView.addGestureRecognizer(doubleTapRecognizer)
         
         // Setting up a gesture recogniser for our long press
         // Long press will display distance
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(longPressRecognizer)
+        
+        // Setting up a double tap gesture recogniser to shift overlay
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        mapView.addGestureRecognizer(doubleTapRecognizer)
+        
+        // And now a single press gesture recogniser to tap on our overlays
+        let singleTapRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(_:)))
+        mapView.addGestureRecognizer(singleTapRecogniser)
         
         // Preferred is imagery.
         mapView.preferredConfiguration = MKImageryMapConfiguration()
@@ -97,6 +101,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // Populating our clubs array
     override func viewWillAppear(_ animated: Bool) {
         self.clubs = (databaseController?.fetchClubs())!
+    }
+    
+    // Display message function from week 1
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - User Location Stuff
@@ -132,12 +143,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.showsUserLocation = true
     }
     
-    // MARK: - Annotations and Overlays
     
-    func clearMapOverlaysAndAnnotations() {
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
-    }
+    // MARK: - Gesture Recognizers
     
     @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
         if gestureRecognizer.state != .began {
@@ -206,8 +213,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
              */
             
             // Drawing a line from the tee to the calculated distance point
-            var polyline = MKPolyline(coordinates: points, count: points.count)
-            polyline.title = String(club.distance)
+            let polyline = MKPolyline(coordinates: points, count: points.count)
+            polyline.title = String(club.distance) // Not working :(
             self.mapView.addOverlay(polyline)
             
             // Going to attempt the ellipse here.
@@ -215,6 +222,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // This is because MKMapView doesn't support ellipses directly.
             // Using a value of 5% for dispersion here (Tour-Player level)
             let horizontalDist = Double(club.distance) * 0.05
+            // Useful if I change to an ellipse
             let verticalDist = Double(club.distance) * 0.025
             
             // Now creating the circle to bound the ellipse
@@ -224,6 +232,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.addOverlay(circle)
         }
         
+    }
+    
+    @objc func handleSingleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        // This will bring up overlay details
+        
+        // Location of the tap
+        let location = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        
+        // Now we need to check if the tap is within our circle annotation
+        for overlay in mapView.overlays {
+            if let circle = overlay as? MKCircle {
+                // Getting radius and center of our circle annotation
+                let circleCenter = circle.coordinate
+                let circleRadius = circle.radius
+                
+                // Turning our tap and circle locations to CLLocations so we can get distance
+                let tapLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                let circleLocation = CLLocation(latitude: circleCenter.latitude, longitude: circleCenter.longitude)
+                // Getting the distance between the taps
+                let distance = tapLocation.distance(from: circleLocation)
+                
+                // If tap is within our circle, we perform action.
+                if distance <= circleRadius {
+//                    displayMessage(title: circle.title!, message: "Test")
+                    // Going to add an annotation to test
+                    
+                    // TODO - Get radius and display distance to right and left from centre
+                    let annotation = MKPointAnnotation()
+                    annotation.coordinate = circleCenter
+                    annotation.title = circle.title
+                    mapView.addAnnotation(annotation)
+                }
+                
+                
+            }
+        }
+    }
+    
+    
+    // MARK: - Annotations and Overlays
+    
+    func clearMapOverlaysAndAnnotations() {
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
     }
     
     // Drop down menu
