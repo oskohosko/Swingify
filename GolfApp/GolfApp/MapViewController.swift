@@ -24,16 +24,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     weak var databaseController: DatabaseProtocol?
     var clubsFetchedResultsController: NSFetchedResultsController<Club>?
     
-    @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
-        // Taken from workshop 7 code.
-        // Displays the user's location and allows us to project annotations from it.
-        mapView.showsUserLocation = !mapView.showsUserLocation
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
-        let iconName = (mapView.showsUserLocation) ? "location.circle.fill" : "location.circle"
-        sender.image = UIImage(systemName: iconName)
-    }
-    
     // The hole that we are displaying
     var selectedHole: HoleData?
     
@@ -44,6 +34,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // The selected club from the drop down.
     var selectedClub: Club?
+    
+    @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
+        // Taken from workshop 7 code.
+        // Displays the user's location and allows us to project annotations from it.
+        mapView.showsUserLocation = !mapView.showsUserLocation
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+        let iconName = (mapView.showsUserLocation) ? "location.circle.fill" : "location.circle"
+        sender.image = UIImage(systemName: iconName)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +59,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if status == .notDetermined {
             locationManager.requestWhenInUseAuthorization()
         }
+
+        // Setting up a double tap gesture recogniser to shift overlay
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        mapView.addGestureRecognizer(doubleTapRecognizer)
         
         // Setting up a gesture recogniser for our long press
+        // Long press will display distance
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         mapView.addGestureRecognizer(longPressRecognizer)
         
@@ -163,22 +169,80 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         gestureRecognizer.state = .ended
     }
     
+    @objc func handleDoubleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        // This will update our overlay.
+        // Firstly, we need to remove the other one.
+        mapView.removeOverlays(mapView.overlays)
+        
+        // And now we need to get the location of the double tap
+        // Getting the location of the gesture
+        let point = gestureRecognizer.location(in: mapView)
+        let coordinate = mapView.convert(point, toCoordinateFrom: mapView)
+        
+        if let hole = selectedHole, let club = selectedClub {
+            // Getting variables for annotation calculations
+            let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
+//            let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
+            var distCoord = self.distToCoord(club: club, location: tee, green: coordinate)
+            
+            // These are the points for the line annotation (tee to distCoord)
+            var points: [CLLocationCoordinate2D] = [tee, distCoord]
+            
+            // If user is at the hole, we will use their location rather than the teebox.
+            if self.mapView.showsUserLocation {
+                let userLat = self.mapView.userLocation.coordinate.latitude
+                let userLong = self.mapView.userLocation.coordinate.longitude
+                let userLoc = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
+                distCoord = self.distToCoord(club: club, location: userLoc, green: coordinate)
+                points = [userLoc, distCoord]
+            }
+            
+            // Point where the club would go
+            /*
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = distCoord
+            annotation.title = String(club.distance)
+            self.mapView.addAnnotation(annotation)
+             */
+            
+            // Drawing a line from the tee to the calculated distance point
+            var polyline = MKPolyline(coordinates: points, count: points.count)
+            polyline.title = String(club.distance)
+            self.mapView.addOverlay(polyline)
+            
+            // Going to attempt the ellipse here.
+            // Firstly, we need to design a circle annotation that bounds the ellipse.
+            // This is because MKMapView doesn't support ellipses directly.
+            // Using a value of 5% for dispersion here (Tour-Player level)
+            let horizontalDist = Double(club.distance) * 0.05
+            let verticalDist = Double(club.distance) * 0.025
+            
+            // Now creating the circle to bound the ellipse
+            // Horizontal distance is always going to be bigger in this case, so set that as radius
+            let circle = MKCircle(center: distCoord, radius: horizontalDist)
+            circle.title = String(club.distance)
+            self.mapView.addOverlay(circle)
+        }
+        
+    }
+    
     // Drop down menu
     @IBAction func selectClubAction(_ sender: UIButton) {
         let actionClosure = { (action: UIAction) in
-            
-            var startLocation: CLLocationCoordinate2D
-            
             // Removing all annotations before adding a new one
             self.clearMapOverlaysAndAnnotations()
             
             if action.title == "None" {
                 self.clearMapOverlaysAndAnnotations()
+                self.mapView.isZoomEnabled = true
 //                self.mapView.isScrollEnabled = true
 //                self.mapView.isRotateEnabled = true
             } else {
                 // Inside the closure, we are updating our selected club based on the drop down.
                 let club = self.clubs.first {$0.name == action.title }
+                
+                // Disabling zoom to allow for double tap
+                self.mapView.isZoomEnabled = false
                 
                 // We are also limitting mapView interaction when in this mode.
 //                self.mapView.isScrollEnabled = false
@@ -195,14 +259,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     // These are the points for the line annotation (tee to distCoord)
                     var points: [CLLocationCoordinate2D] = [tee, distCoord]
                     
-                    // Using startLocation for the annotations
-                    startLocation = tee
                     // If user is at the hole, we will use their location rather than the teebox.
                     if self.mapView.showsUserLocation {
                         let userLat = self.mapView.userLocation.coordinate.latitude
                         let userLong = self.mapView.userLocation.coordinate.longitude
                         let userLoc = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
-                        startLocation = userLoc
                         distCoord = self.distToCoord(club: club, location: userLoc, green: green)
                         points = [userLoc, distCoord]
                     }
@@ -216,7 +277,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                      */
                     
                     // Drawing a line from the tee to the calculated distance point
-                    let polyline = MKPolyline(coordinates: points, count: points.count)
+                    var polyline = MKPolyline(coordinates: points, count: points.count)
+                    polyline.title = String(club.distance)
                     self.mapView.addOverlay(polyline)
                     
                     // Going to attempt the ellipse here.
@@ -229,7 +291,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     // Now creating the circle to bound the ellipse
                     // Horizontal distance is always going to be bigger in this case, so set that as radius
                     let circle = MKCircle(center: distCoord, radius: horizontalDist)
+                    circle.title = String(club.distance)
                     self.mapView.addOverlay(circle)
+//                    
+                    
                     
                 }
             }
@@ -246,22 +311,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let circle = overlay as? MKCircle, let club = selectedClub {
-            print("Circle")
-            // Firstly need to get horiz and vert
-//            let horizontalMetres = Double(club.distance) * 0.05
-//            let verticalMetres = Double(club.distance) * 0.025
-//            return EllipseOverlayRenderer(circle: circle, horizontalMetres: 20, verticalMetres: 10)
+        if let circle = overlay as? MKCircle {
             let renderer = MKCircleRenderer(circle: circle)
             renderer.fillColor = UIColor.clear
-            renderer.strokeColor = UIColor.white // Blue border
+            renderer.strokeColor = UIColor.white
             renderer.lineWidth = 2
             return renderer
             
         }
-        
         if let polyline = overlay as? MKPolyline {
-            print("Polyline")
             let renderer = MKPolylineRenderer(polyline: polyline)
             renderer.strokeColor = .white
             renderer.lineWidth = 3
@@ -270,22 +328,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
        
         return MKOverlayRenderer(overlay: overlay)
     }
-    /*
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? CustomAnnotation {
-            let identifier = "circleAnnotation"
-            var view: CircleAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CircleAnnotationView {
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-            } else {
-                view = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            }
-            return view
-        }
-        return nil
-    }
-     */
     
     // Function that gets the hole's distance (tee to green)
     func calcHoleDistance(hole: HoleData) -> Int {
