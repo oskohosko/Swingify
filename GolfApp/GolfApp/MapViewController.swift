@@ -72,6 +72,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // And now a single press gesture recogniser to tap on our overlays
         let singleTapRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(_:)))
+        singleTapRecogniser.require(toFail: doubleTapRecognizer)
         mapView.addGestureRecognizer(singleTapRecogniser)
         
         // Preferred is imagery.
@@ -88,6 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let green = CLLocationCoordinate2D(latitude: hole.green_lat, longitude: hole.green_lng)
             
             // Setting the geoLocation to the teebox
+            // See if you can do this for the next tee box to automatically take you there.
             geoLocation = CLCircularRegion(center: tee, radius: 30, identifier: TEE_IDENTIFIER)
             geoLocation?.notifyOnEntry = true
             
@@ -220,10 +222,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Going to attempt the ellipse here.
             // Firstly, we need to design a circle annotation that bounds the ellipse.
             // This is because MKMapView doesn't support ellipses directly.
-            // Using a value of 5% for dispersion here (Tour-Player level)
-            let horizontalDist = Double(club.distance) * 0.05
+            // Using a value of 10% for dispersion here (Tour-Player level)
+            let horizontalDist = Double(club.distance) * 0.1
             // Useful if I change to an ellipse
-            let verticalDist = Double(club.distance) * 0.025
+            let verticalDist = horizontalDist / 2
             
             // Now creating the circle to bound the ellipse
             // Horizontal distance is always going to be bigger in this case, so set that as radius
@@ -264,6 +266,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     annotation.coordinate = circleCenter
                     annotation.title = circle.title
                     mapView.addAnnotation(annotation)
+                    Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { [weak self, weak annotation] _ in
+                                if let annotation = annotation {
+                                    self?.mapView.removeAnnotation(annotation)
+                                }
+                            }
                 }
                 
                 
@@ -337,9 +344,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     // Going to attempt the ellipse here.
                     // Firstly, we need to design a circle annotation that bounds the ellipse.
                     // This is because MKMapView doesn't support ellipses directly.
-                    // Using a value of 5% for dispersion here (Tour-Player level)
-                    let horizontalDist = Double(club.distance) * 0.05
-                    let verticalDist = Double(club.distance) * 0.025
+                    // Using a value of 10% for dispersion here (Tour-Player level)
+                    let horizontalDist = Double(club.distance) * 0.1
+                    let verticalDist = horizontalDist / 2
                     
                     // Now creating the circle to bound the ellipse
                     // Horizontal distance is always going to be bigger in this case, so set that as radius
