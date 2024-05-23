@@ -13,6 +13,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     var listeners = MulticastDelegate<DatabaseListener>()
     var persistentContainer: NSPersistentContainer
     var clubsFetchedResultsController: NSFetchedResultsController<Club>?
+    var profileFetchedResultsController: NSFetchedResultsController<Profile>?
     
     override init() {
         // Initialising the persistent container
@@ -20,7 +21,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         // Loading the core data stack
         persistentContainer.loadPersistentStores() { (description, error ) in
             if let error = error {
-                    fatalError("Failed to load Core Data Stack with error: \(error)")
+                fatalError("Failed to load Core Data Stack with error: \(error)")
             }
         }
         super.init()
@@ -42,11 +43,22 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         club.name = name
         club.distance = distance
         return club
-        
+    }
+    
+    func addProfile(name: String, courseID: Int32, courseName: String) -> Profile {
+        let profile = NSEntityDescription.insertNewObject(forEntityName: "Profile", into: persistentContainer.viewContext) as! Profile
+        profile.name = name
+        profile.courseID = courseID
+        profile.courseName = courseName
+        return profile
     }
     
     func deleteClub(club: Club) {
         persistentContainer.viewContext.delete(club)
+    }
+    
+    func deleteProfile(profile: Profile) {
+        persistentContainer.viewContext.delete(profile)
     }
     
     func fetchClubs() -> [Club] {
@@ -57,17 +69,17 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             
             // Initialising the controller
             clubsFetchedResultsController =
-                NSFetchedResultsController(fetchRequest: request,
-                                           managedObjectContext: persistentContainer.viewContext,
-                                           sectionNameKeyPath: nil,
-                                           cacheName: nil)
+            NSFetchedResultsController(fetchRequest: request,
+                                       managedObjectContext: persistentContainer.viewContext,
+                                       sectionNameKeyPath: nil,
+                                       cacheName: nil)
             clubsFetchedResultsController?.delegate = self
             
             do {
                 try clubsFetchedResultsController?.performFetch()
-                } catch {
-                    print("Fetch Request Failed: \(error)")
-                }
+            } catch {
+                print("Fetch Request Failed: \(error)")
+            }
         }
         
         if let clubs = clubsFetchedResultsController?.fetchedObjects {
@@ -76,11 +88,41 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return [Club]()
     }
     
+    func fetchProfile() -> [Profile] {
+        if profileFetchedResultsController == nil {
+            let request: NSFetchRequest<Profile> = Profile.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+            request.sortDescriptors = [sortDescriptor]
+            // Initialising the controller
+            profileFetchedResultsController =
+            NSFetchedResultsController(fetchRequest: request,
+                                       managedObjectContext: persistentContainer.viewContext,
+                                       sectionNameKeyPath: nil,
+                                       cacheName: nil)
+            profileFetchedResultsController?.delegate = self
+            
+            do {
+                try profileFetchedResultsController?.performFetch()
+            } catch {
+                print("Fetch Request Failed: \(error)")
+            }
+        }
+        
+        if let profiles = profileFetchedResultsController?.fetchedObjects {
+            return profiles
+        }
+        return [Profile]()
+    }
+    
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         if listener.listenerType == .clubs || listener.listenerType == .all {
             listener.onClubChange(change: .update, clubs:
-                                        fetchClubs())
+                                    fetchClubs())
+        }
+        if listener.listenerType == .profile || listener.listenerType == .all {
+            listener.onProfileChange(change: .update, profiles:
+                                        fetchProfile())
         }
     }
     
@@ -95,11 +137,16 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             listeners.invoke() { listener in
                 if listener.listenerType == .clubs
                     || listener.listenerType == .all {
-                        listener.onClubChange(change: .update,
-                                              clubs: fetchClubs())
+                    listener.onClubChange(change: .update,
+                                          clubs: fetchClubs())
+                }
+                if listener.listenerType == .profile
+                    || listener.listenerType == .all {
+                    listener.onProfileChange(change: .update,
+                                             profiles: fetchProfile())
                 }
             }
         }
+        
     }
-
 }

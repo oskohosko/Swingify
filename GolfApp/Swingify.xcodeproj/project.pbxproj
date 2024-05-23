@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7546F2DC2BFD95530001E22A /* HolesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */; };
+		7546F2DE2BFD97810001E22A /* HolesTitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */; };
+		7546F2E02BFD98CB0001E22A /* HoleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */; };
+		7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E12BFEC8450001E22A /* ProfileViewController.swift */; };
+		7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */; };
+		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
 		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
 		7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */; };
@@ -37,6 +43,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesCollectionViewController.swift; sourceTree = "<group>"; };
+		7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTitleCollectionReusableView.swift; sourceTree = "<group>"; };
+		7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleCollectionViewCell.swift; sourceTree = "<group>"; };
+		7546F2E12BFEC8450001E22A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "GolfApp/Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swingify-DataModel.xcdatamodel"; sourceTree = "<group>"; };
 		754C99062BF22DE4000E9759 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
@@ -82,6 +94,8 @@
 		75F42E942BD92A3E00C3B659 = {
 			isa = PBXGroup;
 			children = (
+				7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */,
+				7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */,
 				75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */,
 				75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */,
 				75F42E9F2BD92A3E00C3B659 /* GolfApp */,
@@ -120,6 +134,10 @@
 				754C99062BF22DE4000E9759 /* CoreDataController.swift */,
 				7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */,
 				75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */,
+				7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */,
+				7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */,
+				7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */,
+				7546F2E12BFEC8450001E22A /* ProfileViewController.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -222,15 +240,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7546F2DC2BFD95530001E22A /* HolesCollectionViewController.swift in Sources */,
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
 				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
 				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
+				7546F2E02BFD98CB0001E22A /* HoleCollectionViewCell.swift in Sources */,
 				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
+				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
+				7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */,
+				7546F2DE2BFD97810001E22A /* HolesTitleCollectionReusableView.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */,
@@ -241,6 +264,7 @@
 				75F42F872BECA3BC00C3B659 /* Course.swift in Sources */,
 				75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */,
 				7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */,
+				7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */,
 				75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */,
 				75F42EFA2BE3418F00C3B659 /* SignUpViewController.swift in Sources */,
 			);

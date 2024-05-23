@@ -88,6 +88,10 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
         self.clubs = clubs
         self.tableView.reloadData()
     }
+    
+    func onProfileChange(change: DatabaseChange, profiles: [Profile]) {
+        // Do nothing.
+    }
 
     // MARK: - Table view data source
 
@@ -105,7 +109,7 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
         // Configure the cell...
         let club = clubs[indexPath.row]
         cell.textLabel?.text = club.name
-        cell.detailTextLabel?.text = String(club.distance)
+        cell.detailTextLabel?.text = "\(String(club.distance))m"
 
         return cell
     }
