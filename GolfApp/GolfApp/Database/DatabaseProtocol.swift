@@ -28,7 +28,7 @@ protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
     func onClubChange(change: DatabaseChange, clubs: [Club])
     func onProfileChange(change: DatabaseChange, profiles: [Profile])
-    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse])
+    func onFavCoursesChange(change: DatabaseChange, faveCourses: [FavCourse])
 }
 
 // Defines all behavuour the database must have.

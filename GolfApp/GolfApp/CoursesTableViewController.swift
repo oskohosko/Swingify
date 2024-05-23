@@ -130,16 +130,16 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         // Do Nothing
     }
     
-    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse]) {
+    func onFavCoursesChange(change: DatabaseChange, faveCourses: [FavCourse]) {
         // Map every favCourse to a Course class and return
-        favCDCourses = favCourses
+        favCDCourses = faveCourses
         updateFavCourses()
         tableView.reloadData()
     }
     
     func updateFavCourses() {
         favCDCourses = databaseController?.fetchFavCourses() ?? []
-        self.favCourses = allCourses.filter { course in
+        favCourses = allCourses.filter { course in
             favCDCourses.contains { $0.name == course.name }
         }
     }
@@ -150,9 +150,18 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             tableView.reloadData()
             return
         }
-        filteredCourses = allCourses.filter { course in
-            return course.name.lowercased().contains(searchText.lowercased())
+        
+        // Updated searching when we are filtering by favourites
+        if showingFavouritesOnly {
+            filteredCourses = favCourses.filter { course in
+                return course.name.lowercased().contains(searchText.lowercased())
+            }
+        } else {
+            filteredCourses = allCourses.filter { course in
+                return course.name.lowercased().contains(searchText.lowercased())
+            }
         }
+        
         tableView.reloadData()
     }
     
@@ -182,14 +191,20 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showingFavouritesOnly ? favCourses.count : isFiltering ? filteredCourses.count : allCourses.count
+        if showingFavouritesOnly && !isFiltering {
+            return favCourses.count
+        } else if isFiltering {
+            return filteredCourses.count
+        } else {
+            return allCourses.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_COURSE, for: indexPath)
         // COURSE STUFF
         let course: Course
-        if showingFavouritesOnly {
+        if showingFavouritesOnly && !isFiltering {
             course = favCourses[indexPath.row]
         } else if isFiltering {
             course = filteredCourses[indexPath.row]
@@ -219,23 +234,24 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         let favouriteAction = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
             guard let self = self else { return }
             
-            let course = self.showingFavouritesOnly ? favCourses[indexPath.row] : allCourses[indexPath.row]
+            let course = showingFavouritesOnly ? favCourses[indexPath.row] : isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
             
             if favCourses.contains(where: { $0.name == course.name}) {
                 // Deleting the course from favourites in CoreData
                 if let favCourse = favCDCourses.first(where: { $0.name == course.name }) {
                     self.databaseController?.deleteFavCourse(favCourse: favCourse)
-                    if showingFavouritesOnly {
-                        showingFavouritesOnly = false
-                        updateStarToggleButton()
-                    }
+                    // Pops back to the table view as I couldn't update favourites live while in that state for some reason
+//                    if showingFavouritesOnly {
+//                        showingFavouritesOnly = false
+//                        updateStarToggleButton()
+//                    }
                 }
             } else {
                 // Add the course to favourites
                 let _ = databaseController?.addFavCourse(name: course.name, id: Int32(course.id), lat: course.lat, lng: course.lng)
             }
             updateFavCourses()
-            self.tableView.reloadData()
+            tableView.reloadData()
             completionHandler(false)
         }
         

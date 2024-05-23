@@ -93,7 +93,7 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
         // Do nothing.
     }
     
-    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse]) {
+    func onFavCoursesChange(change: DatabaseChange, faveCourses: [FavCourse]) {
         // Do nothing.
     }
 
