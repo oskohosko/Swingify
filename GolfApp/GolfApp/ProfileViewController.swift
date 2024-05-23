@@ -173,6 +173,16 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     func setTextFieldsEditable(_ editable: Bool) {
         nameTextField.isUserInteractionEnabled = editable
         courseTextField.isUserInteractionEnabled = editable
+        if editable == true {
+            nameTextField.textColor = .black
+            courseTextField.textColor = .black
+        } else {
+            nameTextField.textColor = .lightGray
+            courseTextField.textColor = .lightGray
+        }
+        
+        
+        
     }
     
     func updateTextFields(profile: Profile) {
