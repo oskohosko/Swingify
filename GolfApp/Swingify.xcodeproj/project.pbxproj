@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7546F2DC2BFD95530001E22A /* HolesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */; };
-		7546F2DE2BFD97810001E22A /* HolesTitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */; };
-		7546F2E02BFD98CB0001E22A /* HoleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */; };
 		7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E12BFEC8450001E22A /* ProfileViewController.swift */; };
 		7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */; };
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
@@ -19,6 +16,8 @@
 		7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */; };
 		75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */; };
 		75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */; };
+		75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */; };
+		75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */; };
 		75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
@@ -28,8 +27,6 @@
 		75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */; };
 		75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */; };
 		75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */; };
-		75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EF72BE340E500C3B659 /* LoginViewController.swift */; };
-		75F42EFA2BE3418F00C3B659 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */; };
 		75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */; };
 		75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */; };
 		75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */; };
@@ -43,9 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesCollectionViewController.swift; sourceTree = "<group>"; };
-		7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTitleCollectionReusableView.swift; sourceTree = "<group>"; };
-		7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleCollectionViewCell.swift; sourceTree = "<group>"; };
 		7546F2E12BFEC8450001E22A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "GolfApp/Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -55,6 +49,8 @@
 		7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseOverlayRenderer.swift; sourceTree = "<group>"; };
 		75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataClass.swift"; path = "GolfApp/Club+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataProperties.swift"; path = "GolfApp/Club+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataClass.swift"; path = "GolfApp/FavCourse+CoreDataClass.swift"; sourceTree = "<group>"; };
+		75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataProperties.swift"; path = "GolfApp/FavCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseOverlay.swift; sourceTree = "<group>"; };
 		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,8 +59,6 @@
 		75F42EA92BD92A3F00C3B659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75F42EAC2BD92A3F00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75F42EAE2BD92A3F00C3B659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75F42EF72BE340E500C3B659 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllClubsTableViewController.swift; sourceTree = "<group>"; };
 		75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +88,8 @@
 		75F42E942BD92A3E00C3B659 = {
 			isa = PBXGroup;
 			children = (
+				75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */,
+				75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */,
 				7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */,
 				7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */,
 				75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */,
@@ -122,8 +118,6 @@
 				75F42EA92BD92A3F00C3B659 /* Assets.xcassets */,
 				75F42EAB2BD92A3F00C3B659 /* LaunchScreen.storyboard */,
 				75F42EAE2BD92A3F00C3B659 /* Info.plist */,
-				75F42EF72BE340E500C3B659 /* LoginViewController.swift */,
-				75F42EF92BE3418F00C3B659 /* SignUpViewController.swift */,
 				75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */,
 				75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */,
 				75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */,
@@ -134,9 +128,6 @@
 				754C99062BF22DE4000E9759 /* CoreDataController.swift */,
 				7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */,
 				75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */,
-				7546F2DB2BFD95530001E22A /* HolesCollectionViewController.swift */,
-				7546F2DD2BFD97810001E22A /* HolesTitleCollectionReusableView.swift */,
-				7546F2DF2BFD98CB0001E22A /* HoleCollectionViewCell.swift */,
 				7546F2E12BFEC8450001E22A /* ProfileViewController.swift */,
 			);
 			path = GolfApp;
@@ -240,20 +231,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7546F2DC2BFD95530001E22A /* HolesCollectionViewController.swift in Sources */,
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
 				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
 				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
-				7546F2E02BFD98CB0001E22A /* HoleCollectionViewCell.swift in Sources */,
-				75F42EF82BE340E500C3B659 /* LoginViewController.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
+				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
+				75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */,
 				7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */,
-				7546F2DE2BFD97810001E22A /* HolesTitleCollectionReusableView.swift in Sources */,
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */,
@@ -266,7 +255,6 @@
 				7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */,
 				7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */,
 				75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */,
-				75F42EFA2BE3418F00C3B659 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

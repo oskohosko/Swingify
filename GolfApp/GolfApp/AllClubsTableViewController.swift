@@ -92,6 +92,10 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
     func onProfileChange(change: DatabaseChange, profiles: [Profile]) {
         // Do nothing.
     }
+    
+    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse]) {
+        // Do nothing.
+    }
 
     // MARK: - Table view data source
 
