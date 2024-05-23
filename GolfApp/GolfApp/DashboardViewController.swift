@@ -9,11 +9,17 @@ import UIKit
 
 class DashboardViewController: UIViewController {
 
+    
+    
+    @IBOutlet weak var accountButton: UIBarButtonItem!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
 

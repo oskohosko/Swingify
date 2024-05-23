@@ -57,6 +57,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        
         // Search controller setup
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -72,9 +73,14 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             print("URL not valid.")
             return
         }
+        
+ //       let data = Data(contentsOf: <#T##URL#>)
+ 
+        
         // Previous data was cached, this fixes that
-        var request = URLRequest(url: requestURL)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
+        let request = URLRequest(url: requestURL)
+        // Uncomment the below line if the API will be updating.
+//        request.cachePolicy = .reloadIgnoringLocalCacheData
         Task {
             do {
                 let (data, response) = try await URLSession.shared.data(for: request)
@@ -121,6 +127,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         let course = isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
         cell.textLabel?.text = course.name
         cell.detailTextLabel?.text = "(\(course.lat), \(course.lng))"
+        
         
         return cell
     }

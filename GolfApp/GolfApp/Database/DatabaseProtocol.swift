@@ -17,6 +17,7 @@ enum DatabaseChange {
 
 enum ListenerType {
     case clubs
+    case profile
     case all
 }
 
@@ -24,8 +25,8 @@ enum ListenerType {
 protocol DatabaseListener: AnyObject {
     // Must specify the listener's type
     var listenerType: ListenerType {get set}
-   
     func onClubChange(change: DatabaseChange, clubs: [Club])
+    func onProfileChange(change: DatabaseChange, profiles: [Profile])
 }
 
 // Defines all behavuour the database must have.
@@ -36,8 +37,11 @@ protocol DatabaseProtocol: AnyObject {
 
     func addClub(name: String, distance: Int32) -> Club
     func deleteClub(club: Club)
-    
     func fetchClubs() -> [Club]
+    
+    func addProfile(name: String, courseID: Int32, courseName: String) -> Profile
+    func deleteProfile(profile: Profile)
+    func fetchProfile() -> [Profile]
     
     
     func cleanup()
