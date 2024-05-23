@@ -170,7 +170,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             listener.onProfileChange(change: .update, profiles: fetchProfile())
         }
         if listener.listenerType == .favCourses || listener.listenerType == .all {
-            listener.onFavCoursesChange(change: .update, favCourses: fetchFavCourses())
+            listener.onFavCoursesChange(change: .update, faveCourses: fetchFavCourses())
         }
     }
     
@@ -196,7 +196,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
                 if listener.listenerType == .favCourses 
                     || listener.listenerType == .all {
                     listener.onFavCoursesChange(change: .update, 
-                                                favCourses: fetchFavCourses())
+                                                faveCourses: fetchFavCourses())
                 }
             }
         }

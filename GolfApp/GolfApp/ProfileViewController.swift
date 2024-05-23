@@ -200,7 +200,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         // Do nothing
     }
     
-    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse]) {
+    func onFavCoursesChange(change: DatabaseChange, faveCourses: [FavCourse]) {
         // Doing nothing as of now
     }
     
