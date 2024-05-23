@@ -14,6 +14,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     var persistentContainer: NSPersistentContainer
     var clubsFetchedResultsController: NSFetchedResultsController<Club>?
     var profileFetchedResultsController: NSFetchedResultsController<Profile>?
+    var favCoursesFetchedResultsController: NSFetchedResultsController<FavCourse>?
     
     override init() {
         // Initialising the persistent container
@@ -37,6 +38,8 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         }
     }
     
+    // MARK: - Adding Clubs, Profiles and Favourite Courses
+    
     func addClub(name: String, distance: Int32) -> Club {
         
         let club = NSEntityDescription.insertNewObject(forEntityName: "Club", into: persistentContainer.viewContext) as! Club
@@ -53,6 +56,18 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return profile
     }
     
+    func addFavCourse(name: String, id: Int32, lat: Double, lng: Double) -> FavCourse {
+        let course = NSEntityDescription.insertNewObject(forEntityName: "FavCourse", into: persistentContainer.viewContext) as! FavCourse
+        
+        course.name = name
+        course.id = id
+        course.lat = lat
+        course.lng = lng
+        return course
+    }
+    
+    // MARK: - Deleting Clubs, Profiles and Favourite Courses
+    
     func deleteClub(club: Club) {
         persistentContainer.viewContext.delete(club)
     }
@@ -60,6 +75,12 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     func deleteProfile(profile: Profile) {
         persistentContainer.viewContext.delete(profile)
     }
+    
+    func deleteFavCourse(favCourse: FavCourse) {
+        persistentContainer.viewContext.delete(favCourse)
+    }
+    
+    // MARK: - Fetching Clubs, Profiles and Favourite Courses
     
     func fetchClubs() -> [Club] {
         if clubsFetchedResultsController == nil {
@@ -114,15 +135,42 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         return [Profile]()
     }
     
+    func fetchFavCourses() -> [FavCourse] {
+        if favCoursesFetchedResultsController == nil {
+            let request: NSFetchRequest<FavCourse> = FavCourse.fetchRequest()
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
+            request.sortDescriptors = [sortDescriptor]
+            // Initialising the controller
+            favCoursesFetchedResultsController =
+            NSFetchedResultsController(fetchRequest: request,
+                                       managedObjectContext: persistentContainer.viewContext,
+                                       sectionNameKeyPath: nil,
+                                       cacheName: nil)
+            favCoursesFetchedResultsController?.delegate = self
+            
+            do {
+                try favCoursesFetchedResultsController?.performFetch()
+            } catch {
+                print("Fetch Request Failed: \(error)")
+            }
+        }
+        
+        if let favCourses = favCoursesFetchedResultsController?.fetchedObjects {
+            return favCourses
+        }
+        return [FavCourse]()
+    }
+    
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         if listener.listenerType == .clubs || listener.listenerType == .all {
-            listener.onClubChange(change: .update, clubs:
-                                    fetchClubs())
+            listener.onClubChange(change: .update, clubs: fetchClubs())
         }
         if listener.listenerType == .profile || listener.listenerType == .all {
-            listener.onProfileChange(change: .update, profiles:
-                                        fetchProfile())
+            listener.onProfileChange(change: .update, profiles: fetchProfile())
+        }
+        if listener.listenerType == .favCourses || listener.listenerType == .all {
+            listener.onFavCoursesChange(change: .update, favCourses: fetchFavCourses())
         }
     }
     
@@ -144,6 +192,11 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
                     || listener.listenerType == .all {
                     listener.onProfileChange(change: .update,
                                              profiles: fetchProfile())
+                }
+                if listener.listenerType == .favCourses 
+                    || listener.listenerType == .all {
+                    listener.onFavCoursesChange(change: .update, 
+                                                favCourses: fetchFavCourses())
                 }
             }
         }

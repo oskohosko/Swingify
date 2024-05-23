@@ -372,6 +372,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         sender.changesSelectionAsPrimaryAction = true
     }
     
+    // MARK: - MKMapViewDelegate Methods
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let circle = overlay as? MKCircle {
             let renderer = MKCircleRenderer(circle: circle)
@@ -390,6 +392,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
        
         return MKOverlayRenderer(overlay: overlay)
     }
+    
+    // When someone touches an annotation it is removed.
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation else { return }
+        // Remove the annotation from the map view
+        mapView.removeAnnotation(annotation)
+    }
+    
+    // MARK: - MapView Setup: Regions & Rotations
     
     // Function that gets the hole's distance (tee to green)
     func calcHoleDistance(hole: HoleData) -> Int {
@@ -429,12 +440,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         return CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
     }
-    
-    
-    
-
-    
-    // MARK: - MapView Setup: Regions & Rotations
     
     func setupMapView(mapView: MKMapView, teeBox: CLLocationCoordinate2D, centerGreen: CLLocationCoordinate2D) {
         let center = CLLocationCoordinate2D(

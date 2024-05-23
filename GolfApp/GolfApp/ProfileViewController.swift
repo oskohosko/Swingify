@@ -180,9 +180,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             nameTextField.textColor = .lightGray
             courseTextField.textColor = .lightGray
         }
-        
-        
-        
     }
     
     func updateTextFields(profile: Profile) {
@@ -194,15 +191,18 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
                                          
     // MARK: - Database Methods
     
-    func onClubChange(change: DatabaseChange, clubs: [Club]) {
-        // Do nothing
-    }
-    
     func onProfileChange(change: DatabaseChange, profiles: [Profile]) {
         // We only want one profile (and should only have one at a time if I've coded correctly)
         currentProfile = profiles[0]
     }
     
+    func onClubChange(change: DatabaseChange, clubs: [Club]) {
+        // Do nothing
+    }
+    
+    func onFavCoursesChange(change: DatabaseChange, favCourses: [FavCourse]) {
+        // Doing nothing as of now
+    }
     
     // MARK: - UITextFieldDelegate
 
