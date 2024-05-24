@@ -108,8 +108,8 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
                 print(error)
             }
         }
-        showingFavouritesOnly = false
-        updateStarToggleButton()
+//        showingFavouritesOnly = false
+//        updateStarToggleButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -175,7 +175,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         favouriteButton.image = buttonImage
     }
     
-    @IBAction func toggleFavourites(_ sender: UIBarButtonItem) {
+    @IBAction func toggleFavourites(_ sender: Any) {
         showingFavouritesOnly.toggle()
         updateStarToggleButton()
         updateFavCourses()
@@ -240,11 +240,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
                 // Deleting the course from favourites in CoreData
                 if let favCourse = favCDCourses.first(where: { $0.name == course.name }) {
                     self.databaseController?.deleteFavCourse(favCourse: favCourse)
-                    // Pops back to the table view as I couldn't update favourites live while in that state for some reason
-//                    if showingFavouritesOnly {
-//                        showingFavouritesOnly = false
-//                        updateStarToggleButton()
-//                    }
+                    self.databaseController?.cleanup()
                 }
             } else {
                 // Add the course to favourites
@@ -274,7 +270,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
              let destinationVC = segue.destination as! HolesTableViewController
              if let indexPath = sender as? IndexPath {
                  let selectedCourse = isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
-                 destinationVC.selectedCourse = selectedCourse
+                 destinationVC.selectedCourseID = selectedCourse.id
              }
          }
     }

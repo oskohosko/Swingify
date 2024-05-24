@@ -16,7 +16,7 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
     
     let CELL_HOLE = "holeCell"
     
-    weak var selectedCourse: Course?
+    var selectedCourseID: Int?
     
     var courseHoles: [HoleData] = []
 
@@ -32,13 +32,14 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
         navigationItem.title = "Loading Holes..."
         
         // API CALL
-        guard let selectedCourse else {
+        guard let selectedCourseID else {
             print("No Course Selected.")
             return
         }
+        
         // ID to make the API call with
-        let request_id = selectedCourse.id
-        guard let requestURL = URL(string: "https://swingify.s3.ap-southeast-2.amazonaws.com/course_\(request_id).json") else {
+        let requestID = selectedCourseID
+        guard let requestURL = URL(string: "https://swingify.s3.ap-southeast-2.amazonaws.com/course_\(requestID).json") else {
             print("URL not valid")
             return
         }

@@ -8,6 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, DatabaseListener {
+    
+    weak var delegate: ProfileUpdateDelegate?
 
     var listenerType = ListenerType.profile
     weak var databaseController: DatabaseProtocol?
@@ -56,7 +58,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             submitButton.isHidden = true
             return
         }
-        
         // Now, we can add to our database
         if let course = selectedCourse {
             // ID to add to DB
@@ -70,8 +71,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
             
             updateTextFields(profile: newProfile!)
             
+            // Saving context before we call delegate
+            self.databaseController?.cleanup()
+            
+            delegate?.didUpdateProfile()
+            
             currentProfile = newProfile
         }
+        
+        updateTextFields(profile: currentProfile!)
         
         // Exit editing mode
         editButton.setTitle("Edit Profile", for: .normal)
@@ -186,7 +194,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         // This function when called will update the text fields to show the profile
         nameTextField.text = profile.name
         courseTextField.text = profile.courseName
-        navigationItem.title = "Hey, \(profile.name)!"
+        navigationItem.title = "\(profile.name)'s Profile"
     }
                                          
     // MARK: - Database Methods
