@@ -27,7 +27,7 @@
 		75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */; };
 		75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */; };
 		75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */; };
-		75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */; };
+		75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFB2BE3459A00C3B659 /* HomeViewController.swift */; };
 		75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */; };
 		75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */; };
 		75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F072BE3475900C3B659 /* MapViewController.swift */; };
@@ -59,7 +59,7 @@
 		75F42EA92BD92A3F00C3B659 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75F42EAC2BD92A3F00C3B659 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75F42EAE2BD92A3F00C3B659 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		75F42EFB2BE3459A00C3B659 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllClubsTableViewController.swift; sourceTree = "<group>"; };
 		75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesTableViewController.swift; sourceTree = "<group>"; };
 		75F42F072BE3475900C3B659 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				75F42EA92BD92A3F00C3B659 /* Assets.xcassets */,
 				75F42EAB2BD92A3F00C3B659 /* LaunchScreen.storyboard */,
 				75F42EAE2BD92A3F00C3B659 /* Info.plist */,
-				75F42EFB2BE3459A00C3B659 /* DashboardViewController.swift */,
+				75F42EFB2BE3459A00C3B659 /* HomeViewController.swift */,
 				75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */,
 				75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */,
 				75F42F072BE3475900C3B659 /* MapViewController.swift */,
@@ -238,7 +238,7 @@
 				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */,
-				75F42EFC2BE3459A00C3B659 /* DashboardViewController.swift in Sources */,
+				75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
 				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
 				75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */,
