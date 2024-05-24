@@ -194,7 +194,6 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         // This function when called will update the text fields to show the profile
         nameTextField.text = profile.name
         courseTextField.text = profile.courseName
-        navigationItem.title = "\(profile.name)'s Profile"
     }
                                          
     // MARK: - Database Methods

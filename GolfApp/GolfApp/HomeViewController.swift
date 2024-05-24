@@ -44,7 +44,6 @@ class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDeleg
         if profiles!.count > 0 {
             currentProfile = profiles![0]
             updateTextFields(profile: currentProfile!)
-            print(profiles![0].name)
         }
         
         
