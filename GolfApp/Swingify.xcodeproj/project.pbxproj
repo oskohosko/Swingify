@@ -12,6 +12,7 @@
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
 		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
+		756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */; };
 		7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */; };
 		7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */; };
 		75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */; };
@@ -45,6 +46,7 @@
 		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swingify-DataModel.xcdatamodel"; sourceTree = "<group>"; };
 		754C99062BF22DE4000E9759 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateDelegate.swift; sourceTree = "<group>"; };
 		7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseOverlayRenderer.swift; sourceTree = "<group>"; };
 		75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataClass.swift"; path = "GolfApp/Club+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */,
 				75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */,
 				7546F2E12BFEC8450001E22A /* ProfileViewController.swift */,
+				756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			files = (
 				75F42F892BECA3CE00C3B659 /* CourseData.swift in Sources */,
 				75F42F0B2BE49EDD00C3B659 /* DatabaseProtocol.swift in Sources */,
+				756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */,
 				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
 				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
