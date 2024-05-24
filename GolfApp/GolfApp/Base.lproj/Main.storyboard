@@ -256,6 +256,7 @@
                             <constraint firstItem="odb-32-IhF" firstAttribute="top" secondItem="x7V-hr-PVn" secondAttribute="bottom" constant="14" id="za1-gE-8PG"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="hAM-hu-KYt"/>
                     <navigationItem key="navigationItem" title="Home" id="XOl-gn-bra"/>
                     <connections>
                         <outlet property="clubsView" destination="yr7-Y2-OL7" id="yNU-SP-T3z"/>
@@ -266,8 +267,8 @@
                         <outlet property="profileView" destination="x7V-hr-PVn" id="PUg-o3-UCX"/>
                         <segue destination="GVM-2o-HSp" kind="show" identifier="viewCoursesSegue" id="m26-dU-Ulk"/>
                         <segue destination="kde-pE-z5R" kind="show" identifier="viewClubsSegue" id="5Xg-WO-dtY"/>
-                        <segue destination="K5p-dc-27f" kind="show" identifier="viewProfileSegue" id="L6j-Yq-ZTF"/>
                         <segue destination="b0z-xf-Bvg" kind="show" identifier="homeCourseSegue" id="dXv-8w-ewN"/>
+                        <segue destination="K5p-dc-27f" kind="show" identifier="viewProfileSegue" id="QlG-RG-y9F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9R8-Ru-wyG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -374,6 +375,7 @@
                             <constraint firstItem="e8R-pV-aCT" firstAttribute="top" secondItem="veB-bO-dil" secondAttribute="bottom" constant="32" id="xry-be-BPv"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="VR9-j3-xov"/>
                     <navigationItem key="navigationItem" title="Your Profile" id="4LP-iV-AMc"/>
                     <connections>
                         <outlet property="courseTextField" destination="VBI-l9-bWY" id="c85-3U-odH"/>
@@ -384,7 +386,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0K-c9-yXe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4659" y="-343"/>
+            <point key="canvasLocation" x="4659" y="-339"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="WfH-Zn-rCK">
@@ -546,7 +548,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNt-Qb-xzf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5492" y="25"/>
+            <point key="canvasLocation" x="6417.5572519083971" y="24.647887323943664"/>
         </scene>
         <!--Your Clubs-->
         <scene sceneID="k1I-Fz-pJ5">
@@ -599,10 +601,11 @@
             </objects>
             <point key="canvasLocation" x="3721" y="724"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="E5T-FQ-Ftr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="niE-GU-jv6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="3p9-XS-RRE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yXB-wt-b8b">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>

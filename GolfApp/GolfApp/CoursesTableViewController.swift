@@ -245,6 +245,8 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             } else {
                 // Add the course to favourites
                 let _ = databaseController?.addFavCourse(name: course.name, id: Int32(course.id), lat: course.lat, lng: course.lng)
+                self.databaseController?.cleanup()
+                
             }
             updateFavCourses()
             tableView.reloadData()
