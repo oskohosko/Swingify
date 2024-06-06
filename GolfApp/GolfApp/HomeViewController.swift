@@ -128,13 +128,13 @@ class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDeleg
     }
     
     @objc func favouritesViewTapped(_ sender: UITapGestureRecognizer) {
-        // Nothing yet
         favouriteSelected = true
         performSegue(withIdentifier: "viewCoursesSegue", sender: self)
     }
     
     @objc func infoViewTapped(_ sender: UITapGestureRecognizer) {
         // Nothing yet
+        
     }
     
     func updateTextFields(profile: Profile) {

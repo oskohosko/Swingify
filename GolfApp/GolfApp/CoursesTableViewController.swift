@@ -192,6 +192,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if showingFavouritesOnly && !isFiltering {
+            print("\(favCourses.count)")
             return favCourses.count
         } else if isFiltering {
             return filteredCourses.count
@@ -245,7 +246,6 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             } else {
                 // Add the course to favourites
                 let _ = databaseController?.addFavCourse(name: course.name, id: Int32(course.id), lat: course.lat, lng: course.lng)
-                self.databaseController?.cleanup()
                 
             }
             updateFavCourses()
@@ -271,7 +271,14 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
          if segue.identifier == "viewHolesSegue" {
              let destinationVC = segue.destination as! HolesTableViewController
              if let indexPath = sender as? IndexPath {
-                 let selectedCourse = isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
+                 let selectedCourse: Course
+                 if showingFavouritesOnly && !isFiltering {
+                     selectedCourse = favCourses[indexPath.row]
+                 } else if isFiltering {
+                     selectedCourse = filteredCourses[indexPath.row]
+                 } else {
+                     selectedCourse = allCourses[indexPath.row]
+                 }
                  destinationVC.selectedCourseID = selectedCourse.id
              }
          }

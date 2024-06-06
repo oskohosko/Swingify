@@ -104,6 +104,16 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         courseTextField.resignFirstResponder()
     }
     
+    @objc func switchToPickerTapped() {
+        courseTextField.inputView = pickerView
+        courseTextField.reloadInputViews()
+    }
+    
+    @objc func switchToKeyboardTapped() {
+        courseTextField.inputView = nil
+        courseTextField.reloadInputViews()
+        }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -140,7 +150,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
-        toolbar.setItems([doneButton], animated: false)
+        let switchToPickerButton = UIBarButtonItem(title: "Picker", style: .plain, target: self, action: #selector(switchToPickerTapped))
+        let switchToKeyboardButton = UIBarButtonItem(title: "Keyboard", style: .plain, target: self, action: #selector(switchToKeyboardTapped))
+        toolbar.setItems([doneButton, UIBarButtonItem.flexibleSpace(),switchToKeyboardButton, UIBarButtonItem.flexibleSpace(), switchToPickerButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         courseTextField.inputAccessoryView = toolbar
         
@@ -220,11 +232,19 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if let text = textField.text, !text.isEmpty {
-            filterCourses(for: text)
-        } else {
-            filteredCourses = courses
-            pickerView.reloadAllComponents()
+        // Ensure the toolbar is set as the input accessory view
+        if textField.inputAccessoryView == nil {
+            let toolbar = UIToolbar()
+            toolbar.sizeToFit()
+            
+            let switchToKeyboardButton = UIBarButtonItem(title: "Keyboard", style: .plain, target: self, action: #selector(switchToKeyboardTapped))
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+            let switchToPickerButton = UIBarButtonItem(title: "Picker", style: .plain, target: self, action: #selector(switchToPickerTapped))
+            
+            toolbar.setItems([switchToKeyboardButton, UIBarButtonItem.flexibleSpace(), doneButton, UIBarButtonItem.flexibleSpace(), switchToPickerButton], animated: false)
+            toolbar.isUserInteractionEnabled = true
+            
+            textField.inputAccessoryView = toolbar
         }
     }
     

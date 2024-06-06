@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yr7-Y2-OL7">
-                                <rect key="frame" x="203" y="135" width="178" height="125"/>
+                                <rect key="frame" x="204" y="135" width="177" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bbg-8z-vIW">
                                         <rect key="frame" x="8" y="8.0000000000000018" width="65.333333333333329" height="18.666666666666671"/>
@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JZ4-20-Uv3">
-                                        <rect key="frame" x="145" y="92.666666666666671" width="25" height="23.666666666666671"/>
+                                        <rect key="frame" x="144" y="92.666666666666671" width="25" height="23.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="2aL-Ih-Rmr"/>
                                             <constraint firstAttribute="width" constant="25" id="prh-Iw-a5z"/>
@@ -87,7 +87,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7V-hr-PVn">
-                                <rect key="frame" x="203" y="274" width="178" height="125"/>
+                                <rect key="frame" x="204" y="274" width="177" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF3-Oa-4hC">
                                         <rect key="frame" x="8" y="7.9999999999999982" width="71.333333333333329" height="19.333333333333329"/>
@@ -96,7 +96,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I8L-Cc-sR4">
-                                        <rect key="frame" x="140" y="84.666666666666657" width="30" height="35.333333333333343"/>
+                                        <rect key="frame" x="139" y="84.666666666666657" width="30" height="35.333333333333343"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="8zF-1I-Bfe"/>
                                             <constraint firstAttribute="width" constant="30" id="Wyy-6M-C1h"/>
@@ -155,7 +155,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odb-32-IhF">
-                                <rect key="frame" x="12" y="413" width="178" height="82"/>
+                                <rect key="frame" x="12" y="413" width="177" height="82"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favourites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRS-GC-DYc">
                                         <rect key="frame" x="8" y="8" width="78.333333333333329" height="21"/>
@@ -164,7 +164,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lzd-fl-wyc">
-                                        <rect key="frame" x="145" y="48.666666666666671" width="25" height="24.666666666666671"/>
+                                        <rect key="frame" x="144" y="48.666666666666671" width="25" height="24.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="wxu-1d-M3r"/>
                                             <constraint firstAttribute="height" constant="25" id="zbw-8T-CV6"/>
@@ -247,9 +247,12 @@
                             <constraint firstItem="KR7-Lh-bfK" firstAttribute="trailing" secondItem="yr7-Y2-OL7" secondAttribute="trailing" constant="12" id="Eir-KW-0FR"/>
                             <constraint firstItem="KR7-Lh-bfK" firstAttribute="trailing" secondItem="C5N-lK-umH" secondAttribute="trailing" constant="12" id="LxC-go-Aed"/>
                             <constraint firstItem="yr7-Y2-OL7" firstAttribute="top" secondItem="KR7-Lh-bfK" secondAttribute="top" constant="32" id="MJl-0M-EoR"/>
+                            <constraint firstItem="yr7-Y2-OL7" firstAttribute="leading" secondItem="fcO-Z6-BfC" secondAttribute="trailing" constant="14" id="MKp-wS-qfP"/>
                             <constraint firstItem="x7V-hr-PVn" firstAttribute="top" secondItem="yr7-Y2-OL7" secondAttribute="bottom" constant="14" id="Pnq-Wg-cpd"/>
                             <constraint firstItem="KR7-Lh-bfK" firstAttribute="trailing" secondItem="x7V-hr-PVn" secondAttribute="trailing" constant="12" id="QbA-72-0lS"/>
+                            <constraint firstItem="v2g-Yf-OKD" firstAttribute="leading" secondItem="odb-32-IhF" secondAttribute="trailing" constant="14" id="hes-5v-kDJ"/>
                             <constraint firstItem="fcO-Z6-BfC" firstAttribute="top" secondItem="KR7-Lh-bfK" secondAttribute="top" constant="32" id="ie2-hl-eNv"/>
+                            <constraint firstItem="x7V-hr-PVn" firstAttribute="leading" secondItem="teF-Sn-jVv" secondAttribute="trailing" constant="14" id="oFu-rw-2Hd"/>
                             <constraint firstItem="C5N-lK-umH" firstAttribute="leading" secondItem="v2g-Yf-OKD" secondAttribute="trailing" constant="14" id="opH-sg-oeQ"/>
                             <constraint firstItem="fcO-Z6-BfC" firstAttribute="leading" secondItem="KR7-Lh-bfK" secondAttribute="leading" constant="12" id="sR8-a9-R2p"/>
                             <constraint firstItem="v2g-Yf-OKD" firstAttribute="top" secondItem="x7V-hr-PVn" secondAttribute="bottom" constant="14" id="vox-bt-gnb"/>
@@ -392,17 +395,17 @@
         <scene sceneID="WfH-Zn-rCK">
             <objects>
                 <viewController id="5zH-uv-gbz" customClass="MapViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="VWF-GR-A1m">
+                    <view key="view" contentMode="scaleToFill" id="VWF-GR-A1m">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsScale="YES" id="vvk-aF-F6I">
-                                <rect key="frame" x="0.0" y="142" width="393" height="710"/>
+                                <rect key="frame" x="9.7592789637682245" y="141.99999999999818" width="393.00000000000011" height="710"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oke-js-kBW">
-                                <rect key="frame" x="16" y="104" width="361" height="34"/>
+                                <rect key="frame" x="25.894765392176623" y="103.99999999999864" width="361" height="34"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Select Club" cornerStyle="capsule">
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle3"/>
                                 </buttonConfiguration>
