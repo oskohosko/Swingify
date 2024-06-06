@@ -5,6 +5,13 @@
 //  Created by Oskar Hosken on 2/5/2024.
 //
 
+/*
+ This is the file responsible for showing our table of courses.
+ It makes an api call to our api and displays the results in a table view.
+ The courses can be filtered by searching and/or by toggling favourites.
+ The user can swipe to the right to add a course to their favourites.
+ */
+
 import UIKit
 
 enum CourseListError: Error {
@@ -14,8 +21,10 @@ enum CourseListError: Error {
 
 class CoursesTableViewController: UITableViewController, UISearchResultsUpdating, DatabaseListener {
     
+    // Favourite button outlet - star
     @IBOutlet weak var favouriteButton: UIBarButtonItem!
     
+    // Database stuff as favourite courses are stored in Core Data
     var listenerType = ListenerType.favCourses
     weak var databaseController: DatabaseProtocol?
     
@@ -28,19 +37,21 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
     // Our Favourite courses list
     var favCourses: [Course] = []
     
-    // Favourite courses list for DB
+    // Favourite courses list for our database because decodable class is different to core data.
     var favCDCourses: [FavCourse] = []
     
     // For searching for courses.
     var filteredCourses: [Course] = []
     var searchController: UISearchController!
     
-    var isFiltering: Bool {
-        return searchController.isActive && !searchBarIsEmpty
-    }
-
+    // A flag used to determine if we are searching for a course
     var searchBarIsEmpty: Bool {
         return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    // This is a flag to determine whether the view is filtering (searching)
+    var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
     }
     
     // URL we request when loading the screen to get the courses
@@ -70,6 +81,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
+        // Loading the courses
         navigationItem.title = "Loading Courses..."
         
         // Making our API call
@@ -77,28 +89,30 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             print("URL not valid.")
             return
         }
-        
- //       let data = Data(contentsOf: <#T##URL#>)
- 
-        
         // Previous data was cached, this fixes that
         let request = URLRequest(url: requestURL)
-        // Uncomment the below line if the API will be updating.
-//        request.cachePolicy = .reloadIgnoringLocalCacheData
+        // Uncomment the below line if the API will be updating - means the app won't cache.
+        // request.cachePolicy = .reloadIgnoringLocalCacheData
+        
+        // Here is where we make the API call.
         Task {
             do {
+                // Getting the data from the request
                 let (data, response) = try await URLSession.shared.data(for: request)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw CourseListError.invalidServerResponse
                 }
-            
+                
+                // Decoding it to our Course class
                 let decoder = JSONDecoder()
                 let courseData = try decoder.decode([Course].self, from: data)
+                // And adding all the courses to our list.
                 allCourses = courseData
                 
                 navigationItem.title = "Courses"
-                // Fetch favorite courses from Core Data
+                
+                // We also fetch our favourites from Core Data and update the list too.
                 favCDCourses = databaseController?.fetchFavCourses() ?? []
                 updateFavCourses()
                 
@@ -108,9 +122,9 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
                 print(error)
             }
         }
-//        showingFavouritesOnly = false
-//        updateStarToggleButton()
     }
+    
+    // MARK: - Database Delegate methods
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -137,13 +151,18 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         tableView.reloadData()
     }
     
+    // MARK: - Filtering and Favourites
+    
     func updateFavCourses() {
+        // Updates our table view's favourite courses by comparing them to what we have in core data.
         favCDCourses = databaseController?.fetchFavCourses() ?? []
+        // Need to check if the names are the same.
         favCourses = allCourses.filter { course in
             favCDCourses.contains { $0.name == course.name }
         }
     }
     
+    // Search controller method
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
             filteredCourses = []
@@ -153,9 +172,11 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         
         // Updated searching when we are filtering by favourites
         if showingFavouritesOnly {
+            // If we are showing favourites and searching, we filter the favourite courses, not all courses
             filteredCourses = favCourses.filter { course in
                 return course.name.lowercased().contains(searchText.lowercased())
             }
+        // Otherwise we filter all the courses.
         } else {
             filteredCourses = allCourses.filter { course in
                 return course.name.lowercased().contains(searchText.lowercased())
@@ -165,17 +186,23 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         tableView.reloadData()
     }
     
-    // Helper functions for favourite courses.
+    // Helper function for favourite courses.
     func getCourseNames(from courses: [Course]) -> [String] {
+        // Mapping every course to just their name
+        // *sigh* only way I could think of adding favourites to core data.
         return courses.map { $0.name }
     }
     
+    // Simnply does the opposite of what the star button is doing.
+    // i.e if it's filled, we empty and vice versa.
     func updateStarToggleButton() {
         let buttonImage = showingFavouritesOnly ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
         favouriteButton.image = buttonImage
     }
     
+    // Our star button to toggle favourites.
     @IBAction func toggleFavourites(_ sender: Any) {
+        // Updating favourites, courses and tableview.
         showingFavouritesOnly.toggle()
         updateStarToggleButton()
         updateFavCourses()
@@ -191,9 +218,13 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Need to be careful with this as we have 3 modes
+        // Filtering, Favourites and All courses
+        
+        // This is when we have the favourites and not searching
         if showingFavouritesOnly && !isFiltering {
-            print("\(favCourses.count)")
             return favCourses.count
+        // Filtering handles favourites so we can leave this here.
         } else if isFiltering {
             return filteredCourses.count
         } else {
@@ -205,6 +236,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_COURSE, for: indexPath)
         // COURSE STUFF
         let course: Course
+        // Just like numberOfRowsInSection, we need to be careful which state we are in
         if showingFavouritesOnly && !isFiltering {
             course = favCourses[indexPath.row]
         } else if isFiltering {
@@ -213,14 +245,13 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
             course = allCourses[indexPath.row]
         }
         cell.textLabel?.text = course.name
-        cell.detailTextLabel?.text = "(\(course.lat), \(course.lng))"
+//        cell.detailTextLabel?.text = "(\(course.lat), \(course.lng))"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // When a user selects a row in the table view, they are taken to the map view controller
-//        let selectedCourse = courseList[indexPath.row]
         self.performSegue(withIdentifier: "viewHolesSegue", sender: indexPath)
         
     }
@@ -230,13 +261,27 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
         return true
     }
     
-    // This allows us to trail swipe to add to favourites
+    // Function to swipe to add to favourites.
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Here is our favouriteAction with the bulk of it in the closure.
         let favouriteAction = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
-            guard let self = self else { return }
             
-            let course = showingFavouritesOnly ? favCourses[indexPath.row] : isFiltering ? filteredCourses[indexPath.row] : allCourses[indexPath.row]
+            guard let self = self else {
+                return
+            }
             
+            // Once again, being careful with what state we are in so the right course is chosen.
+            let course: Course
+            if showingFavouritesOnly && !isFiltering {
+                course = favCourses[indexPath.row]
+            } else if isFiltering {
+                course = filteredCourses[indexPath.row]
+            } else {
+                course = allCourses[indexPath.row]
+            }
+            
+            // Handling the addition and deletion from favourites.
+            // Need to check if it exists, so we check our core data array and compare by name.
             if favCourses.contains(where: { $0.name == course.name}) {
                 // Deleting the course from favourites in CoreData
                 if let favCourse = favCDCourses.first(where: { $0.name == course.name }) {
@@ -248,15 +293,25 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
                 let _ = databaseController?.addFavCourse(name: course.name, id: Int32(course.id), lat: course.lat, lng: course.lng)
                 
             }
+            // Reloading and updating
             updateFavCourses()
             tableView.reloadData()
             completionHandler(false)
         }
-        
-        let course = showingFavouritesOnly ? favCourses[indexPath.row] : allCourses[indexPath.row]
+        // Doing this again outside of the closure to update the star icon.
+        let course: Course
+        if showingFavouritesOnly && !isFiltering {
+            course = favCourses[indexPath.row]
+        } else if isFiltering {
+            course = filteredCourses[indexPath.row]
+        } else {
+            course = allCourses[indexPath.row]
+        }
+        // Filling the star if the course is favourited, otherwise it's empty.
         favouriteAction.image = favCourses.contains(where: { $0.name == course.name }) ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
         favouriteAction.backgroundColor = .systemYellow
         
+        // Reloading everything again.
         updateFavCourses()
         self.tableView.reloadData()
         let configuration = UISwipeActionsConfiguration(actions: [favouriteAction])
@@ -268,9 +323,11 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
 
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Ensuring we send the right hole to the view controller.
          if segue.identifier == "viewHolesSegue" {
              let destinationVC = segue.destination as! HolesTableViewController
              if let indexPath = sender as? IndexPath {
+                 // Just like before, handling the chosen course.
                  let selectedCourse: Course
                  if showingFavouritesOnly && !isFiltering {
                      selectedCourse = favCourses[indexPath.row]
@@ -279,6 +336,7 @@ class CoursesTableViewController: UITableViewController, UISearchResultsUpdating
                  } else {
                      selectedCourse = allCourses[indexPath.row]
                  }
+                 // And sending the ID because I do it this way for our home course.
                  destinationVC.selectedCourseID = selectedCourse.id
              }
          }

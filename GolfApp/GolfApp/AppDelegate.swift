@@ -16,6 +16,8 @@ import CoreData
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Setting up our database controller
         databaseController = CoreDataController()
         return true
     }

@@ -5,6 +5,11 @@
 //  Created by Oskar Hosken on 9/5/2024.
 //
 
+/*
+ This file is responsible for our holes table view controller.
+ Makes an API call based on a given id and then populates the table view with the data.
+ */
+
 import UIKit
 
 enum HoleListError: Error {
@@ -15,7 +20,7 @@ enum HoleListError: Error {
 class HolesTableViewController: UITableViewController, UISearchBarDelegate {
     
     let CELL_HOLE = "holeCell"
-    
+    // ID we make the API call with.
     var selectedCourseID: Int?
     
     var courseHoles: [HoleData] = []
@@ -43,22 +48,26 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
             print("URL not valid")
             return
         }
-        // Previous data was cached, this fixes that
         var request = URLRequest(url: requestURL)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
+        // Uncomment to ignore caching from our app - do this if api will be updating.
+//        request.cachePolicy = .reloadIgnoringLocalCacheData
+        
+        // This is where we make the API call.
         Task {
             do {
+                // Getting the data from the api call
                 let (data, response) = try await URLSession.shared.data(for: request)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw HoleListError.invalidServerResponse
                 }
-                
+                // Decoding into our CourseData classes
                 let decoder = JSONDecoder()
                 let courseData = try decoder.decode(CourseData.self, from: data)
                 
                 navigationItem.title = courseData.name
                 
+                // And populating our table view.
                 courseHoles = courseData.holes!
                 tableView.reloadData()
             }
@@ -94,41 +103,6 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
         self.performSegue(withIdentifier: "goToHoleSegue", sender: indexPath)
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -136,9 +110,11 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         // Get destination, convert selected hole into a location annotation
+        
         if segue.identifier == "goToHoleSegue" {
             let destinationVC = segue.destination as! MapViewController
             if let indexPath = sender as? IndexPath {
+                // Sending the selected hole to the map view controller
                 let selectedHole = courseHoles[indexPath.row]
                 destinationVC.selectedHole = selectedHole
             }

@@ -5,7 +5,7 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app will use the user&apos;s location on the golf course.</string>
+	<string>This app will use the user&apos;s location on the golf course to track distances.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

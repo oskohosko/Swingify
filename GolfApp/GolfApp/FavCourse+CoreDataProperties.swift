@@ -15,7 +15,9 @@ extension FavCourse {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FavCourse> {
         return NSFetchRequest<FavCourse>(entityName: "FavCourse")
     }
-
+    
+    // Attributes
+    // Lat and lng are the coordinates
     @NSManaged public var id: Int32
     @NSManaged public var name: String
     @NSManaged public var lat: Double
