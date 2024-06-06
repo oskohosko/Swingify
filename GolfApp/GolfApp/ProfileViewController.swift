@@ -5,15 +5,23 @@
 //  Created by Oskar Hosken on 23/5/2024.
 //
 
+/*
+ This file handles the code for our profile view controller.
+ It allows the user to select their home course and update their profile.
+ 
+ */
+
 import UIKit
 
 class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, DatabaseListener {
     
+    // Profile update delegate as we let the home view know when a profile is updated.
     weak var delegate: ProfileUpdateDelegate?
 
     var listenerType = ListenerType.profile
     weak var databaseController: DatabaseProtocol?
     
+    // Courses are here because we need to choose a home course.
     var courses = [Course]()
     var filteredCourses = [Course]()
     
@@ -43,6 +51,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         }
     }
     
+    // Button that appears when we are in the editing state.
     @IBAction func submitChanges(_ sender: Any) {
         // Need to overwrite User in Core Data when added.
         // First checking if all fields were entered.
@@ -100,16 +109,22 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     var pickerView: UIPickerView!
     
+    // This is for our picker view
+    // Had some issues on actual phone as keyboard didn't show.
+    
+    // Ultimately, these functions are for our toolbar below.
     @objc func doneButtonTapped() {
         courseTextField.resignFirstResponder()
     }
     
     @objc func switchToPickerTapped() {
+        // Switches input to our picker
         courseTextField.inputView = pickerView
         courseTextField.reloadInputViews()
     }
     
     @objc func switchToKeyboardTapped() {
+        // Switches input to our keyboard
         courseTextField.inputView = nil
         courseTextField.reloadInputViews()
         }
@@ -146,16 +161,24 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         // Setting the picker view as the input view for the text field
         courseTextField.inputView = pickerView
         
-        // Adding a toolbar with a "Done" button for the picker view.
+        // Adding a toolbar with a Done button, keyboard button and picker button.
+        
+        // This is a bit janky but allows us to use the keyboard and picker at the same time.
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
+        // Done button
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        // Picker button
         let switchToPickerButton = UIBarButtonItem(title: "Picker", style: .plain, target: self, action: #selector(switchToPickerTapped))
+        // Keyboard button
         let switchToKeyboardButton = UIBarButtonItem(title: "Keyboard", style: .plain, target: self, action: #selector(switchToKeyboardTapped))
+        
+        // Adding the items to our toolbar
         toolbar.setItems([doneButton, UIBarButtonItem.flexibleSpace(),switchToKeyboardButton, UIBarButtonItem.flexibleSpace(), switchToPickerButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         courseTextField.inputAccessoryView = toolbar
         
+        // And now making the API call for our courses when the view loads
         loadCourses()
         
     }
@@ -172,12 +195,14 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         // Uncomment the below line if the API will be updating.
         // request.cachePolicy = .reloadIgnoringLocalCacheData
         Task {
+            // API call
             do {
                 let (data, response) = try await URLSession.shared.data(for: request)
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     throw CourseListError.invalidServerResponse
                 }
+                // Decoding into courses
                 let decoder = JSONDecoder()
                 let courseData = try decoder.decode([Course].self, from: data)
                 courses = courseData
@@ -186,11 +211,13 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
                 print(error)
             }
         }
+        // Setting filtered courses to courses for now
         filteredCourses = courses
     }
     
     // Function to toggle editable text fields
     func setTextFieldsEditable(_ editable: Bool) {
+        // Simply adds to our UX
         nameTextField.isUserInteractionEnabled = editable
         courseTextField.isUserInteractionEnabled = editable
         if editable == true {
@@ -224,15 +251,17 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     // MARK: - UITextFieldDelegate
-
+    
+    // UITextField delegate method
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // When filtering using the picker we filter the courses
         let searchText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         filterCourses(for: searchText)
         return true
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        // Ensure the toolbar is set as the input accessory view
+        // Ensuring the toolbar is set as the input accessory view
         if textField.inputAccessoryView == nil {
             let toolbar = UIToolbar()
             toolbar.sizeToFit()
@@ -249,6 +278,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     }
     
     func filterCourses(for searchText: String) {
+        // This filters courses for our picker.
         if searchText.isEmpty {
             filteredCourses = courses
         } else {

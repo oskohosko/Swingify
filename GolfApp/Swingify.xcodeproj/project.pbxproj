@@ -12,14 +12,12 @@
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
 		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
+		7566BA222C117B82001FC1EC /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BA212C117B82001FC1EC /* InfoViewController.swift */; };
 		756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */; };
-		7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */; };
-		7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */; };
 		75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */; };
 		75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */; };
 		75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */; };
 		75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */; };
-		75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
@@ -46,14 +44,12 @@
 		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swingify-DataModel.xcdatamodel"; sourceTree = "<group>"; };
 		754C99062BF22DE4000E9759 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		7566BA212C117B82001FC1EC /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateDelegate.swift; sourceTree = "<group>"; };
-		7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
-		7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseOverlayRenderer.swift; sourceTree = "<group>"; };
 		75A68D992BF231CB002E0F6A /* Club+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataClass.swift"; path = "GolfApp/Club+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Club+CoreDataProperties.swift"; path = "GolfApp/Club+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataClass.swift"; path = "GolfApp/FavCourse+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataProperties.swift"; path = "GolfApp/FavCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseOverlay.swift; sourceTree = "<group>"; };
 		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,13 +121,11 @@
 				75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */,
 				75F42F072BE3475900C3B659 /* MapViewController.swift */,
 				75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */,
-				7587CF5B2BEF0CAE00F4F767 /* CustomAnnotation.swift */,
 				754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */,
 				754C99062BF22DE4000E9759 /* CoreDataController.swift */,
-				7596C85E2BF2F21200901185 /* EllipseOverlayRenderer.swift */,
-				75BEA8EC2BF594F5009747B1 /* EllipseOverlay.swift */,
 				7546F2E12BFEC8450001E22A /* ProfileViewController.swift */,
 				756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */,
+				7566BA212C117B82001FC1EC /* InfoViewController.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -239,9 +233,7 @@
 				756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */,
 				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
-				7587CF5C2BEF0CAE00F4F767 /* CustomAnnotation.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
-				75BEA8ED2BF594F5009747B1 /* EllipseOverlay.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
 				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
@@ -256,8 +248,8 @@
 				75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */,
 				75F42F872BECA3BC00C3B659 /* Course.swift in Sources */,
 				75F42F8D2BECA57300C3B659 /* HolesTableViewController.swift in Sources */,
-				7596C85F2BF2F21200901185 /* EllipseOverlayRenderer.swift in Sources */,
 				7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */,
+				7566BA222C117B82001FC1EC /* InfoViewController.swift in Sources */,
 				75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Each hole has the number, par and coordinates of the teebox and green.
 class HoleData: NSObject, Decodable {
     
     var num: Int
