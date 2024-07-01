@@ -53,7 +53,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // The selected club from the drop down.
     var selectedClub: Club?
     
-    // Outlets for our three views
+    // Outlets for our four views
     @IBOutlet weak var parView: UIView!
     @IBOutlet weak var parLabel: UILabel!
     
@@ -63,8 +63,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var clubView: UIView!
     @IBOutlet weak var clubLabel: UILabel!
     
+    @IBOutlet weak var elevationView: UIView!
     
-    // Taken from workshop 7 code.
+    
+    var elevationEnabled = false
+    // Button to toggle elevation.
+    // Will reset current annotations when toggled.
+    @IBAction func toggleElevation(_ sender: UISwitch) {
+        // Firstly resetting overlays and annotations
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+        // And simply changing our elevationEnabled Flag.
+        elevationEnabled = !elevationEnabled
+    }
+    
+
     // Displays the user's location and allows us to project annotations from it.
     @IBAction func toggleLocationAction(_ sender: UIBarButtonItem) {
         mapView.showsUserLocation = !mapView.showsUserLocation
@@ -90,6 +103,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         clubView.layer.cornerRadius = 15
         clubView.layer.masksToBounds = true
+        
+        elevationView.layer.cornerRadius = 15
+        elevationView.layer.masksToBounds = true
         
         // Adding a tap gesture for our view.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectClubAction))
