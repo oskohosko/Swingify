@@ -20,6 +20,10 @@ Holding down on a position on the map will place a pin and a distance to that pi
 If location hasn't been approved, the teebox is the location the distance is measured from.
 Simply tap the pin to remove it from the map.
 
+## Elevation Adjustment
+A toggleable elevation switch will generate adjusted distances which take elevation into account.
+Uphill = Longer, Downhill = Shorter.
+
 ## Home Course and Favourites
 You can select your home course on your profile and save courses to your favourites to save time when navigating to the course you are playing.
 
