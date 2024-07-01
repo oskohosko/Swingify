@@ -732,10 +732,37 @@
                                     <constraint firstAttribute="width" constant="104" id="yWW-8d-7jW"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qa6-Qn-4wK" userLabel="Elevation View">
+                                <rect key="frame" x="275" y="756" width="104" height="62"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elevation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6P5-MB-34Z">
+                                        <rect key="frame" x="26.333333333333318" y="6" width="51.333333333333343" height="15"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="n6c-RN-TrQ">
+                                        <rect key="frame" x="27.666666666666686" y="23" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="toggleElevation:" destination="5zH-uv-gbz" eventType="valueChanged" id="wOW-j8-Zg5"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="6P5-MB-34Z" firstAttribute="centerX" secondItem="Qa6-Qn-4wK" secondAttribute="centerX" id="4Gh-s1-Hhe"/>
+                                    <constraint firstItem="n6c-RN-TrQ" firstAttribute="centerX" secondItem="Qa6-Qn-4wK" secondAttribute="centerX" id="A5K-zr-mcF"/>
+                                    <constraint firstAttribute="height" constant="62" id="dhT-se-MqH"/>
+                                    <constraint firstItem="6P5-MB-34Z" firstAttribute="top" secondItem="Qa6-Qn-4wK" secondAttribute="top" constant="6" id="gDh-t9-evJ"/>
+                                    <constraint firstAttribute="width" constant="104" id="kK7-wV-3hJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="n6c-RN-TrQ" secondAttribute="bottom" constant="8" id="qcX-Um-aAv"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ghw-cv-F0O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="Qa6-Qn-4wK" secondAttribute="trailing" constant="14" id="1eK-ti-azy"/>
                             <constraint firstAttribute="bottom" secondItem="W5M-mP-K0g" secondAttribute="bottom" id="2VT-Po-8D7"/>
                             <constraint firstItem="nFq-I9-cBc" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="JbB-be-UDQ"/>
                             <constraint firstItem="W5M-mP-K0g" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" id="Kg8-dw-1wA"/>
@@ -743,6 +770,7 @@
                             <constraint firstItem="pCj-qo-IPb" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="eL4-vn-Koj"/>
                             <constraint firstItem="pCj-qo-IPb" firstAttribute="top" secondItem="Yxe-rX-ara" secondAttribute="bottom" constant="14" id="joK-pd-8AX"/>
                             <constraint firstItem="nFq-I9-cBc" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" constant="14" id="njN-4h-3cb"/>
+                            <constraint firstItem="Qa6-Qn-4wK" firstAttribute="bottom" secondItem="ghw-cv-F0O" secondAttribute="bottom" id="ovR-KP-fEd"/>
                             <constraint firstItem="Yxe-rX-ara" firstAttribute="top" secondItem="nFq-I9-cBc" secondAttribute="bottom" constant="14" id="p4i-2V-FnQ"/>
                             <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="W5M-mP-K0g" secondAttribute="trailing" id="xCd-Hh-bIm"/>
                             <constraint firstItem="W5M-mP-K0g" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" id="zsp-uC-Vns"/>
@@ -761,6 +789,7 @@
                         <outlet property="clubView" destination="pCj-qo-IPb" id="yTL-xW-7yd"/>
                         <outlet property="distLabel" destination="TqE-4X-EZy" id="fRV-CH-FNM"/>
                         <outlet property="distView" destination="Yxe-rX-ara" id="Wj1-CP-BVO"/>
+                        <outlet property="elevationView" destination="Qa6-Qn-4wK" id="IUe-KR-0T4"/>
                         <outlet property="mapView" destination="W5M-mP-K0g" id="dpB-9u-auV"/>
                         <outlet property="parLabel" destination="WYC-pz-Nkt" id="Czg-A2-QuO"/>
                         <outlet property="parView" destination="nFq-I9-cBc" id="ae0-cE-0jY"/>
