@@ -26,6 +26,11 @@ import MapKit
 import CoreData
 import CoreLocation
 
+enum ElevationError: Error {
+    case invalidURL
+    case invalidServerResponse
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     // Setting up our map view, location managers and database stuff
@@ -66,6 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var elevationView: UIView!
     
     
+    var elevApiKey: String?
     var elevationEnabled = false
     // Button to toggle elevation.
     // Will reset current annotations when toggled.
@@ -141,6 +147,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Preferred configuration is imagery.
         mapView.preferredConfiguration = MKImageryMapConfiguration()
         mapView.delegate = self
+        
+        // Loading api
+        loadElevationApi()
         
         // Checking if we have been given a hole (which should always be the case)
         if let hole = selectedHole {
@@ -339,15 +348,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         annotation.coordinate = coordinate
         // If the user is showing their location, we project the distance from them.
         if mapView.showsUserLocation {
-            let distance = Int(distanceBetweenPoints(first: mapView.userLocation.coordinate, second: coordinate))
             
-            annotation.title = "\(distance)m"
+            // Using a closure as we are making an API call
+            annotationDistance(first: mapView.userLocation.coordinate, second: coordinate) { distance in
+                annotation.title = "\(Int(distance))m"
+            }
         // Otherwise, we project the distance from the tee of the hole.
         } else {
             if let hole = selectedHole {
                 let tee = CLLocationCoordinate2D(latitude: hole.tee_lat, longitude: hole.tee_lng)
-                let distance = Int(distanceBetweenPoints(first: tee, second: coordinate))
-                annotation.title = "\(distance)m"
+                
+                // Using a closure as we are making an API call
+                annotationDistance(first: tee, second: coordinate) { distance in
+                    annotation.title = "\(Int(distance))m"
+                }
             }
         }
         mapView.addAnnotation(annotation)
@@ -569,12 +583,105 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return radiansToDegrees(bearing)
     }
     
-    // Function to compute distance between two CLLocationCoordinate2D points
     func distanceBetweenPoints(first: CLLocationCoordinate2D, second: CLLocationCoordinate2D) -> CLLocationDistance {
         let location1 = CLLocation(latitude: first.latitude, longitude: first.longitude)
         let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
+        
         return location1.distance(from: location2)
     }
+    
+    // Function that calculates the distance for our annotations and takes into account elevation
+    // Using a completion handler to ensure title is updated ONCE task has been completed.
+    func annotationDistance(first: CLLocationCoordinate2D, second: CLLocationCoordinate2D, completion: @escaping (Double) -> Void) {
+        // Getting locations
+        let location1 = CLLocation(latitude: first.latitude, longitude: first.longitude)
+        let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
+        
+        // Simply horizontal distance without elevation
+        if !elevationEnabled {
+            completion(location1.distance(from: location2))
+            return
+        }
+        
+        let lat1 = first.latitude
+        let lng1 = first.longitude
+        let lat2 = second.latitude
+        let lng2 = second.longitude
+        
+        // Now getting elevation
+        guard let apiKey = elevApiKey else {
+            print("API key not loaded.")
+            completion(location1.distance(from: location2))
+            return
+        }
+        
+        
+        let requestString = "https://maps.googleapis.com/maps/api/elevation/json?locations=\(lat1)%2C\(lng1)%7C\(lat2)%2C\(lng2)&key=\(apiKey)"
+        
+        guard let requestURL = URL(string: requestString) else {
+            print("URL not valid.")
+            completion(location1.distance(from: location2))
+            return
+        }
+        
+        var request = URLRequest(url: requestURL)
+        // Uncomment the below line if the API will be updating - means the app won't cache.
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        var distance = 0.0
+        // Making the API Call
+        Task {
+            do {
+                let elevationData = try await getElevation(request: request)
+                print(elevationData)
+                
+                let horizontalDistance = location1.distance(from: location2)
+                
+                // If this is positive, it's uphill, negative is downhill
+
+                let elevationChange = elevationData[1] - elevationData[0]
+                
+                distance = horizontalDistance + 0.7 * elevationChange
+                print(distance)
+                completion(distance)
+            
+            } catch {
+                print("Failed to fetch data: \(error)")
+                completion(location1.distance(from: location2))
+            }
+            
+        }
+    }
+    
+    // Loads our API Key
+    func loadElevationApi() {
+        if let filePath = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            let fileURL = URL(fileURLWithPath: filePath)
+            let plist = NSDictionary(contentsOf: fileURL)
+            elevApiKey = plist?.object(forKey: "API_KEY") as? String
+        }
+    }
+    
+    // Makes our call to Google's elevation API
+    func getElevation(request: URLRequest) async throws -> [Double] {
+        
+        var elevationData: [Double] = []
+        // Making the API call
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw ElevationError.invalidServerResponse
+        }
+        
+        let decoder = JSONDecoder()
+        // Response from API
+        let elevationResponse = try decoder.decode(ElevationResponse.self, from: data)
+        // Extracting the elevation values only
+        // [elevation1, elevation2]
+        elevationData = elevationResponse.results.map{ $0.elevation }
+        
+        return elevationData
+    }
+    
     
     
     // Do any additional setup after loading the view.
