@@ -6,4 +6,23 @@ A Golf App I created that shows the hole you are playing, displays distances and
 Was created over 6 weeks while learning my first IOS App Development Unit. 
 Will continue to update and build upon the app to further suit my needs and help improve my golf!
 
+# Functionalities
 
+## Select Club
+Can add clubs and their distance to your bag.
+When on the course, you can select from a drop down and choose a club.
+A 10% dispersion based on the distance of the club will be displayed originally in the direction of the green.
+You can double tap anywhere on the map while the dispersion is displayed to change its direction.
+A single tap on the dispersion ring will display the distance for a brief period of time.
+
+## Distances
+Holding down on a position on the map will place a pin and a distance to that pin from your location.
+If location hasn't been approved, the teebox is the location the distance is measured from.
+Simply tap the pin to remove it from the map.
+
+## Home Course and Favourites
+You can select your home course on your profile and save courses to your favourites to save time when navigating to the course you are playing.
+
+
+# Screenshots
+<img src="/Screenshots/royalmelb.png" width=100>
