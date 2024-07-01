@@ -33,6 +33,5 @@ You can select your home course on your profile and save courses to your favouri
   <img src="/Screenshots/royalmelb.PNG" width=240 alt="Par 3 Screenshot">
   <img src="/Screenshots/rosebud12.PNG" width=240 alt="Par 4 Screenshot">
   <img src="/Screenshots/tulla.PNG" width=240 alt="Par 4 Screenshot">
-  <img src="/Screenshots/rosebud13.PNG" width=240 alt="Par 3 Screenshot">
 </p>
 
