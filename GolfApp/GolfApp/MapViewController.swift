@@ -24,6 +24,7 @@
 import UIKit
 import MapKit
 import CoreData
+import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
@@ -145,7 +146,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             geoLocation = CLCircularRegion(center: tee, radius: 30, identifier: TEE_IDENTIFIER)
             geoLocation?.notifyOnEntry = true
             
-            locationManager.startMonitoring(for: geoLocation!)
+            // Uncomment if monitoring is desired.
+//            locationManager.startMonitoring(for: geoLocation!)
             
             // Using these values to set up our map view.
             self.setupMapView(mapView: mapView, teeBox: tee, centerGreen: green)
@@ -322,6 +324,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // If the user is showing their location, we project the distance from them.
         if mapView.showsUserLocation {
             let distance = Int(distanceBetweenPoints(first: mapView.userLocation.coordinate, second: coordinate))
+            
             annotation.title = "\(distance)m"
         // Otherwise, we project the distance from the tee of the hole.
         } else {
