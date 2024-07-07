@@ -6,13 +6,51 @@
 //
 
 import UIKit
+import SceneKit
+import ARKit
 
-class ARViewController: UIViewController {
-
+class ARViewController: UIViewController, ARSCNViewDelegate {
+    
+    
+    @IBOutlet weak var sceneView: ARSCNView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Setting the scene view's delegate
+        sceneView.delegate = self
+        
+        // Creating our scene
+        let scene = SCNScene()
+        
+        
+        // Testing with a box
+        
+        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        box.firstMaterial?.diffuse.contents = UIColor.red
+        let boxNode = SCNNode(geometry: box)
+        
+        boxNode.position = SCNVector3(0, 0, -0.5)
+        scene.rootNode.addChildNode(boxNode)
+        
+        
+        sceneView.scene = scene
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Creating a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+        
+        sceneView.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Pause the view's session
+        sceneView.session.pause()
     }
     
 

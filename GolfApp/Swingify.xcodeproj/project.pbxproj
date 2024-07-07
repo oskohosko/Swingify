@@ -20,6 +20,7 @@
 		75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */; };
 		75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6EF8E2C3278F700CD0272 /* Elevation.swift */; };
 		75BCD92E2C3A2DBF00DCC825 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BCD92D2C3A2DBF00DCC825 /* ARViewController.swift */; };
+		75BCD9312C3A330400DCC825 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BCD9302C3A330400DCC825 /* ARKit.framework */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
@@ -54,6 +55,7 @@
 		75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataProperties.swift"; path = "GolfApp/FavCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B6EF8E2C3278F700CD0272 /* Elevation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elevation.swift; sourceTree = "<group>"; };
 		75BCD92D2C3A2DBF00DCC825 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
+		75BCD9302C3A330400DCC825 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
 		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			files = (
 				75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */,
 				75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */,
+				75BCD9312C3A330400DCC825 /* ARKit.framework in Frameworks */,
 				75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75BCD92F2C3A330400DCC825 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75BCD9302C3A330400DCC825 /* ARKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		75F42E942BD92A3E00C3B659 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +109,7 @@
 				75A68D9A2BF231CB002E0F6A /* Club+CoreDataProperties.swift */,
 				75F42E9F2BD92A3E00C3B659 /* GolfApp */,
 				75F42E9E2BD92A3E00C3B659 /* Products */,
+				75BCD92F2C3A330400DCC825 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,6 +425,7 @@
 				DEVELOPMENT_TEAM = 6TW9C7C78N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GolfApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the camera in the AR View to show target lines.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app will use the user's location on the golf course to track distances.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -443,6 +456,7 @@
 				DEVELOPMENT_TEAM = 6TW9C7C78N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GolfApp/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use the camera in the AR View to show target lines.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app will use the user's location on the golf course to track distances.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

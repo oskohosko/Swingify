@@ -846,14 +846,28 @@
                     <view key="view" contentMode="scaleToFill" id="w3X-ZY-w2e">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kk-bh-PZi">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                            </arscnView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="9DZ-ZF-fa5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2Kk-bh-PZi" secondAttribute="bottom" id="24a-1S-aJB"/>
+                            <constraint firstItem="2Kk-bh-PZi" firstAttribute="top" secondItem="9DZ-ZF-fa5" secondAttribute="top" id="Af9-dI-vTw"/>
+                            <constraint firstItem="9DZ-ZF-fa5" firstAttribute="trailing" secondItem="2Kk-bh-PZi" secondAttribute="trailing" id="Ei4-Ql-QZR"/>
+                            <constraint firstItem="2Kk-bh-PZi" firstAttribute="leading" secondItem="9DZ-ZF-fa5" secondAttribute="leading" id="VYj-XC-0Cf"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="S6W-3t-inc"/>
+                    <connections>
+                        <outlet property="sceneView" destination="2Kk-bh-PZi" id="Ysj-lf-HOm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bls-xm-cEF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6347" y="773"/>
+            <point key="canvasLocation" x="6345.801526717557" y="772.53521126760563"/>
         </scene>
         <!--Courses-->
         <scene sceneID="bA1-SU-JJ8">
