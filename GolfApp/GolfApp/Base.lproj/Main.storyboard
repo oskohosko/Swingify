@@ -758,6 +758,42 @@
                                     <constraint firstAttribute="bottom" secondItem="n6c-RN-TrQ" secondAttribute="bottom" constant="8" id="qcX-Um-aAv"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWp-Jo-WRk" userLabel="AR Toggle View">
+                                <rect key="frame" x="275" y="688" width="104" height="62"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View Target" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk1-vY-IFi">
+                                        <rect key="frame" x="18.666666666666686" y="6.0000000000000009" width="66.666666666666671" height="14.333333333333336"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SLz-7O-ndw">
+                                        <rect key="frame" x="27.000000000000004" y="19.666666666666632" width="50.333333333333343" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain">
+                                            <imageReference key="image" image="camera.viewfinder" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
+                                                <hierarchicalColors>
+                                                    <color red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color systemColor="secondaryLabelColor"/>
+                                                    <color systemColor="tertiaryLabelColor"/>
+                                                </hierarchicalColors>
+                                            </imageReference>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="toggleAR:" destination="5zH-uv-gbz" eventType="touchUpInside" id="OS3-Xr-KPT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="sk1-vY-IFi" firstAttribute="top" secondItem="nWp-Jo-WRk" secondAttribute="top" constant="6" id="2bY-wl-Df3"/>
+                                    <constraint firstItem="sk1-vY-IFi" firstAttribute="centerX" secondItem="nWp-Jo-WRk" secondAttribute="centerX" id="OXL-YR-IYq"/>
+                                    <constraint firstAttribute="bottom" secondItem="SLz-7O-ndw" secondAttribute="bottom" constant="8" id="dTJ-pr-wLJ"/>
+                                    <constraint firstAttribute="height" constant="62" id="eGF-kn-Rj9"/>
+                                    <constraint firstAttribute="width" constant="104" id="l1w-fo-3Ko"/>
+                                    <constraint firstItem="SLz-7O-ndw" firstAttribute="centerX" secondItem="nWp-Jo-WRk" secondAttribute="centerX" id="pXO-GQ-fnu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ghw-cv-F0O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -769,9 +805,11 @@
                             <constraint firstItem="Yxe-rX-ara" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="NcN-Si-qWU"/>
                             <constraint firstItem="pCj-qo-IPb" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="eL4-vn-Koj"/>
                             <constraint firstItem="pCj-qo-IPb" firstAttribute="top" secondItem="Yxe-rX-ara" secondAttribute="bottom" constant="14" id="joK-pd-8AX"/>
+                            <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="nWp-Jo-WRk" secondAttribute="trailing" constant="14" id="nfq-bE-mVe"/>
                             <constraint firstItem="nFq-I9-cBc" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" constant="14" id="njN-4h-3cb"/>
                             <constraint firstItem="Qa6-Qn-4wK" firstAttribute="bottom" secondItem="ghw-cv-F0O" secondAttribute="bottom" id="ovR-KP-fEd"/>
                             <constraint firstItem="Yxe-rX-ara" firstAttribute="top" secondItem="nFq-I9-cBc" secondAttribute="bottom" constant="14" id="p4i-2V-FnQ"/>
+                            <constraint firstItem="Qa6-Qn-4wK" firstAttribute="top" secondItem="nWp-Jo-WRk" secondAttribute="bottom" constant="6" id="wxs-bf-HLo"/>
                             <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="W5M-mP-K0g" secondAttribute="trailing" id="xCd-Hh-bIm"/>
                             <constraint firstItem="W5M-mP-K0g" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" id="zsp-uC-Vns"/>
                         </constraints>
@@ -785,6 +823,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="arView" destination="nWp-Jo-WRk" id="vee-kd-OLh"/>
                         <outlet property="clubLabel" destination="igx-zL-Wz3" id="MSu-sC-Zfs"/>
                         <outlet property="clubView" destination="pCj-qo-IPb" id="yTL-xW-7yd"/>
                         <outlet property="distLabel" destination="TqE-4X-EZy" id="fRV-CH-FNM"/>
@@ -793,11 +832,28 @@
                         <outlet property="mapView" destination="W5M-mP-K0g" id="dpB-9u-auV"/>
                         <outlet property="parLabel" destination="WYC-pz-Nkt" id="Czg-A2-QuO"/>
                         <outlet property="parView" destination="nFq-I9-cBc" id="ae0-cE-0jY"/>
+                        <segue destination="5mj-6a-vF7" kind="show" identifier="arSegue" id="QAn-oj-py0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rm3-tt-CCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5490.8396946564881" y="772.53521126760563"/>
+            <point key="canvasLocation" x="5491" y="773"/>
+        </scene>
+        <!--AR View Controller-->
+        <scene sceneID="k7w-55-96L">
+            <objects>
+                <viewController title="AR View Controller" id="5mj-6a-vF7" customClass="ARViewController" customModule="Swingify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w3X-ZY-w2e">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="9DZ-ZF-fa5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="S6W-3t-inc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bls-xm-cEF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6347" y="773"/>
         </scene>
         <!--Courses-->
         <scene sceneID="bA1-SU-JJ8">
@@ -980,6 +1036,7 @@
     <resources>
         <image name="arrow.forward" catalog="system" width="128" height="95"/>
         <image name="bag" catalog="system" width="128" height="128"/>
+        <image name="camera.viewfinder" catalog="system" width="128" height="115"/>
         <image name="figure.golf" catalog="system" width="83" height="128"/>
         <image name="flag.fill" catalog="system" width="128" height="121"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>

@@ -70,6 +70,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var elevationView: UIView!
     
+    @IBOutlet weak var arView: UIView!
+    
     
     var elevApiKey: String?
     var elevationEnabled = false
@@ -94,6 +96,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         sender.image = UIImage(systemName: iconName)
     }
     
+    // Performs the segue to our AR View Controller
+    @IBAction func toggleAR(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "arSegue", sender: self)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,6 +120,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         elevationView.layer.cornerRadius = 15
         elevationView.layer.masksToBounds = true
+        
+        arView.layer.cornerRadius = 15
+        arView.layer.masksToBounds = true
+        
+        // Going to initially hide this view
+        arView.isHidden = true
         
         // Adding a tap gesture for our view.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectClubAction))
@@ -367,6 +381,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addAnnotation(annotation)
         // This line allows for better UX as you had to touch the map for the app to recognise the gesture ended.
         gestureRecognizer.state = .ended
+        
+        // Adding the AR View to show as we have an annotation now
+        arView.isHidden = false
     }
     
     // This double tap function contains the logic of shifting the annotation of the club.
@@ -429,6 +446,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func clearMapOverlaysAndAnnotations() {
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
+        
+        arView.isHidden = true
     }
     
     
@@ -465,6 +484,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         guard let annotation = view.annotation else { return }
         // Remove the annotation from the map view
         mapView.removeAnnotation(annotation)
+        
+        // And now hiding the AR View button
+        if (mapView.annotations.count == 0) {
+            arView.isHidden = true
+        }
     }
     
     // MARK: - MapView Setup: Regions & Rotations

@@ -19,6 +19,7 @@
 		75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */; };
 		75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */; };
 		75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6EF8E2C3278F700CD0272 /* Elevation.swift */; };
+		75BCD92E2C3A2DBF00DCC825 /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BCD92D2C3A2DBF00DCC825 /* ARViewController.swift */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
@@ -52,6 +53,7 @@
 		75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataClass.swift"; path = "GolfApp/FavCourse+CoreDataClass.swift"; sourceTree = "<group>"; };
 		75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FavCourse+CoreDataProperties.swift"; path = "GolfApp/FavCourse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		75B6EF8E2C3278F700CD0272 /* Elevation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Elevation.swift; sourceTree = "<group>"; };
+		75BCD92D2C3A2DBF00DCC825 /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		75F42E9D2BD92A3E00C3B659 /* Swingify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swingify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				7546F2E12BFEC8450001E22A /* ProfileViewController.swift */,
 				756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */,
 				7566BA212C117B82001FC1EC /* InfoViewController.swift */,
+				75BCD92D2C3A2DBF00DCC825 /* ARViewController.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
 				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
+				75BCD92E2C3A2DBF00DCC825 /* ARViewController.swift in Sources */,
 				75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */,
 				75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */,
 				7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */,
