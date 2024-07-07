@@ -30,12 +30,9 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
         // Setting the scene view's delegate
         sceneView.delegate = self
-        sceneView.session.delegate = self
         
         // Creating our scene
-        let scene = SCNScene()
-        
-        sceneView.scene = scene
+        sceneView.scene = SCNScene()
         
         // Ensure the AR session is running and stable before placing the marker
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -44,6 +41,49 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         
     }
     
+    func updateMarkers() {
+        // Ensuring we have the annotations
+        guard let annotations = annotations else {
+            return
+        }
+        
+        // Going to begin by only worrying about one annotation for the moment.
+        let currentAnnotation = annotations[0]
+        
+//        let coord = currentAnnotation.coordinate
+        
+        let lat = -37.81522840751438
+        let long = 145.08842414837835
+        
+        let coord = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        print(coord)
+        
+        // Create an ARGeoAnchor with the annotation's coordinates
+        let geoAnchor = ARGeoAnchor(name: "Geo Anchor", coordinate: coord, altitude: 33.0)
+        
+        // Add the geo anchor to the AR session
+        sceneView.session.add(anchor: geoAnchor)
+    }
+    
+    func renderer(_ renderer: any SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard let geoAnchor = anchor as? ARGeoAnchor, geoAnchor.name == "Geo Anchor" else { return }
+        
+        print("hello")
+        
+        let boxGeometry = SCNBox(width: 3.0,
+                                 height: 3.0,
+                                 length: 3.0,
+                                 chamferRadius: 0.1)
+        
+        boxGeometry.firstMaterial?.diffuse.contents = UIColor.red
+        
+        let cube = SCNNode(geometry: boxGeometry)
+        
+        node.addChildNode(cube)
+    }
+    
+    
+    /*
     func updateMarkers() {
         // Ensuring we have the user's location and the annotations
         guard let userLocation = userLocation, let annotations = annotations else {
@@ -79,6 +119,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         markerNode?.position = markerPosition
         print(markerNode?.position)
     }
+     */
     
     // MARK: - Coordinate Geometry Methods
     
@@ -126,7 +167,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, 
         super.viewWillAppear(animated)
         
         // Creating a session configuration
-        let configuration = ARWorldTrackingConfiguration()
+        let configuration = ARGeoTrackingConfiguration()
         
         sceneView.session.run(configuration)
     }
