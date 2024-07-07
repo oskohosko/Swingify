@@ -8,34 +8,119 @@
 import UIKit
 import SceneKit
 import ARKit
+import MapKit
+import CoreLocation
 
-class ARViewController: UIViewController, ARSCNViewDelegate {
-    
+class ARViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
+    
+    var markerNode: SCNNode?
+    
+    // The annotations passed from our Map View
+    var annotations: [MKAnnotation]?
+    
+    let locationManager = CLLocationManager()
+    
+    // User's location to be projecting start lines from
+    var userLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Setting the scene view's delegate
         sceneView.delegate = self
+        sceneView.session.delegate = self
         
         // Creating our scene
         let scene = SCNScene()
         
-        
-        // Testing with a box
-        
-        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
-        box.firstMaterial?.diffuse.contents = UIColor.red
-        let boxNode = SCNNode(geometry: box)
-        
-        boxNode.position = SCNVector3(0, 0, -0.5)
-        scene.rootNode.addChildNode(boxNode)
-        
-        
         sceneView.scene = scene
+        
+        // Ensure the AR session is running and stable before placing the marker
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.updateMarkers()
+        }
+        
     }
+    
+    func updateMarkers() {
+        // Ensuring we have the user's location and the annotations
+        guard let userLocation = userLocation, let annotations = annotations else {
+            return
+        }
+        
+        // Going to begin by only worrying about one annotation for the moment.
+        let currentAnnotation = annotations[0]
+        
+        let coord = currentAnnotation.coordinate
+        
+        // Getting the target location lat long
+        let targetLocation = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+        
+        // Getting distance to target location
+        // This will only be used for annotation purposes - will keep title of annotation same as map kit for consistency
+        let distance = userLocation.distance(from: targetLocation)
+        print(distance)
+        
+        // Now we need to calculate the bearing.
+//        let bearing = bearingBetweenPoints(startPoint: userLocation, endPoint: targetLocation)
+        let bearing = 0.0
+        print(bearing)
+        
+        // And now our position in the AR World
+        let markerPosition = calculateARPosition(distance: distance, bearing: bearing)
+        
+        // Just going to use a line for testing purposes
+        let line = SCNCylinder(radius: 1, height: 15)
+        markerNode = SCNNode(geometry: line)
+        sceneView.scene.rootNode.addChildNode(markerNode!)
+        
+        markerNode?.position = markerPosition
+        print(markerNode?.position)
+    }
+    
+    // MARK: - Coordinate Geometry Methods
+    
+    // These are taken from my MapViewController file and altered for this file's needs
+    
+    // Helper functions
+    func degreesToRadians(_ degrees: Double) -> Double {
+        return degrees * .pi / 180.0
+    }
+    
+    func radiansToDegrees(_ radians: Double) -> Double {
+        return radians * 180.0 / .pi
+    }
+    
+    // Calculate bearing between two coordinates
+    func bearingBetweenPoints(startPoint: CLLocation, endPoint: CLLocation) -> Double {
+        // Getting radians of the start and end points
+        let lat1 = degreesToRadians(startPoint.coordinate.latitude)
+        let lon1 = degreesToRadians(startPoint.coordinate.longitude)
+        let lat2 = degreesToRadians(endPoint.coordinate.latitude)
+        let lon2 = degreesToRadians(endPoint.coordinate.longitude)
+        
+        // getting our distance longitude
+        let distLon = lon2 - lon1
+        // Maths logic to get a bearing, we use arctan
+        let y = sin(distLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(distLon)
+        let bearing = atan2(y, x)
+        
+        // And returning the bearing in radians.
+        return bearing
+    }
+    
+    // Converts a distance and a bearing into AR Coordinates (much like overlay in Map View)
+    func calculateARPosition(distance: CLLocationDistance, bearing: Double) -> SCNVector3 {
+        let x = Float(distance * cos(bearing))
+        let z = Float(distance * sin(bearing))
+        
+        return SCNVector3(x, 0, z)
+    }
+    
+    // MARK: - View Delegate Methods
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,6 +137,15 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
         // Pause the view's session
         sceneView.session.pause()
     }
+    
+    // MARK: - ARSessionDelegate Methods
+//        
+//    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+//        // Ensure the AR session is running and stable before placing the marker
+//        if frame.camera.trackingState == .normal, markerNode == nil {
+//            updateMarkers()
+//        }
+//    }
     
 
     /*

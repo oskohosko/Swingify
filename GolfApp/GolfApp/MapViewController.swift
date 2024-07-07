@@ -384,6 +384,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Adding the AR View to show as we have an annotation now
         arView.isHidden = false
+        
+//        print(mapView.annotations.map { ($0.coordinate, $0.title) })
     }
     
     // This double tap function contains the logic of shifting the annotation of the club.
@@ -710,13 +712,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // Do any additional setup after loading the view.
     
-    /*
+
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+         // Handling before going into AR Mode.
+         // We need annotations to be passed to AR View.
+         if segue.identifier == "arSegue" {
+             let destinationVC = segue.destination as! ARViewController
+             // Sending the MKAnnotations across
+             destinationVC.annotations = mapView.annotations
+             
+             let userLat = mapView.userLocation.coordinate.latitude
+             let userLong = mapView.userLocation.coordinate.longitude
+             
+             destinationVC.userLocation = CLLocation(latitude: userLat, longitude: userLong)
+         }
      }
-     */
 }
