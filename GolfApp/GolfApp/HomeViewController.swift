@@ -12,6 +12,8 @@
  I have set most of the UI elements as Views and used gestures to handle when a user selects them.
  */
 
+// Test commit before branch
+
 import UIKit
 
 class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDelegate {
