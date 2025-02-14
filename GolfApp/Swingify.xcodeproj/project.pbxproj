@@ -10,7 +10,6 @@
 		7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E12BFEC8450001E22A /* ProfileViewController.swift */; };
 		7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */; };
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
-		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
 		7566BA222C117B82001FC1EC /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BA212C117B82001FC1EC /* InfoViewController.swift */; };
 		756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */; };
@@ -19,14 +18,12 @@
 		75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C22BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift */; };
 		75B057C52BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B057C32BFF19BB00C66E48 /* FavCourse+CoreDataProperties.swift */; };
 		75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B6EF8E2C3278F700CD0272 /* Elevation.swift */; };
+		75E5393D2C5B5B6900D75630 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA02BD92A3E00C3B659 /* AppDelegate.swift */; };
 		75F42EA32BD92A3E00C3B659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EA22BD92A3E00C3B659 /* SceneDelegate.swift */; };
 		75F42EA82BD92A3E00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA72BD92A3E00C3B659 /* Base */; };
 		75F42EAA2BD92A3F00C3B659 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EA92BD92A3F00C3B659 /* Assets.xcassets */; };
 		75F42EAD2BD92A3F00C3B659 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 75F42EAC2BD92A3F00C3B659 /* Base */; };
-		75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */; };
-		75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */; };
-		75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */; };
 		75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFB2BE3459A00C3B659 /* HomeViewController.swift */; };
 		75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42EFD2BE345BC00C3B659 /* AllClubsTableViewController.swift */; };
 		75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F42F012BE346D800C3B659 /* CoursesTableViewController.swift */; };
@@ -76,9 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75F42EF22BE0CB0E00C3B659 /* FirebaseAuth in Frameworks */,
-				75F42EF42BE0CB0E00C3B659 /* FirebaseFirestore in Frameworks */,
-				75F42EF62BE0CB0E00C3B659 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,9 +163,6 @@
 			);
 			name = Swingify;
 			packageProductDependencies = (
-				75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */,
-				75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */,
-				75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */,
 			);
 			productName = GolfApp;
 			productReference = 75F42E9D2BD92A3E00C3B659 /* Swingify.app */;
@@ -238,6 +229,7 @@
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */,
+				75E5393D2C5B5B6900D75630 /* Swingify-DataModel.xcdatamodeld in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
 				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
 				75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */,
@@ -246,7 +238,6 @@
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */,
-				754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */,
 				75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,
 				75F42F0D2BE49EF500C3B659 /* MulticastDelegate.swift in Sources */,
@@ -492,24 +483,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		75F42EF12BE0CB0E00C3B659 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75F42EF02BE0CB0E00C3B659 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		75F42EF32BE0CB0E00C3B659 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75F42EF02BE0CB0E00C3B659 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		75F42EF52BE0CB0E00C3B659 /* FirebaseFirestoreSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 75F42EF02BE0CB0E00C3B659 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestoreSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */ = {
