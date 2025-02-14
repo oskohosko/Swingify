@@ -307,7 +307,14 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="hAM-hu-KYt"/>
-                    <navigationItem key="navigationItem" title="Home" id="XOl-gn-bra"/>
+                    <navigationItem key="navigationItem" title="Home" id="XOl-gn-bra">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="PuC-Gh-dMa">
+                            <imageReference key="image" image="applewatch.slash" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <action selector="connectAppleWatch:" destination="yMh-Yf-rEb" id="BAw-Xg-w6i"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="clubsView" destination="yr7-Y2-OL7" id="yNU-SP-T3z"/>
                         <outlet property="courseView" destination="fcO-Z6-BfC" id="Fu3-D0-N9s"/>
@@ -758,41 +765,12 @@
                                     <constraint firstAttribute="bottom" secondItem="n6c-RN-TrQ" secondAttribute="bottom" constant="8" id="qcX-Um-aAv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zmx-A3-N1R" userLabel="Elevation View">
-                                <rect key="frame" x="275" y="686" width="104" height="62"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Apple Watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fgh-iI-YAX">
-                                        <rect key="frame" x="16" y="6" width="72" height="15"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Nw7-m4-vlN">
-                                        <rect key="frame" x="27.666666666666686" y="23" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="toggleAppleWatch:" destination="5zH-uv-gbz" eventType="valueChanged" id="lTr-xu-XrU"/>
-                                            <action selector="toggleElevation:" destination="5zH-uv-gbz" eventType="valueChanged" id="oYM-zh-mGB"/>
-                                        </connections>
-                                    </switch>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <constraints>
-                                    <constraint firstItem="Nw7-m4-vlN" firstAttribute="centerX" secondItem="Zmx-A3-N1R" secondAttribute="centerX" id="No0-8e-YWe"/>
-                                    <constraint firstAttribute="width" constant="104" id="Prm-c4-GFs"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nw7-m4-vlN" secondAttribute="bottom" constant="8" id="QED-H1-ijM"/>
-                                    <constraint firstItem="Fgh-iI-YAX" firstAttribute="centerX" secondItem="Zmx-A3-N1R" secondAttribute="centerX" id="UeO-Tm-Ub9"/>
-                                    <constraint firstAttribute="height" constant="62" id="W8N-Cs-WC3"/>
-                                    <constraint firstItem="Fgh-iI-YAX" firstAttribute="top" secondItem="Zmx-A3-N1R" secondAttribute="top" constant="6" id="xRU-qO-1SJ"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ghw-cv-F0O"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="Qa6-Qn-4wK" secondAttribute="trailing" constant="14" id="1eK-ti-azy"/>
                             <constraint firstAttribute="bottom" secondItem="W5M-mP-K0g" secondAttribute="bottom" id="2VT-Po-8D7"/>
-                            <constraint firstItem="ghw-cv-F0O" firstAttribute="trailing" secondItem="Zmx-A3-N1R" secondAttribute="trailing" constant="14" id="C3i-Lt-MVX"/>
-                            <constraint firstItem="Qa6-Qn-4wK" firstAttribute="top" secondItem="Zmx-A3-N1R" secondAttribute="bottom" constant="8" id="Fgj-Ou-toC"/>
                             <constraint firstItem="nFq-I9-cBc" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="JbB-be-UDQ"/>
                             <constraint firstItem="W5M-mP-K0g" firstAttribute="top" secondItem="ghw-cv-F0O" secondAttribute="top" id="Kg8-dw-1wA"/>
                             <constraint firstItem="Yxe-rX-ara" firstAttribute="leading" secondItem="ghw-cv-F0O" secondAttribute="leading" constant="14" id="NcN-Si-qWU"/>
@@ -814,7 +792,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="appleWatchView" destination="Zmx-A3-N1R" id="KOp-EZ-DfI"/>
                         <outlet property="clubLabel" destination="igx-zL-Wz3" id="MSu-sC-Zfs"/>
                         <outlet property="clubView" destination="pCj-qo-IPb" id="yTL-xW-7yd"/>
                         <outlet property="distLabel" destination="TqE-4X-EZy" id="fRV-CH-FNM"/>
@@ -1008,6 +985,7 @@
         <segue reference="dXv-8w-ewN"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="applewatch.slash" catalog="system" width="110" height="128"/>
         <image name="arrow.forward" catalog="system" width="128" height="95"/>
         <image name="bag" catalog="system" width="128" height="128"/>
         <image name="figure.golf" catalog="system" width="83" height="128"/>

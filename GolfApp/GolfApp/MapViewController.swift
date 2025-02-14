@@ -75,8 +75,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var elevationView: UIView!
     
-    @IBOutlet weak var appleWatchView: UIView!
-    
     
     var elevApiKey: String?
     var elevationEnabled = false
@@ -101,34 +99,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         sender.image = UIImage(systemName: iconName)
     }
     
-    // This function is going to toggle the connection with an apple watch
-    // Starting with this function here but will move it to a different place later
-    @IBAction func toggleAppleWatch(_ sender: UISwitch) {
-        // Toggling flag
-        isAppleWatchConnected = !isAppleWatchConnected
-        // Attempting to connect to Apple Watch
-        if (WCSession.isSupported()) {
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
-            
-            print(session.activationState.rawValue)
-        } else {
-            displayMessage(title: "Apple Watch Not Found", message: "Make sure to open the Apple Watch app.")
-        }
-    }
-    
-    // Delegate method to receive message from Apple Watch
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if isAppleWatchConnected {
-            if let value = message["buttonPressed"] as? String {
-                print("Received message: \(value)")
-                // Handle the message
-            }
-        }
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -147,9 +117,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         elevationView.layer.cornerRadius = 15
         elevationView.layer.masksToBounds = true
-        
-        appleWatchView.layer.cornerRadius = 15
-        appleWatchView.layer.masksToBounds = true
         
         // Adding a tap gesture for our view.
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectClubAction))
