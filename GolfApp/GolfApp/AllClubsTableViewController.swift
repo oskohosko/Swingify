@@ -65,7 +65,7 @@ class AllClubsTableViewController: UITableViewController, DatabaseListener {
         self.present(alertController, animated: false, completion: nil)
         }
     
-    // Display message function from week 1
+    // Display message function
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
