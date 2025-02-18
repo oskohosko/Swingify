@@ -380,7 +380,9 @@
 				DEVELOPMENT_TEAM = 6TW9C7C78N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "swingTracker-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = swingTracker;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Needed to calculate distances";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.oskartex.swingify;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -410,7 +412,9 @@
 				DEVELOPMENT_TEAM = 6TW9C7C78N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "swingTracker-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = swingTracker;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Needed to calculate distances";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.oskartex.swingify;
 				LD_RUNPATH_SEARCH_PATHS = (
