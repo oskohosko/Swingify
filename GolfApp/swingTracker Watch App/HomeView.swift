@@ -12,32 +12,42 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-//            Text("Swingify")
-//                .font(.headline)
-            Spacer()
-            
-            Button("Detect Course") {
-                viewModel.detectNearestCourse()
+            NavigationStack(path: $viewModel.navigationPath) {
+                Spacer()
+                
+                Button("Detect Course") {
+                    viewModel.detectNearestCourse()
+                }
+                
+                .alert("Are you at this course?",
+                       isPresented: $viewModel.showConfirmation,
+                       actions: {
+                    Button("Yes") {
+                        viewModel.confirmDetectedCourse(isConfirmed: true)
+                    }
+                    Button("No") {
+                        viewModel.confirmDetectedCourse(isConfirmed: false)
+                    }
+                }, message: {
+                    Text(viewModel.detectedCourse?.name ?? "Unknown course")
+                })
+                // Choose Course Button
+                Button("Choose Course") {
+                    viewModel.navigationPath.append(.searchCourse)
+                }
+                
+                Spacer()
             }
-            .alert("Are you at this course?",
-                   isPresented: $viewModel.showConfirmation,
-                   actions: {
-                Button("Yes") {
-                    viewModel.confirmDetectedCourse(isConfirmed: true)
-                }
-                Button("No") {
-                    viewModel.confirmDetectedCourse(isConfirmed: false)
-                }
-            }, message: {
-                Text(viewModel.detectedCourse?.name ?? "Unknown course")
-            })
-            // Choose Course Button
-            NavigationLink("Choose Course", destination: searchCourseView().environmentObject(viewModel))
-            
-            Spacer()
-
         }
         .navigationTitle("Swingify")
+        .navigationDestination(for: NavigationDestination.self) { destination in
+            switch destination {
+                case .courseDetail:
+                    CourseDetailView(course: viewModel.detectedCourse).environmentObject(viewModel)
+                case .searchCourse:
+                    searchCourseView().environmentObject(viewModel)
+            }
+        }
     }
 }
 

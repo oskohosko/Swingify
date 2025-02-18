@@ -27,11 +27,10 @@ struct HoleDetailView: View {
     
     var body: some View {
         VStack {
-            Text("Hole \(hole.num) Par \(hole.par)")
-                .font(.headline)
-            
             Text("\(distanceToGreen, specifier: "%.0f")m")
+                .font(.largeTitle)
         }
+        .navigationTitle("Hole \(hole.num) Par \(hole.par)")
     }
 }
 
@@ -61,7 +60,10 @@ let testHole = Hole(
 )
 
 #Preview {
-    HoleDetailView(hole: testHole).environmentObject(viewModel())
+    NavigationStack {
+        HoleDetailView(hole: testHole).environmentObject(viewModel())
+    }
+    
 }
 
 
