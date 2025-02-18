@@ -25,13 +25,18 @@ import UIKit
 import MapKit
 import CoreData
 import CoreLocation
+import WatchConnectivity
 
 enum ElevationError: Error {
     case invalidURL
     case invalidServerResponse
 }
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, WCSessionDelegate {
+    
+    // Boolean to track apple watch receiving status
+    var isAppleWatchConnected: Bool = false
+    
     
     // Setting up our map view, location managers and database stuff
     @IBOutlet weak var mapView: MKMapView!
@@ -680,6 +685,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         elevationData = elevationResponse.results.map{ $0.elevation }
         
         return elevationData
+    }
+    
+    // MARK: - WCSession Delegate Methods
+    // Doing nothing with them for now.
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
+        // Nothing
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        // Nothing
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        // Nothing
     }
     
     
