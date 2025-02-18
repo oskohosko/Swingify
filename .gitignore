@@ -92,3 +92,7 @@ iOSInjectionProject/
 # Info
 
 GolfApp/GolfApp/Info.plist
+
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/

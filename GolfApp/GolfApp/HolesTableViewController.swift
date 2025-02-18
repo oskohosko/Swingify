@@ -48,6 +48,7 @@ class HolesTableViewController: UITableViewController, UISearchBarDelegate {
             print("URL not valid")
             return
         }
+        
         var request = URLRequest(url: requestURL)
         // Uncomment to ignore caching from our app - do this if api will be updating.
 //        request.cachePolicy = .reloadIgnoringLocalCacheData
