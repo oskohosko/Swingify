@@ -18,6 +18,11 @@ enum HoleListError: Error {
     case invalidServerResponse
 }
 
+enum NavigationDestination: Hashable {
+    case courseDetail
+    case searchCourse
+}
+
 class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observable {
     @Published var allCourses: [Course] = []
     @Published var filteredCourses: [Course] = []
@@ -25,6 +30,9 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     @Published var selectedCourseHoles: [Hole] = []
     @Published var showConfirmation = false
     @Published var detectedCourse: Course? = nil
+    
+    // Flags to handle navigating to certain pages
+    @Published var navigationPath: [NavigationDestination] = []
     
     private let locationManager = CLLocationManager()
     
@@ -108,12 +116,32 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     
     func detectNearestCourse() {
         // Detect nearest course to user
-        let userLocation = locationManager.location
-        
+        guard let userLocation = locationManager.location else {
+            detectedCourse = allCourses.first
+            showConfirmation = true
+            return
+        }
+        // Now sorting the courses
+        let sortedCourses = allCourses.sorted { course1, course2 in
+    
+            let courseLoc1 = CLLocation(latitude: course1.lat, longitude: course1.lng)
+            let courseLoc2 = CLLocation(latitude: course2.lat, longitude: course2.lng)
+            let distance1 = userLocation.distance(from: courseLoc1)
+            let distance2 = userLocation.distance(from: courseLoc2)
+            
+            return distance1 < distance2
+        }
+        detectedCourse = sortedCourses.first
+        showConfirmation = true
     }
     
     func confirmDetectedCourse(isConfirmed: Bool) {
         // Confirming detected course and handling navigation if not
+        if isConfirmed {
+            navigationPath.append(.courseDetail)
+        } else {
+            navigationPath.append(.searchCourse)
+        }
     }
     
     func filterCourses(by keyword: String) {
