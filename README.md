@@ -37,4 +37,4 @@ You can select your home course on your profile and save courses to your favouri
 </p>
 
 ## In Progress
-Currently working on an Augmented Reality section of the app to display lines to various targets.
+Working on a watchOS app to display distances and automatically track my round by detecting swings and logging locations of them.
