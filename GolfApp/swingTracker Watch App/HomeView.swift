@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: viewModel
@@ -31,6 +32,11 @@ struct HomeView: View {
                 }, message: {
                     Text(viewModel.detectedCourse?.name ?? "Unknown course")
                 })
+                .onChange(of: viewModel.showConfirmation) {
+                    if viewModel.showConfirmation {
+                        WKInterfaceDevice.current().play(.notification)
+                    }
+                }
                 // Choose Course Button
                 Button("Choose Course") {
                     viewModel.navigationPath.append(.searchCourse)

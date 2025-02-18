@@ -24,13 +24,19 @@ struct HoleDetailView: View {
         return userLocation.distance(from: greenLocation).rounded()
     }
     
+    private var holeLength: Double {
+        let greenLocation = CLLocation(latitude: hole.green_lat, longitude: hole.green_lng)
+        let teeLocation = CLLocation(latitude: hole.tee_lat, longitude: hole.tee_lng)
+        return teeLocation.distance(from: greenLocation)
+    }
+    
     
     var body: some View {
         VStack {
             Text("\(distanceToGreen, specifier: "%.0f")m")
                 .font(.largeTitle)
         }
-        .navigationTitle("Hole \(hole.num) Par \(hole.par)")
+        .navigationTitle("Hole \(hole.num) Par \(hole.par) \(holeLength, specifier: "%.0f")m")
     }
 }
 
