@@ -15,10 +15,12 @@ struct HoleDetailView: View {
     var hole: Hole
     
     private var distanceToGreen: Double {
-        guard let userLocation = locationManager.currentLocation else {
-            return 0
-        }
         let greenLocation = CLLocation(latitude: hole.green_lat, longitude: hole.green_lng)
+        let teeLocation = CLLocation(latitude: hole.tee_lat, longitude: hole.tee_lng)
+        guard let userLocation = locationManager.currentLocation else {
+            return teeLocation.distance(from: greenLocation).rounded()
+        }
+        
         return userLocation.distance(from: greenLocation).rounded()
     }
     
