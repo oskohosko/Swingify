@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct swingTracker_Watch_AppApp: App {
+    @StateObject private var golfViewModel = viewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                HomeView()
+                    .environmentObject(golfViewModel)
+            }
+            
         }
     }
 }
