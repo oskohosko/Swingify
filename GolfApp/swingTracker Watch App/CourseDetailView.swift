@@ -15,8 +15,10 @@ struct CourseDetailView: View {
     var body: some View {
         VStack {
             if let course = course {
+                // Listing each hole
                 List(viewModel.selectedCourseHoles) { hole in
-                    NavigationLink(destination: HoleDetailView(hole: hole).environmentObject(viewModel)) {
+                    NavigationLink(destination: HoleDetailView(hole: hole)
+                        .environmentObject(viewModel)) {
                         Text("Hole \(hole.num)")
                     }
                 }
@@ -25,6 +27,7 @@ struct CourseDetailView: View {
             }
         }
         .navigationTitle(course?.name ?? "No course selected")
+        // API call when the view appears
         .onAppear {
             if let course = course {
                 viewModel.loadHoles(course: course)

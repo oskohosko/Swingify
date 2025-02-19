@@ -15,7 +15,7 @@ struct swingTracker_Watch_AppApp: App {
         WindowGroup {
             NavigationStack {
                 HomeView()
-                    .environmentObject(golfViewModel)
+                    .environmentObject(golfViewModel) // Injecting our view model
             }
             
         }
