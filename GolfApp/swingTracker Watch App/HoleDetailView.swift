@@ -9,21 +9,26 @@ import SwiftUI
 import CoreLocation
 
 struct HoleDetailView: View {
+    // Injecting view model and using locationManager
     @EnvironmentObject var viewModel: viewModel
     @ObservedObject var locationManager = LocationManager()
     
     var hole: Hole
     
+    // Calculates the distance to the green
     private var distanceToGreen: Double {
+        // Getting green and tee locations
         let greenLocation = CLLocation(latitude: hole.green_lat, longitude: hole.green_lng)
         let teeLocation = CLLocation(latitude: hole.tee_lat, longitude: hole.tee_lng)
+        // If the user hasn't provided location, we use the teebox location
         guard let userLocation = locationManager.currentLocation else {
             return teeLocation.distance(from: greenLocation).rounded()
         }
-        
+        // Otherwise, we can use the user's location
         return userLocation.distance(from: greenLocation).rounded()
     }
     
+    // Similar to above, just calculates tee to green length
     private var holeLength: Double {
         let greenLocation = CLLocation(latitude: hole.green_lat, longitude: hole.green_lng)
         let teeLocation = CLLocation(latitude: hole.tee_lat, longitude: hole.tee_lng)
@@ -40,13 +45,16 @@ struct HoleDetailView: View {
     }
 }
 
+// Our observable LocationManager
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let manager = CLLocationManager()
+    // When current location changes -> inform subscribers/view
     @Published var currentLocation: CLLocation?
     
     override init() {
         super.init()
         
+        // Ensuring location services
         manager.delegate = self
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
@@ -56,6 +64,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 }
 
+// I think this is Albert Park hole 1.
+// test hole as I couldn't be bothered handling optional variables.
 let testHole = Hole(
     num: 1,
     par: 4,

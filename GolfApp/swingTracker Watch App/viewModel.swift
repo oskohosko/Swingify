@@ -5,9 +5,13 @@
 //  Created by Oskar Hosken on 14/2/2025.
 //
 
+// Main global state for our watch app.
+// Handles most external functionality
+
 import Foundation
 import CoreLocation
 
+// Error handling
 enum CourseListError: Error {
     case invalidCourseURL
     case invalidServerResponse
@@ -23,15 +27,16 @@ enum NavigationDestination: Hashable {
     case searchCourse
 }
 
+// Now oour view model
 class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observable {
     @Published var allCourses: [Course] = []
-    @Published var filteredCourses: [Course] = []
+    @Published var filteredCourses: [Course] = []   // For searching
     @Published var selectedCourse: Course? = nil
-    @Published var selectedCourseHoles: [Hole] = []
+    @Published var selectedCourseHoles: [Hole] = [] // Holes in our selected course
     @Published var showConfirmation = false
     @Published var detectedCourse: Course? = nil
     
-    // Flags to handle navigating to certain pages
+    // Nav path for home view.
     @Published var navigationPath: [NavigationDestination] = []
     
     private let locationManager = CLLocationManager()
@@ -39,14 +44,17 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     override init() {
         super.init()
         
+        // Location services
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
+        // API call to locate courses
         loadCourses()
         filteredCourses = allCourses
     }
     
     func loadCourses() {
+        // My API
         let REQUEST_URL = "https://swingify.s3.ap-southeast-2.amazonaws.com/courses.json"
         
         guard let requestURL = URL(string: REQUEST_URL) else {
@@ -54,6 +62,7 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
             return
         }
         
+        // Handling API request
         URLSession.shared.dataTask(with: requestURL) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
@@ -62,8 +71,10 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
                 return
             }
             
+            // Decoding into our course model and updating
             do {
                 let decoded = try JSONDecoder().decode([Course].self, from: data)
+                // Ensuring it's done on the main thread as UI depends on this
                 DispatchQueue.main.async {
                     self.allCourses = decoded
                 }
@@ -123,14 +134,18 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
         }
         // Now sorting the courses
         let sortedCourses = allCourses.sorted { course1, course2 in
-    
+            
+            // Getting locations and distances
             let courseLoc1 = CLLocation(latitude: course1.lat, longitude: course1.lng)
             let courseLoc2 = CLLocation(latitude: course2.lat, longitude: course2.lng)
             let distance1 = userLocation.distance(from: courseLoc1)
             let distance2 = userLocation.distance(from: courseLoc2)
             
+            // Sorting by course that is closest to user
             return distance1 < distance2
         }
+        // Choosing the first one (can handle multiple in the future)
+        // But user can just search if they happen to be equidistant to multiple.
         detectedCourse = sortedCourses.first
         showConfirmation = true
     }
