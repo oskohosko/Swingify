@@ -55,7 +55,7 @@ struct HoleDetailView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             HStack {
-                NavigationLink(destination: MapView()) {
+                NavigationLink(destination: MapView().environmentObject(viewModel)) {
                     Image(systemName: "map")
                         .resizable()
                         .scaledToFit()

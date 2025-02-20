@@ -45,7 +45,7 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     private let locationManager = CLLocationManager()
     
     // Swing manager to handle detection logic
-    private let swingDetectionManager = swingManager()
+    let swingDetectionManager = swingManager()
     
     override init() {
         super.init()

@@ -13,6 +13,8 @@ import FirebaseCore
 
     var databaseController: DatabaseProtocol?
     
+    let firebaseManager = FirebaseManager()
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -23,6 +25,9 @@ import FirebaseCore
         
         // Adding firebase too
         FirebaseApp.configure()
+        
+        // And watch session
+        WatchSessionManager.shared.configureSession(firebaseManager: firebaseManager)
         
         return true
     }

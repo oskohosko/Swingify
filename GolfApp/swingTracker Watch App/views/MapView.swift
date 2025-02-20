@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct MapView: View {
+    
+    @EnvironmentObject var viewModel: viewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            viewModel.swingDetectionManager.sendMessage()
+        }) {
+            Text("Send Message")
+        }
     }
 }
 
 #Preview {
-    MapView()
+    MapView().environmentObject(viewModel())
 }

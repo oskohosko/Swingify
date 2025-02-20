@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		752EDFB42D66CD6B00052BEF /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */; };
+		752EDFB52D66CD6B00052BEF /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */; };
+		752EDFB72D66D35D00052BEF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 752EDFB62D66D35D00052BEF /* FirebaseFirestore */; };
 		7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E12BFEC8450001E22A /* ProfileViewController.swift */; };
 		7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */; };
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
 		754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 754C98FF2BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld */; };
 		754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754C99062BF22DE4000E9759 /* CoreDataController.swift */; };
 		75626D492D65938400BA4FF9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 75626D482D65938400BA4FF9 /* FirebaseCore */; };
-		75626D4B2D6595F100BA4FF9 /* firebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75626D4A2D6595F100BA4FF9 /* firebaseManager.swift */; };
-		75626D4C2D6595F100BA4FF9 /* firebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75626D4A2D6595F100BA4FF9 /* firebaseManager.swift */; };
+		75626D4B2D6595F100BA4FF9 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75626D4A2D6595F100BA4FF9 /* FirebaseManager.swift */; };
 		75626D4E2D6596ED00BA4FF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75626D4D2D6596ED00BA4FF9 /* GoogleService-Info.plist */; };
 		75626D4F2D6596ED00BA4FF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75626D4D2D6596ED00BA4FF9 /* GoogleService-Info.plist */; };
 		7566BA222C117B82001FC1EC /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7566BA212C117B82001FC1EC /* InfoViewController.swift */; };
@@ -67,12 +69,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		7546F2E12BFEC8450001E22A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "GolfApp/Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		754C99002BF22AA8000E9759 /* Swingify-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Swingify-DataModel.xcdatamodel"; sourceTree = "<group>"; };
 		754C99062BF22DE4000E9759 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
-		75626D4A2D6595F100BA4FF9 /* firebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseManager.swift; sourceTree = "<group>"; };
+		75626D4A2D6595F100BA4FF9 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		75626D4D2D6596ED00BA4FF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7566BA212C117B82001FC1EC /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUpdateDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75626D492D65938400BA4FF9 /* FirebaseCore in Frameworks */,
+				752EDFB72D66D35D00052BEF /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,8 +181,9 @@
 				756875EC2C003D2200AC3018 /* ProfileUpdateDelegate.swift */,
 				7566BA212C117B82001FC1EC /* InfoViewController.swift */,
 				75B8C3912D64267700A42E38 /* Info.plist */,
-				75626D4A2D6595F100BA4FF9 /* firebaseManager.swift */,
+				75626D4A2D6595F100BA4FF9 /* FirebaseManager.swift */,
 				75626D4D2D6596ED00BA4FF9 /* GoogleService-Info.plist */,
+				752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */,
 			);
 			path = GolfApp;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 			name = Swingify;
 			packageProductDependencies = (
 				75626D482D65938400BA4FF9 /* FirebaseCore */,
+				752EDFB62D66D35D00052BEF /* FirebaseFirestore */,
 			);
 			productName = GolfApp;
 			productReference = 75F42E9D2BD92A3E00C3B659 /* Swingify.app */;
@@ -317,7 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75626D4C2D6595F100BA4FF9 /* firebaseManager.swift in Sources */,
+				752EDFB52D66CD6B00052BEF /* WatchSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,9 +336,10 @@
 				756875ED2C003D2200AC3018 /* ProfileUpdateDelegate.swift in Sources */,
 				75A68D9B2BF231CB002E0F6A /* Club+CoreDataClass.swift in Sources */,
 				75A68D9C2BF231CB002E0F6A /* Club+CoreDataProperties.swift in Sources */,
-				75626D4B2D6595F100BA4FF9 /* firebaseManager.swift in Sources */,
+				75626D4B2D6595F100BA4FF9 /* FirebaseManager.swift in Sources */,
 				75F42F022BE346D800C3B659 /* CoursesTableViewController.swift in Sources */,
 				75F42EFC2BE3459A00C3B659 /* HomeViewController.swift in Sources */,
+				752EDFB42D66CD6B00052BEF /* WatchSessionManager.swift in Sources */,
 				7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */,
 				75B057C42BFF19BB00C66E48 /* FavCourse+CoreDataClass.swift in Sources */,
 				75B6EF8F2C3278F700CD0272 /* Elevation.swift in Sources */,
@@ -670,6 +677,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		752EDFB62D66D35D00052BEF /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75626D442D65912400BA4FF9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		75626D482D65938400BA4FF9 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 75626D442D65912400BA4FF9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
