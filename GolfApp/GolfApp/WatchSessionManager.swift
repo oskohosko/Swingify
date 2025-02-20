@@ -12,28 +12,28 @@ import WatchConnectivity
 class WatchSessionManager: NSObject, WCSessionDelegate {
 
     static let shared = WatchSessionManager()
-    
+
     #if os(iOS)
-    private var firebaseManager: FirebaseManager?
+        private var firebaseManager: FirebaseManager?
     #endif
 
     override init() {
         super.init()
 
     }
-    
+
     // Sets up the session
     #if os(iOS)
-    func configureSession(firebaseManager: FirebaseManager) {
-        self.firebaseManager = firebaseManager
-        if WCSession.isSupported() {
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
+        func configureSession(firebaseManager: FirebaseManager) {
+            self.firebaseManager = firebaseManager
+            if WCSession.isSupported() {
+                let session = WCSession.default
+                session.delegate = self
+                session.activate()
+            }
         }
-    }
     #endif
-    
+
     // Conforming to delegate
     func session(
         _ session: WCSession,
@@ -46,25 +46,34 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
             print("WCSession activated with state: \(activationState.rawValue)")
         }
     }
-    
+
     // Main method to handle receiving of messages
     func session(_ session: WCSession, didReceiveMessage message: [String: Any])
     {
-        if let value = message["buttonPressed"] as? String {
-            print("Received message from watch: \(value)")
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: message, options: [])
+            
+            // Decoding
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let swingData = try decoder.decode(SwingData.self, from: jsonData)
             #if os(iOS)
-            firebaseManager?.saveMessage(value)
+            firebaseManager?.saveShot(data: swingData)
             #endif
+            print("received and decoded message")
+        } catch {
+            print("Error decoding message: \(error.localizedDescription)")
         }
-    }
-    
-    #if os(iOS)
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        // Doing nothing for now
+        
     }
 
-    func sessionDidDeactivate(_ session: WCSession) {
-        // Doing nothing for now
-    }
+    #if os(iOS)
+        func sessionDidBecomeInactive(_ session: WCSession) {
+            // Doing nothing for now
+        }
+
+        func sessionDidDeactivate(_ session: WCSession) {
+            // Doing nothing for now
+        }
     #endif
 }

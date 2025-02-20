@@ -10,6 +10,8 @@
 		752EDFB42D66CD6B00052BEF /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */; };
 		752EDFB52D66CD6B00052BEF /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */; };
 		752EDFB72D66D35D00052BEF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 752EDFB62D66D35D00052BEF /* FirebaseFirestore */; };
+		752EDFBD2D66DEA900052BEF /* SwingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFBC2D66DEA900052BEF /* SwingData.swift */; };
+		752EDFBE2D66DEA900052BEF /* SwingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EDFBC2D66DEA900052BEF /* SwingData.swift */; };
 		7546F2E22BFEC8450001E22A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E12BFEC8450001E22A /* ProfileViewController.swift */; };
 		7546F2E72BFEE8760001E22A /* Profile+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */; };
 		7546F2E82BFEE8760001E22A /* Profile+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */; };
@@ -70,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		752EDFBC2D66DEA900052BEF /* SwingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwingData.swift; sourceTree = "<group>"; };
 		7546F2E12BFEC8450001E22A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7546F2E52BFEE8760001E22A /* Profile+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataClass.swift"; path = "GolfApp/Profile+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7546F2E62BFEE8760001E22A /* Profile+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Profile+CoreDataProperties.swift"; path = "GolfApp/Profile+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 				7566BA212C117B82001FC1EC /* InfoViewController.swift */,
 				75B8C3912D64267700A42E38 /* Info.plist */,
 				75626D4A2D6595F100BA4FF9 /* FirebaseManager.swift */,
+				752EDFBC2D66DEA900052BEF /* SwingData.swift */,
 				75626D4D2D6596ED00BA4FF9 /* GoogleService-Info.plist */,
 				752EDFB32D66CD6B00052BEF /* WatchSessionManager.swift */,
 			);
@@ -323,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752EDFBD2D66DEA900052BEF /* SwingData.swift in Sources */,
 				752EDFB52D66CD6B00052BEF /* WatchSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +353,7 @@
 				75F42EA12BD92A3E00C3B659 /* AppDelegate.swift in Sources */,
 				75F42EFE2BE345BC00C3B659 /* AllClubsTableViewController.swift in Sources */,
 				754C99072BF22DE4000E9759 /* CoreDataController.swift in Sources */,
+				752EDFBE2D66DEA900052BEF /* SwingData.swift in Sources */,
 				754C99012BF22AA8000E9759 /* Swingify-DataModel.xcdatamodeld in Sources */,
 				75F42F8B2BECA3F600C3B659 /* HoleData.swift in Sources */,
 				75F42F082BE3475900C3B659 /* MapViewController.swift in Sources */,

@@ -55,7 +55,9 @@ struct HoleDetailView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             HStack {
-                NavigationLink(destination: MapView().environmentObject(viewModel)) {
+                NavigationLink(
+                    destination: MapView().environmentObject(viewModel)
+                ) {
                     Image(systemName: "map")
                         .resizable()
                         .scaledToFit()
@@ -80,6 +82,9 @@ struct HoleDetailView: View {
                 .padding(12)
 
             }
+        }
+        .onAppear {
+            viewModel.currentHole = hole
         }
         .ignoresSafeArea(.container, edges: [.bottom, .top])
         .navigationTitle(
@@ -121,7 +126,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             currentLocation = location
         }
         isRequestingLocation = false
-
     }
 
     func locationManager(

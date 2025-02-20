@@ -15,9 +15,8 @@
 // Test commit before branch
 
 import UIKit
-import WatchConnectivity
 
-class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDelegate, WCSessionDelegate {
+class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDelegate {
     
     // Setting up our database stuff
     var listenerType = ListenerType.profile
@@ -44,33 +43,6 @@ class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDeleg
     @IBOutlet weak var tipsView: UIView!
     
     @IBOutlet weak var tipsLabel: UILabel!
-    
-    // Outlet for apple watch icon
-    var isAppleWatchConnected: Bool = false
-    @IBAction func connectAppleWatch(_ sender: UIBarButtonItem) {
-        // Toggling apple watch
-        isAppleWatchConnected = !isAppleWatchConnected
-        let iconName = isAppleWatchConnected ? "applewatch.watchface" : "applewatch.slash"
-        sender.image = UIImage(systemName: iconName)
-        
-        if (WCSession.isSupported()) {
-            let session = WCSession.default
-            session.delegate = self
-            session.activate()
-            
-            print(session.activationState.rawValue)
-        }
-    }
-    
-    // Delegate method to receive message from Apple Watch
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if isAppleWatchConnected {
-            if let value = message["buttonPressed"] as? String {
-                print("Received message: \(value)")
-                // Need to handle the message here.
-            }
-        }
-    }
     
     // List of tips to rotate through on the home screen.
     // Hard coded - If time permits, can add a feature that allows the user to add their own tips
@@ -335,19 +307,6 @@ class HomeViewController: UIViewController, DatabaseListener, ProfileUpdateDeleg
                 destinationVC.selectedCourseID = Int(currentProfile.courseID)
             }
         }
-    }
-    
-    // WCSession Delegate methods - doing nothing for now
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: (any Error)?) {
-        // Do nothing
-    }
-    
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        // Do Nothing
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        // Do Nothing
     }
 
 }

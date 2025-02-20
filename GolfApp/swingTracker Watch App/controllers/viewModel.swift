@@ -41,11 +41,9 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     
     // Flag if user is tracking round
     @Published var isTrackingRound = false
+    @Published var currentHole: Hole? = nil
     
     private let locationManager = CLLocationManager()
-    
-    // Swing manager to handle detection logic
-    let swingDetectionManager = swingManager()
     
     override init() {
         super.init()
@@ -129,6 +127,13 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
         let location2 = CLLocation(latitude: second.latitude, longitude: second.longitude)
         
         return location1.distance(from: location2)
+    }
+    
+    func distanceToPin(userLocation: CLLocation) -> Int {
+        
+        let green = CLLocation(latitude: currentHole?.green_lat ?? 0, longitude: currentHole?.green_lng ?? 0)
+        
+        return Int(userLocation.distance(from: green))
     }
     
     func detectNearestCourse() {

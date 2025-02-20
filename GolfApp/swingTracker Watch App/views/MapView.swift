@@ -10,10 +10,12 @@ import SwiftUI
 struct MapView: View {
     
     @EnvironmentObject var viewModel: viewModel
+    var swingDetectionManager = swingManager()
     
     var body: some View {
         Button(action: {
-            viewModel.swingDetectionManager.sendMessage()
+            swingDetectionManager.sharedViewModel = viewModel
+            swingDetectionManager.sendMessage()
         }) {
             Text("Send Message")
         }
