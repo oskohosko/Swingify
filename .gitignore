@@ -96,3 +96,7 @@ GolfApp/GolfApp/Info.plist
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
+
+*.plist
+
+GoogleService-Info.plist

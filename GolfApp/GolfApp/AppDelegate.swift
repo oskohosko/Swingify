@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseCore
 
 @main class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,6 +20,10 @@ import CoreData
         
         // Setting up our database controller
         databaseController = CoreDataController()
+        
+        // Adding firebase too
+        FirebaseApp.configure()
+        
         return true
     }
 

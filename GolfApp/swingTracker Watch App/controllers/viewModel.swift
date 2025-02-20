@@ -27,7 +27,7 @@ enum NavigationDestination: Hashable {
     case searchCourse
 }
 
-// Now oour view model
+// Now our view model
 class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observable {
     @Published var allCourses: [Course] = []
     @Published var filteredCourses: [Course] = []   // For searching
@@ -39,7 +39,13 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     // Nav path for home view.
     @Published var navigationPath: [NavigationDestination] = []
     
+    // Flag if user is tracking round
+    @Published var isTrackingRound = false
+    
     private let locationManager = CLLocationManager()
+    
+    // Swing manager to handle detection logic
+    private let swingDetectionManager = swingManager()
     
     override init() {
         super.init()

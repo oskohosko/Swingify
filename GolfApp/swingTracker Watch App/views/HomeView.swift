@@ -53,10 +53,10 @@ struct HomeView: View {
             switch destination {
                 // Navigating to the course
                 case .courseDetail:
-                    CourseDetailView(course: viewModel.detectedCourse).environmentObject(viewModel)
+                    CourseDetailView(course: viewModel.detectedCourse!).environmentObject(viewModel)
                 // Or searching for a course
                 case .searchCourse:
-                    searchCourseView().environmentObject(viewModel)
+                    SearchCourseView().environmentObject(viewModel)
             }
         }
     }

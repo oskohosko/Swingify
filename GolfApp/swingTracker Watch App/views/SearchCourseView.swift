@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct searchCourseView: View {
+struct SearchCourseView: View {
     @EnvironmentObject var viewModel: viewModel
     // When this updates, we update view
     @State private var searchText = ""
@@ -16,8 +16,8 @@ struct searchCourseView: View {
         VStack {
             // Filtering courses based on text input
             TextField("Search Courses...", text: $searchText)
-                .onChange(of: searchText) { newValue in
-                    viewModel.filterCourses(by: newValue)
+                .onChange(of: searchText) {
+                    viewModel.filterCourses(by: searchText)
                 }
                 .padding()
             
@@ -35,7 +35,7 @@ struct searchCourseView: View {
 
 #Preview {
     NavigationStack {
-        searchCourseView().environmentObject(viewModel())
+        SearchCourseView().environmentObject(viewModel())
     }
     
 }
