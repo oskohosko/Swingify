@@ -33,10 +33,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate, Ob
     }
     
     func requestCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
-        print("Requesting location...")
-        
         isRequestingLocation = true
-        print(isRequestingLocation)
         locationRequestCompletion = completion
         manager.requestLocation()
     }
@@ -52,6 +49,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate, Ob
             // If there's a completion waiting, call it
             self.locationRequestCompletion?(location)
             self.locationRequestCompletion = nil
+        }
+        
+        // Means the UI will always show "Calculating distance..." or whatever I decide to show
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.isRequestingLocation = false
         }
         

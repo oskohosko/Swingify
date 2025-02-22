@@ -56,7 +56,7 @@ struct HoleDetailView: View {
 
             HStack {
                 NavigationLink(
-                    destination: MapView().environmentObject(viewModel)
+                    destination: MapView(distance: Int(holeLength)).environmentObject(viewModel)
                 ) {
                     Image(systemName: "map")
                         .resizable()
