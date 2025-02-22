@@ -11,7 +11,6 @@ import SwiftUI
 struct HoleDetailView: View {
     // Injecting view model and using locationManager
     @EnvironmentObject var viewModel: viewModel
-    @StateObject var locationManager = LocationManager()
 
     var hole: Hole
 
@@ -23,7 +22,7 @@ struct HoleDetailView: View {
         let teeLocation = CLLocation(
             latitude: hole.tee_lat, longitude: hole.tee_lng)
         // If the user hasn't provided location, we use the teebox location
-        guard let userLocation = locationManager.currentLocation else {
+        guard let userLocation = viewModel.locationManager.currentLocation else {
             return teeLocation.distance(from: greenLocation).rounded()
         }
         // Otherwise, we can use the user's location
@@ -40,9 +39,10 @@ struct HoleDetailView: View {
     }
 
     var body: some View {
+        
         ZStack(alignment: .bottomLeading) {
             VStack(alignment: .center) {
-                if locationManager.isRequestingLocation {
+                if viewModel.locationManager.isRequestingLocation {
                     Text("Calculating distance…")
                         .font(.headline)
                         .transition(.opacity)
@@ -70,7 +70,9 @@ struct HoleDetailView: View {
                 Spacer()
 
                 Button {
-                    locationManager.updateLocation()
+                    viewModel.locationManager.requestCurrentLocation { location in
+                        // Doing nothing I think
+                    }
                 } label: {
                     Image(systemName: "location.circle")
                         .resizable()
@@ -92,48 +94,6 @@ struct HoleDetailView: View {
         )
 
     }
-}
-
-// Our observable LocationManager
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private let manager = CLLocationManager()
-    // When current location changes -> inform subscribers/view
-    @Published var currentLocation: CLLocation?
-    @Published var isRequestingLocation = false
-
-    override init() {
-        super.init()
-
-        // Ensuring location services
-        manager.delegate = self
-        manager.requestWhenInUseAuthorization()
-        // 50 meters for now until we update distance
-        //        manager.distanceFilter = 5
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        //        manager.startUpdatingLocation()
-        self.updateLocation()
-    }
-
-    func updateLocation() {
-        isRequestingLocation = true
-        manager.requestLocation()
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]
-    ) {
-        if let location = locations.last {
-            currentLocation = location
-        }
-        isRequestingLocation = false
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager, didFailWithError error: Error
-    ) {
-        print("Location error: \(error.localizedDescription)")
-    }
-
 }
 
 // I think this is Albert Park hole 1.

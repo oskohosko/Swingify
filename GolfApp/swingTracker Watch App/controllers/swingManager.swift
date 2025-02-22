@@ -11,7 +11,6 @@ import WatchConnectivity
 
 class swingManager: NSObject, ObservableObject, WCSessionDelegate {
     private var session: WCSession?
-    private var locationManager = SwingLocationManager()
     weak var sharedViewModel: viewModel?
 
     override init() {
@@ -33,7 +32,7 @@ class swingManager: NSObject, ObservableObject, WCSessionDelegate {
     // Main method handling our message sending
     func sendMessage() {
         print("Send message pressed... getting user location")
-        locationManager.requestCurrentLocation { [weak self] location in
+        sharedViewModel!.locationManager.requestCurrentLocation { [weak self] location in
             guard let self = self else { return }
 
             // If no location, skip sending the message
@@ -84,45 +83,3 @@ class swingManager: NSObject, ObservableObject, WCSessionDelegate {
     }
 }
 
-class SwingLocationManager: NSObject, ObservableObject,
-    CLLocationManagerDelegate
-{
-    private let manager = CLLocationManager()
-    var currentLocation: CLLocation?
-
-    private var locationRequestCompletion: ((CLLocation?) -> Void)?
-
-    override init() {
-        super.init()
-
-        // Ensuring location services
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-//        manager.startUpdatingLocation()
-    }
-
-    func requestCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
-        locationRequestCompletion = completion
-        manager.requestLocation()
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]
-    ) {
-        let location = locations.last
-
-        DispatchQueue.main.async {
-            self.currentLocation = location
-            // If there's a completion waiting, call it
-            self.locationRequestCompletion?(location)
-            self.locationRequestCompletion = nil
-        }
-
-    }
-
-    func locationManager(
-        _ manager: CLLocationManager, didFailWithError error: Error
-    ) {
-        print("Location error: \(error.localizedDescription)")
-    }
-}

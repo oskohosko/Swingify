@@ -28,7 +28,7 @@ enum NavigationDestination: Hashable {
 }
 
 // Now our view model
-class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observable {
+class viewModel: NSObject, ObservableObject, Observable {
     @Published var allCourses: [Course] = []
     @Published var filteredCourses: [Course] = []   // For searching
     @Published var selectedCourse: Course? = nil
@@ -43,14 +43,10 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     @Published var isTrackingRound = false
     @Published var currentHole: Hole? = nil
     
-    private let locationManager = CLLocationManager()
+    @Published var locationManager = LocationManager()
     
     override init() {
         super.init()
-        
-        // Location services
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         
         // API call to locate courses
         loadCourses()
@@ -138,7 +134,7 @@ class viewModel: NSObject, ObservableObject, CLLocationManagerDelegate, Observab
     
     func detectNearestCourse() {
         // Detect nearest course to user
-        guard let userLocation = locationManager.location else {
+        guard let userLocation = locationManager.currentLocation else {
             detectedCourse = allCourses.first
             showConfirmation = true
             return

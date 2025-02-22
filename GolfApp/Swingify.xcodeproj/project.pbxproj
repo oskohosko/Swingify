@@ -107,8 +107,18 @@
 		75F42F8C2BECA57300C3B659 /* HolesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		752EDFD22D69414800052BEF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				controllers/locationManager.swift,
+			);
+			target = 75F42E9C2BD92A3E00C3B659 /* Swingify */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		756936ED2D5ED21100154803 /* swingTracker Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "swingTracker Watch App"; sourceTree = "<group>"; };
+		756936ED2D5ED21100154803 /* swingTracker Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (752EDFD22D69414800052BEF /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "swingTracker Watch App"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */

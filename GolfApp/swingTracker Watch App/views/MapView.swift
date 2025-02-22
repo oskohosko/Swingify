@@ -12,6 +12,8 @@ struct MapView: View {
     @EnvironmentObject var viewModel: viewModel
     var swingDetectionManager = swingManager()
     
+    private var userLocation: CLLocation?
+    
     var body: some View {
         Button(action: {
             swingDetectionManager.sharedViewModel = viewModel
