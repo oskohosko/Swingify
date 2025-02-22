@@ -20,7 +20,7 @@ struct CourseDetailView: View {
             }.padding()
             // Listing each hole
             List(viewModel.selectedCourseHoles) { hole in
-                NavigationLink(destination: HoleDetailView(hole: hole)
+                NavigationLink(destination: HolePagesView(hole: hole)
                     .environmentObject(viewModel)) {
                         Text("Hole \(hole.num)")
                             .padding(.leading, 5)

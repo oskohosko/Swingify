@@ -28,14 +28,11 @@ struct MapView: View {
         }
     }
 
-    //    private var region: MKCoordinateRegion {
-    //        MKCoordinateRegion(
-    //            center: regionCenter,
-    //            span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-    //    }
-
     var body: some View {
         ScrollView {
+            Text("\(distance)m")
+                .font(.title)
+                .frame(alignment: .topLeading)
             Map(position: $mapPosition) {
                 UserAnnotation()
             }
@@ -58,9 +55,6 @@ struct MapView: View {
                 Text("Send Message")
             }
         }
-        .navigationTitle(
-            "\(distance)m"
-        )
     }
 }
 
