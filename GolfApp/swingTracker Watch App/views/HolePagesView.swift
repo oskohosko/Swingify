@@ -10,7 +10,6 @@ import CoreLocation
 import WatchKit
 
 struct HolePagesView: View {
-    @State var roundTrackingAlert = false
 
     @EnvironmentObject var viewModel: viewModel
     let hole: Hole
@@ -24,32 +23,14 @@ struct HolePagesView: View {
 
     var body: some View {
         TabView {
-            DashboardView(hole: hole)
+            HoleDetailView(hole: hole)
                 .environmentObject(viewModel)
-                .alert(
-                    "Round Started on hole \(hole.num).",
-                    isPresented: $roundTrackingAlert,
-                    actions: {
-                        //! TODO - add options for beginning rounds on different holes e.g 10.
-                    }
-                )
                 
             
             MapView(distance: holeDistance)
                 .environmentObject(viewModel)
         }
         .tabViewStyle(VerticalPageTabViewStyle(transitionStyle: .automatic))
-        .onAppear {
-            if viewModel.roundManager.isTrackingRound {
-                roundTrackingAlert = true
-            }
-        }
-        .onChange(of: roundTrackingAlert) {
-            if roundTrackingAlert {
-                WKInterfaceDevice.current().play(.notification)
-            }
-            
-        }
         
         
     }

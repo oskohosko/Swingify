@@ -64,6 +64,8 @@ class swingManager: NSObject, ObservableObject, WCSessionDelegate {
                 "userLong": userLong,
                 "distanceToPin": distanceToPin,
                 "holeNum": holeNum,
+                "greenLat": hole.green_lat,
+                "greenLong": hole.green_lng,
                 "time": timeInterval,
             ]
             

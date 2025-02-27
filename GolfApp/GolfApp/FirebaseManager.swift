@@ -81,7 +81,9 @@ class FirebaseManager {
                 } else {
                     // Hole doesn't exist, add it
                     roundRef.collection("holes").addDocument(data: [
-                        "holeNum": holeNum
+                        "holeNum": holeNum,
+                        "greenLat": shotData.greenLat,
+                        "greenLong": shotData.greenLong
                     ]) {
                         error in
                         if let error = error {

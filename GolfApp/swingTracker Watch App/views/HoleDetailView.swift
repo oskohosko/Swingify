@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DashboardView: View {
+struct HoleDetailView: View {
 
     var hole: Hole
 
@@ -147,7 +147,7 @@ let testHole5 = Hole(
 
 #Preview {
     NavigationStack {
-        DashboardView(hole: testHole5).environmentObject(viewModel())
+        HoleDetailView(hole: testHole5).environmentObject(viewModel())
     }
 
 }

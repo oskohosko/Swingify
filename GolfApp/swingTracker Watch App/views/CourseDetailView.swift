@@ -10,30 +10,29 @@ import WatchKit
 
 struct CourseDetailView: View {
     @EnvironmentObject var viewModel: viewModel
+    @State var presentAlert = false
 
     let course: Course
 
     var body: some View {
         VStack {
             // Toggle if user wants to track their round
-            Toggle(isOn: $viewModel.roundManager.isTrackingRound) {
+            Toggle(isOn: $presentAlert) {
                 Text("Track Round")
             }
             .padding()
             // Alert when the user begins tracking round
             .alert(
                 "You are about to track this round at \(course.name).",
-                isPresented: $viewModel.roundManager.isTrackingRound,
+                isPresented: $presentAlert,
+                // Confirming tracking of round
                 actions: {
-                    NavigationLink(
-                        destination: HolePagesView(
-                            hole: viewModel.selectedCourseHoles.first!)
-                        .environmentObject(viewModel)
-                    ) {
-                        Text("Begin")
+                    Button("Confirm") {
+                        viewModel.roundManager.isTrackingRound = true
                     }
-
+                    // Cancelling tracking of round
                     Button("Cancel") {
+                        // Could do nothing but keeping this here
                         viewModel.roundManager.isTrackingRound = false
                     }
                 }
@@ -42,7 +41,10 @@ struct CourseDetailView: View {
             .onChange(of: viewModel.roundManager.isTrackingRound) {
                 if viewModel.roundManager.isTrackingRound {
                     WKInterfaceDevice.current().play(.notification)
+                    presentAlert = true
                 }
+                print(viewModel.roundManager.isTrackingRound)
+                
             }
             // Listing each hole
             List(viewModel.selectedCourseHoles) { hole in
@@ -59,6 +61,7 @@ struct CourseDetailView: View {
         // API call when the view appears
         .onAppear {
             viewModel.loadHoles(course: course)
+            print(viewModel.roundManager.isTrackingRound)
         }
     }
 }

@@ -12,5 +12,5 @@ class RoundManager: NSObject, ObservableObject {
     @Published var currentHole: Hole? = nil
     @Published var currentCourse: Course? = nil
     
-    
+    // Need to make sure this data persists
 }
