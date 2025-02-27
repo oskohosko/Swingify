@@ -48,6 +48,11 @@ struct HomeView: View {
             }
         }
         .navigationTitle("Swingify")
+        .onAppear {
+            viewModel.locationManager.requestCurrentLocation { location in
+                // Doing nothing
+            }
+        }
         // Handles navigation as there are multiple from this view
         .navigationDestination(for: NavigationDestination.self) { destination in
             switch destination {

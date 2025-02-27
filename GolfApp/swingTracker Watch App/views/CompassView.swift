@@ -21,33 +21,8 @@ struct CompassView: View {
     }
 
     var body: some View {
-        VStack {
-            ZStack {
-                Image(systemName: "circle.dotted")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.gray)
-                    .padding()
-
-                // The arrow that points to the green
-                Image(systemName: "location.north.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.blue)
-                    .rotationEffect(.degrees(arrowRotation))
-            }
-//            Spacer()
-            Text(
-                "\(viewModel.distanceToPin(userLocation: viewModel.locationManager.currentLocation ?? CLLocation(latitude: hole.tee_lat, longitude: hole.tee_lng)))m"
-            )
-            .font(.title2)
-            .padding()
-            
-        }
-        .ignoresSafeArea(edges: .bottom)
-
-        .navigationTitle("Center of Green")
+            CompassCircle()
+                .rotationEffect(.degrees(arrowRotation))
     }
 
     private var arrowRotation: Double {

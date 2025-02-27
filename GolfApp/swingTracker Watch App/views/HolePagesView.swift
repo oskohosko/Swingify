@@ -25,13 +25,16 @@ struct HolePagesView: View {
             HoleDetailView(hole: hole)
                 .environmentObject(viewModel)
             
+            CompassView(hole: hole)
+                .environmentObject(viewModel)
+            
             MapView(distance: holeDistance)
                 .environmentObject(viewModel)
             
-            CompassView(hole: hole)
+            DashboardView(hole: hole)
                 .environmentObject(viewModel)
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+        .tabViewStyle(VerticalPageTabViewStyle(transitionStyle: .automatic))
     }
 }
 
