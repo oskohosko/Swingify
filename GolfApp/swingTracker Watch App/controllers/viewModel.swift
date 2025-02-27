@@ -32,16 +32,16 @@ class viewModel: NSObject, ObservableObject, Observable {
     @Published var allCourses: [Course] = []
     @Published var filteredCourses: [Course] = []   // For searching
     @Published var selectedCourse: Course? = nil
-    @Published var selectedCourseHoles: [Hole] = [] // Holes in our selected course
+    @Published var selectedCourseHoles: [Hole] = [testHole2] // Holes in our selected course
     @Published var showConfirmation = false
     @Published var detectedCourse: Course? = nil
     
     // Nav path for home view.
     @Published var navigationPath: [NavigationDestination] = []
     
-    // Flag if user is tracking round
-    @Published var isTrackingRound = false
     @Published var currentHole: Hole? = nil
+    
+    @Published var roundManager = RoundManager()
     
     @Published var locationManager = LocationManager()
     

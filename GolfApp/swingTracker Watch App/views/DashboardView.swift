@@ -55,19 +55,25 @@ struct DashboardView: View {
                     .background(Color(white: 0.2))
                     .cornerRadius(12)
                     .offset(y: -15)
-                ZStack {
+                ZStack(alignment: .center) {
                     // Outer ring with the location
                     CompassView(hole: hole)
                         .environmentObject(viewModel)
 
                     // Center circle showing distance
-                    VStack(spacing: 0) {
-                        Text("\(Int(distanceToGreen))")
-                            .font(
-                                .system(
-                                    size: 42, weight: .bold, design: .rounded)
-                            )
-                            .foregroundColor(.white)
+                    VStack(alignment: .center, spacing: 0) {
+                        if viewModel.locationManager.isRequestingLocation {
+                            RippleTextView()
+                                .frame(width: 130, height: 60)
+                        } else {
+                            Text("\(Int(distanceToGreen))")
+                                .font(
+                                    .system(
+                                        size: 42, weight: .bold,
+                                        design: .rounded)
+                                )
+                                .foregroundColor(.white)
+                        }
 
                         Text("METERS")
                             .font(
@@ -85,6 +91,7 @@ struct DashboardView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .offset(y: -10)
 
             HStack {
                 // Bottom left button
@@ -98,7 +105,7 @@ struct DashboardView: View {
                         .padding(1)
                 }
                 .clipShape(Circle())
-                .frame(width: 35, height: 35)
+                .frame(width: 32, height: 32)
 
                 Spacer()
 
@@ -109,19 +116,23 @@ struct DashboardView: View {
                         // Doing nothing
                     }
                 } label: {
-                    Image(systemName: "location.circle")
+                    Image(systemName: "location.fill")
                         .resizable()
                         .scaledToFit()
+                        .padding(2)
+                        .frame(alignment: .center)
                 }
                 .clipShape(Circle())
-                .frame(width: 35, height: 35)
+                .frame(width: 32, height: 32)
 
             }
-            .padding([.leading, .trailing])
-            .offset(y: 10)
+            .offset(y: 2)
 
-        }.ignoresSafeArea(edges: .bottom)
-
+        }
+        .padding()
+        .onAppear {
+            viewModel.currentHole = hole
+        }
     }
 }
 

@@ -15,7 +15,7 @@ struct CompassCircle: View {
                 .stroke(
                     AngularGradient(
                         gradient: Gradient(colors: [
-                            .blue, .green, .green, .blue,
+                            .green, .green, .blue, .blue, .green, .green,
                         ]),
                         center: .center,
                         startAngle: .degrees(0),

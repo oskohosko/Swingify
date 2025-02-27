@@ -6,24 +6,52 @@
 //
 
 import SwiftUI
+import WatchKit
 
 struct CourseDetailView: View {
     @EnvironmentObject var viewModel: viewModel
-    
+
     let course: Course
-    
+
     var body: some View {
         VStack {
             // Toggle if user wants to track their round
-            Toggle(isOn: $viewModel.isTrackingRound) {
+            Toggle(isOn: $viewModel.roundManager.isTrackingRound) {
                 Text("Track Round")
-            }.padding()
+            }
+            .padding()
+            // Alert when the user begins tracking round
+            .alert(
+                "You are about to track this round at \(course.name).",
+                isPresented: $viewModel.roundManager.isTrackingRound,
+                actions: {
+                    NavigationLink(
+                        destination: HolePagesView(
+                            hole: viewModel.selectedCourseHoles.first!)
+                        .environmentObject(viewModel)
+                    ) {
+                        Text("Begin")
+                    }
+
+                    Button("Cancel") {
+                        viewModel.roundManager.isTrackingRound = false
+                    }
+                }
+            )
+            // Haptics
+            .onChange(of: viewModel.roundManager.isTrackingRound) {
+                if viewModel.roundManager.isTrackingRound {
+                    WKInterfaceDevice.current().play(.notification)
+                }
+            }
             // Listing each hole
             List(viewModel.selectedCourseHoles) { hole in
-                NavigationLink(destination: HolePagesView(hole: hole)
-                    .environmentObject(viewModel)) {
-                        Text("Hole \(hole.num)")
-                            .padding(.leading, 5)
+                NavigationLink(
+                    destination: HolePagesView(hole: hole)
+                        .environmentObject(viewModel)
+                ) {
+                    Text("Hole \(hole.num)")
+                        .padding(.leading, 5)
                 }
             }
         }
