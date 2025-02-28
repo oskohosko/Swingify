@@ -33,7 +33,6 @@ struct CompassView: View {
             return 0
         }
 
-        // heading.trueHeading or .magneticHeading
         let userHeadingDegrees = heading.trueHeading
 
         // Bearing from user to green
