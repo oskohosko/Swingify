@@ -42,6 +42,10 @@ Am also planning to improve the iOS app once the watchOS app and Web app are up 
 
 # WatchOS App
 
+<p>
+  <img src="/Screenshots/watchOS.PNG" width=240 alt="watchOS screenshot">
+</p>
+
 ## Overview
 Implementing a watchOS app to complement my iOS app. It will display distances, point to the center of the green, track rounds, detect shots and save them to the cloud for analysis on a web application.
 The ultimate goal is to be able to automatically have my golf rounds tracked and to visualise where I took each shot from after the round, as well as share it with others.
@@ -64,9 +68,5 @@ I'm currently implementing the round tracking system which will utilise swing de
 ## Plans
 I'm planning to connect all of these with a web application and to create an authentication system that can be used between the three applications.
 
-# Screenshots
-<p>
-  <img src="/Screenshots/watchOS.PNG" width=240 alt="watchOS screenshot">
-</p>
 
 
