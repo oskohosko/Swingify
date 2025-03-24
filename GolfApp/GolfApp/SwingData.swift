@@ -8,7 +8,8 @@
 import Foundation
 
 class SwingData: Identifiable, Codable {
-    var roundName: String
+    var courseName: String
+    var courseId: Int
     var userLat: Double
     var userLong: Double
     var distanceToPin: Int
@@ -17,8 +18,9 @@ class SwingData: Identifiable, Codable {
     var greenLong: Double
     var time: TimeInterval
     
-    init(roundName: String, userLat: Double, userLong: Double, distanceToPin: Int, holeNum: Int, greenLat: Double, greenLong: Double, time: TimeInterval) {
-        self.roundName = roundName
+    init(courseName: String, courseId: Int, userLat: Double, userLong: Double, distanceToPin: Int, holeNum: Int, greenLat: Double, greenLong: Double, time: TimeInterval) {
+        self.courseName = courseName
+        self.courseId = courseId
         self.userLat = userLat
         self.userLong = userLong
         self.distanceToPin = distanceToPin
@@ -30,7 +32,8 @@ class SwingData: Identifiable, Codable {
     
     func toDictionary() -> [String: Any] {
         return [
-            "roundName": roundName,
+            "courseName": courseName,
+            "courseId": courseId,
             "userLat": userLat,
             "userLong": userLong,
             "distanceToPin": distanceToPin,

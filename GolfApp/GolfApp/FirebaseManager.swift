@@ -36,6 +36,8 @@ class FirebaseManager {
                     // Round doesn't exist
                     db.collection("rounds").addDocument(data: [
                         "title": data.roundName,
+                        "courseName": data.courseName,
+                        "courseId": data.courseId,
                         "createdAt": Date(),
                     ]) { error in
                         if let error = error {

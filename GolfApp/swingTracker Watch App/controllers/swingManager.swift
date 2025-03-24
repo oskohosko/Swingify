@@ -52,6 +52,12 @@ class swingManager: NSObject, ObservableObject, WCSessionDelegate {
                 print("No current hole set.")
                 return
             }
+            
+            // Ensuring that we have a selected course and id
+            guard let selectedCourse = sharedViewModel?.selectedCourse else {
+                print("No selected course set.")
+                return
+            }
 
             let distanceToPin = sharedViewModel?.distanceToPin(
                 userLocation: userLocation)
@@ -59,7 +65,8 @@ class swingManager: NSObject, ObservableObject, WCSessionDelegate {
 //            let time = Date()
             let timeInterval = Date().timeIntervalSince1970
             let message: [String: Any] = [
-                "roundName": "Test Round",
+                "courseName": selectedCourse.name,
+                "courseId": selectedCourse.id,
                 "userLat": userLat,
                 "userLong": userLong,
                 "distanceToPin": distanceToPin,

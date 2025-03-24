@@ -61,6 +61,7 @@ struct CourseDetailView: View {
         // API call when the view appears
         .onAppear {
             viewModel.loadHoles(course: course)
+            viewModel.selectedCourse = course
             print(viewModel.roundManager.isTrackingRound)
         }
     }
